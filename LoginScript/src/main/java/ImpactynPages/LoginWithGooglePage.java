@@ -14,7 +14,7 @@ public class LoginWithGooglePage {
     private final AppiumDriver driver;
     private final WebDriverWait wait;
 
-    public final By ChooseGoogleAccountBtnLocator= By.xpath("//android.widget.Button[@resource-id=\"com.android.chrome:id/signin_fre_continue_button\"]");
+    private final By ChooseGoogleAccountBtnLocator= By.xpath("//android.widget.Button[@resource-id=\"com.android.chrome:id/signin_fre_continue_button\"]");
 
     public LoginWithGooglePage(AppiumDriver driver) {
         this.driver = driver;

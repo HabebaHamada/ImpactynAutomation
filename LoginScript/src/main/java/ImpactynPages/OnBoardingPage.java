@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class onBoardingPage {
+public class OnBoardingPage {
 
     private final AppiumDriver driver;
 
@@ -17,7 +17,7 @@ public class onBoardingPage {
     private final By notificationSettingsAllowLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]");
     private final By phoneCallSettingsAllowLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]");
 
-    public onBoardingPage(AppiumDriver driver) {
+    public OnBoardingPage(AppiumDriver driver) {
         this.driver = driver;
     }
 

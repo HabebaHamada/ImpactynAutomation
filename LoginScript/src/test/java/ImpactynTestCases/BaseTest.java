@@ -4,9 +4,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -14,7 +15,7 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    public static AppiumDriver driver;
+    public AppiumDriver driver;
     public WebDriverWait wait;
 
     private static DesiredCapabilities getDesiredCapabilities() {
@@ -35,7 +36,7 @@ public class BaseTest {
         return caps;
     }
 
-    @BeforeSuite
+    @BeforeMethod
     public void setup() throws MalformedURLException  {
         DesiredCapabilities caps = getDesiredCapabilities();
 
@@ -50,7 +51,7 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-   // @AfterSuite
+    @AfterMethod
     public void teardown() {
         if (driver != null) {
             driver.quit();

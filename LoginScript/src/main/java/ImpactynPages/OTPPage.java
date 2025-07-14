@@ -15,7 +15,7 @@ public class OTPPage {
 
     private final By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
     private final By OTPInputLocator = By.xpath("//android.widget.EditText");
-    public final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+    private final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
 
 
     public OTPPage(AppiumDriver driver) {
@@ -30,7 +30,7 @@ public class OTPPage {
         phoneInput.sendKeys(OTP);
     }
 
-    public FeedPage clickNext() {
+    public FeedPage clickNext(){
         System.out.println("Clicking the 'Next' button.");
         WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(nextBtnLocator));
         nextButton.click();

@@ -2,25 +2,24 @@ package ImpactynTestCases;
 
 import ImpactynPages.*;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
 
 public class ImpactynLoginTest extends BaseTest  {
 
-    @BeforeTest
-
+    @BeforeMethod
     public void initializeSettings()
     {
 
-        onBoardingPage onboardingPage = new onBoardingPage(driver);
+        OnBoardingPage onboardingPage = new OnBoardingPage(driver);
         onboardingPage.handleOnboardingFlow();
     }
 
 
     @Test(priority = 2)
-    public void loginWithPhoneNumberTest() {
+    public void loginWithPhoneNumberTest() throws InterruptedException {
 
         System.out.println("Login with Phone Number Testcase Started : ");
 
@@ -52,6 +51,8 @@ public class ImpactynLoginTest extends BaseTest  {
 
     }
 
+
+
     @Test(priority = 1)
     public void loginWithFacebookTest() {
 
@@ -72,9 +73,4 @@ public class ImpactynLoginTest extends BaseTest  {
         System.out.println("Test execution completed successfully.");
 
     }
-
-
-
-
-
-    }
+}

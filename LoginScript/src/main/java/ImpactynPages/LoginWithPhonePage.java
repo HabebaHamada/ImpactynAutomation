@@ -13,9 +13,9 @@ public class LoginWithPhonePage {
     private final AppiumDriver driver;
     private final WebDriverWait wait;
 
-    public final By phoneNumberInputLocator = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]");
-    public final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-    public final By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"What's your number?\"]");
+    private final By phoneNumberInputLocator = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]");
+    private final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+    private final By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"What's your number?\"]");
 
 
     public LoginWithPhonePage(AppiumDriver driver) {
