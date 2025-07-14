@@ -44,14 +44,14 @@ public class LoginOptionsPage {
 
     }
 
-   /* public LoginWithSnapchatPage LoginWithSnapchat(){
+   public LoginWithSnapchatPage clickLoginWithSnapchat(){
         System.out.println("Clicking on 'Continue With Snapchat' button.");
         WebElement snapchatButton = wait.until(ExpectedConditions.elementToBeClickable(useSnapchatBtnLocator));
         snapchatButton.click();
         // Return the next page object to allow for a fluent interface
         return new LoginWithSnapchatPage(driver);
 
-    }*/
+    }
 
    /* public LoginWithGooglePage LoginWithGoogle(){
         System.out.println("Clicking on 'Continue With Google' button.");

@@ -18,7 +18,7 @@ public class ImpactynLoginTest extends BaseTest  {
     }
 
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void loginWithPhoneNumberTest() throws InterruptedException {
 
         System.out.println("Login with Phone Number Testcase Started : ");
@@ -53,7 +53,7 @@ public class ImpactynLoginTest extends BaseTest  {
 
 
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void loginWithFacebookTest() {
 
         System.out.println("Login with Facebook Testcase Started : ");
@@ -67,6 +67,27 @@ public class ImpactynLoginTest extends BaseTest  {
 
         //3.Click continue with facebook
         FeedPage feedPage=loginWithFacebook.clickContinueWithFacebook();
+
+        Assert.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page.");
+
+        System.out.println("Test execution completed successfully.");
+
+    }
+
+    @Test(priority = 1)
+    public void loginWithSnapchatTest() {
+
+        System.out.println("Login with Snapchat Testcase Started : ");
+
+        // 1. Initialize the first page object
+        LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
+
+        // 2. Perform actions using the page object methods
+        // This line clicks the button and returns the next page object
+        LoginWithSnapchatPage loginWithSnapchat = loginOptionsPage.clickLoginWithSnapchat();
+
+        //3.Click continue with facebook
+        FeedPage feedPage=loginWithSnapchat.clickContinueWithSnapchat();
 
         Assert.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page.");
 
