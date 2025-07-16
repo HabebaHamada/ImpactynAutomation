@@ -21,7 +21,7 @@ public class BaseTest {
     private static DesiredCapabilities getDesiredCapabilities() {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
-        caps.setCapability("appium:platformVersion", "16.0");
+        caps.setCapability("appium:platformVersion", "14.0");
 
         caps.setCapability("appium:deviceName", "emulator-5554");
         caps.setCapability("appium:automationName", "UiAutomator2");

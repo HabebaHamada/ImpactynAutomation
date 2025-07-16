@@ -53,12 +53,11 @@ public class LoginOptionsPage {
 
     }
 
-   /* public LoginWithGooglePage LoginWithGoogle(){
+  public LoginWithGooglePage clickLoginWithGoogle(){
         System.out.println("Clicking on 'Continue With Google' button.");
         WebElement googleButton = wait.until(ExpectedConditions.elementToBeClickable(useGoogleBtnLocator));
         googleButton.click();
-        // Return the next page object to allow for a fluent interface
-        return new LoginWithGooglePage(driver);
-
-    }*/
+      // Return the next page object to allow for a fluent interface
+      return new LoginWithGooglePage(driver);
+    }
 }
