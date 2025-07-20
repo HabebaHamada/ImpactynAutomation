@@ -19,7 +19,7 @@ public class ImpactynLoginTest extends BaseTest  {
 
 
    @Test(priority = 4)
-    public void loginWithPhoneNumberTest() throws InterruptedException {
+    public void loginWithPhoneNumberTest() {
 
         System.out.println("Login with Phone Number Testcase Started : ");
 
@@ -41,11 +41,8 @@ public class ImpactynLoginTest extends BaseTest  {
         // 5. Verify that we landed on the correct page "OTP Page"
         Assert.assertTrue(OTPPAGE.isPageLoaded(), "Did not navigate to the 'OTP Page' page.");
 
-        /*Implicit Wait fo 40 seconds "OTP Time out is 60 seconds" */
-        wait(40000);
-
         // 6. Perform actions on the new page
-        FeedPage feedPage= OTPPAGE.clickNext();
+        FeedPage feedPage= OTPPAGE.waitForManualOtpAndProceed();
 
         // 7. Verify that Feed Screen appears by verifying that Nav Bar appears
         Assert.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page.");
