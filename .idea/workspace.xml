@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4bd91627-a3c0-4b7b-a23b-62280df255ab" name="Changes" comment="" />
+    <list default="true" id="4bd91627-a3c0-4b7b-a23b-62280df255ab" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/LoginScript/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/FeedPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/LoginOptionsPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/LoginWithFacebookPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/LoginWithGooglePage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/LoginWithPhonePage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/LoginWithSnapchatPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/OTPPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/main/java/ImpactynPages/OnBoardingPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/test/java/ImpactynTestCases/BaseTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginScript/src/test/java/ImpactynTestCases/ImpactynLoginTest.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "HabebaHamada"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/HabebaHamada/ImpactynAutomation.git",
+    "accountId": "8d6575f7-756c-4e57-b035-f03bb86e93e2"
+  }
+}]]></component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:/Program Files/php-8.4.8-Win32-vs17-x64/php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="3008VnsYs4BSwtQgCoVUnFiycJ6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,10 +56,21 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Career/Testing/Appium/ImpactynAutomated/LoginScript"
+    "last_opened_file_path": "E:/ImpactynAutomated",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26927.53" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.26927.53" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -35,7 +79,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1752753156236</updated>
+      <workItem from="1753266418340" duration="39000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
