@@ -56,7 +56,6 @@ public class OTPPage {
             longWait.until(ExpectedConditions.visibilityOfElementLocated(feedPageElement));
 
             System.out.println("OTP entry detected. Proceeding to the feed page.");
-            clickNext();
             return new FeedPage(driver);
 
         } catch (TimeoutException e) {
