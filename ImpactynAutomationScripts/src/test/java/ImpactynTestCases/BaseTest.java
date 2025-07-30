@@ -40,7 +40,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void setup() throws MalformedURLException  {
+    public void setup() {
         DesiredCapabilities caps = getDesiredCapabilities();
 
         URL url;
