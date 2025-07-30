@@ -33,9 +33,9 @@ public class FeedPage {
 
     public boolean isPageLoaded()
     {
-       boolean ForYouValidation=  wait.until(ExpectedConditions.visibilityOfElementLocated(ForYouTextLocator)).isDisplayed();
-       boolean FollowingValidation=  wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
-       boolean NavBarValidation=  wait.until(ExpectedConditions.visibilityOfElementLocated(NavBarLocator)).isDisplayed();
+       boolean ForYouValidation=      wait.until(ExpectedConditions.visibilityOfElementLocated(ForYouTextLocator)).isDisplayed();
+       boolean FollowingValidation=   wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
+       boolean NavBarValidation=      wait.until(ExpectedConditions.visibilityOfElementLocated(NavBarLocator)).isDisplayed();
        boolean EarnButtonValidation=  wait.until(ExpectedConditions.visibilityOfElementLocated(EarnButtonLocator)).isDisplayed();
 
        return (ForYouValidation||FollowingValidation||NavBarValidation||EarnButtonValidation);
