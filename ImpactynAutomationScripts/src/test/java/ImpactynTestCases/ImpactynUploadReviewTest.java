@@ -28,10 +28,36 @@ public class ImpactynUploadReviewTest extends BaseTest
         /*mention Brand*/
         feedPage.setMentionBrand("BRGR");
 
-        /*set rating of the Review*/
+        /*set rating for the Review*/
         feedPage.setReviewRating();
 
         /*Uploading the Review*/
         feedPage.shareReview();
     }
+
+    @Test (priority = 2 , description = "Verify user can upload a new review from Front camera")
+    public void UploadFrontCameraReview() throws InterruptedException {
+        // 1. Initialize the first page object
+        FeedPage feedPage = new FeedPage(driver);
+
+        /*Clicking on Plus Icon From nav bar*/
+        feedPage.clickRecordReview();
+
+        /*Flipping Camera to Front Camera*/
+        feedPage.setFrontCamera();
+
+        /*Camera Recording for 30 seconds*/
+        feedPage.startCameraRecording(3000);
+
+        /*mention Brand*/
+        feedPage.setMentionBrand("BRGR");
+
+        /*set rating for the Review*/
+        feedPage.setReviewRating();
+
+        /*Uploading the Review*/
+        feedPage.shareReview();
+    }
+
+
 }
