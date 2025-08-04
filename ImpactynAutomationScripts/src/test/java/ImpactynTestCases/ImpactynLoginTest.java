@@ -103,7 +103,6 @@ public class ImpactynLoginTest extends BaseTest  {
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
 
         // 2. Perform actions using the page object methods
-        // This line clicks the button
         LoginWithGooglePage loginWithGoogle=loginOptionsPage.clickLoginWithGoogle();
 
         FeedPage feedPage=loginWithGoogle.clickChooseGoogleAccount();

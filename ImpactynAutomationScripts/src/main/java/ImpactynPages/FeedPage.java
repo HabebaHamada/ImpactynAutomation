@@ -53,31 +53,41 @@ public class FeedPage {
 
         WebElement AllowVoice = wait.until(ExpectedConditions.elementToBeClickable(AllowVoiceSettingsLocator));
         AllowVoice.click();
-
-       /* WebElement ProgressBar = wait.until(ExpectedConditions.elementToBeClickable(ProgressBarLocator));
-        ProgressBar.click();
-
-        wait(30000);
-
-        ProgressBar.click();
-
-        WebElement MentionBrand = wait.until(ExpectedConditions.visibilityOfElementLocated(MentionBrandLocator));
-
-        MentionBrand.click();
-
-        MentionBrand.sendKeys("BRGR");
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(BrandsSuggestionBarLocator));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(BrandSelectionNameLocator));*/
-
     }
 
-    public void  recordingReview(long reviewDuration) throws InterruptedException {
+    public void startCameraRecording(long reviewDuration) throws InterruptedException {
         WebElement ProgressBar = wait.until(ExpectedConditions.elementToBeClickable(ProgressBarLocator));
         ProgressBar.click();
 
         wait(reviewDuration);
 
         ProgressBar.click();
+    }
+
+    public void setMentionBrand(String Brand)
+    {
+        WebElement MentionBrand = wait.until(ExpectedConditions.visibilityOfElementLocated(MentionBrandLocator));
+
+        MentionBrand.click();
+
+        MentionBrand.sendKeys(Brand);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(BrandsSuggestionBarLocator));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(BrandSelectionNameLocator));
+    }
+
+    public void setReviewRating()
+    {
+
+    }
+
+    public void shareReview()
+    {
+        /*click share button*/
+
+        /*assert that background Progress bar is shown*/
+
+        /*assert that video is fully uploaded*/
+
     }
 }
