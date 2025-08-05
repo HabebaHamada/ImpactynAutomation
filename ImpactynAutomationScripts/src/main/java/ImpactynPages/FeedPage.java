@@ -133,7 +133,7 @@ public class FeedPage {
         String flipCameraLocator = "new UiSelector().className(\"android.widget.Button\").instance(0)";
         WebElement FlipCamera =wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
-                        AppiumBy.className(flipCameraLocator)
+                        AppiumBy.androidUIAutomator(flipCameraLocator)
                 )
         );
         FlipCamera.click();
