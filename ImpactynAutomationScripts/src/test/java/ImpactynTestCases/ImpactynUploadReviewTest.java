@@ -23,7 +23,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         feedPage.clickRecordReview();
 
         /*Camera Recording for 30 seconds*/
-        feedPage.startCameraRecording(3000);
+        feedPage.startCameraRecording(20000);
 
         /*mention Brand*/
         feedPage.setMentionBrand("BRGR");

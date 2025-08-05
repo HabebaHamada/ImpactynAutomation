@@ -2,32 +2,22 @@ package ImpactynPages;
 
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LoginOptionsPage {
 
     private final AppiumDriver driver;
-    private final WebDriverWait wait;
-
-    private final By usePhoneEmailBtnLocator = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button");
-    private final By useFacebookBtnLocator = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.Button");
-    private final By useSnapchatBtnLocator = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button");
-    private final By useGoogleBtnLocator = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.widget.Button");
 
     public LoginOptionsPage(AppiumDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     // Public method to perform an action on this page
     public LoginWithPhonePage clickUsePhoneOrEmail() {
         System.out.println("Clicking on 'Use phone or email' button.");
-        WebElement phoneEmailButton = wait.until(ExpectedConditions.elementToBeClickable(usePhoneEmailBtnLocator));
+        String usePhoneEmailBtnLocator = "new UiSelector().className(\"android.widget.Button\").instance(0)";
+        WebElement phoneEmailButton = driver.findElement(AppiumBy.androidUIAutomator(usePhoneEmailBtnLocator));
         phoneEmailButton.click();
 
         // Return the next page object to allow for a fluent interface
@@ -36,28 +26,31 @@ public class LoginOptionsPage {
 
     public LoginWithFacebookPage clickLoginWithFacebook(){
         System.out.println("Clicking on 'Continue With Facebook' button.");
-        WebElement facebookButton = wait.until(ExpectedConditions.elementToBeClickable(useFacebookBtnLocator));
+        String useFacebookBtnLocator = "new UiSelector().className(\"android.widget.Button\").instance(1)";
+        WebElement facebookButton = driver.findElement(AppiumBy.androidUIAutomator(useFacebookBtnLocator));
         facebookButton.click();
 
         // Return the next page object to allow for a fluent interface
         return new LoginWithFacebookPage(driver);
-
     }
 
    public LoginWithSnapchatPage clickLoginWithSnapchat(){
         System.out.println("Clicking on 'Continue With Snapchat' button.");
-        WebElement snapchatButton = wait.until(ExpectedConditions.elementToBeClickable(useSnapchatBtnLocator));
+       String useSnapchatBtnLocator = "new UiSelector().className(\"android.widget.Button\").instance(2)";
+       WebElement snapchatButton = driver.findElement(AppiumBy.androidUIAutomator(useSnapchatBtnLocator));
         snapchatButton.click();
+
         // Return the next page object to allow for a fluent interface
         return new LoginWithSnapchatPage(driver);
-
     }
 
   public LoginWithGooglePage clickLoginWithGoogle(){
         System.out.println("Clicking on 'Continue With Google' button.");
-        WebElement googleButton = wait.until(ExpectedConditions.elementToBeClickable(useGoogleBtnLocator));
-        googleButton.click();
-      // Return the next page object to allow for a fluent interface
-      return new LoginWithGooglePage(driver);
+      String useGoogleBtnLocator = "new UiSelector().className(\"android.widget.Button\").instance(3)";
+      WebElement googleButton=driver.findElement(AppiumBy.androidUIAutomator(useGoogleBtnLocator));
+       googleButton.click();
+
+       // Return the next page object to allow for a fluent interface
+        return new LoginWithGooglePage(driver);
     }
 }
