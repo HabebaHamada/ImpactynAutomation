@@ -24,7 +24,6 @@ public class FeedPage {
     private final By BrandSelectionNameLocator = By.xpath("//android.widget.TextView[@text=\"BRGR\"]");
 
     private final By ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
-    private final By FlipCameraLocator = By.id("");
 
 
     public FeedPage(AppiumDriver driver) {
@@ -131,7 +130,12 @@ public class FeedPage {
     public void setFrontCamera()
     {
        /*click flip camera button*/
-        WebElement FlipCamera = wait.until(ExpectedConditions.elementToBeClickable(FlipCameraLocator));
+        String flipCameraLocator = "new UiSelector().className(\"android.widget.Button\").instance(0)";
+        WebElement FlipCamera =wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        AppiumBy.className(flipCameraLocator)
+                )
+        );
         FlipCamera.click();
 
     }
