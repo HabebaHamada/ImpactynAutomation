@@ -66,7 +66,11 @@ public class FeedPage {
         System.out.println("Recording for " + reviewDurationInMillis + " milliseconds...");
         Thread.sleep(reviewDurationInMillis);
 
-        ProgressBar.click();
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        AppiumBy.className(progressBarLocator)
+                )
+        ).click();
     }
 
     public void setMentionBrand(String Brand)
@@ -121,9 +125,6 @@ public class FeedPage {
         /*click share button*/
         WebElement ShareButton = wait.until(ExpectedConditions.visibilityOfElementLocated(ShareButtonLocator));
         ShareButton.click();
-
-        /*assert that background Progress bar is shown*/
-
 
     }
 
