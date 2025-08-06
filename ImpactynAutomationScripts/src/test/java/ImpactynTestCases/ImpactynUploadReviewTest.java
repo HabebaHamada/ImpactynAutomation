@@ -70,11 +70,16 @@ public class ImpactynUploadReviewTest extends BaseTest
         /*set rating for the Review*/
         feedPage.setReviewRating();
 
-        /*Uploading the Review*/
+       /*Uploading the Review*/
         feedPage.shareReview();
 
         /*soft Assertion Navigating to the 'Feed' page after Uploading*/
         softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
+
+       /*initialize a Notification Verification object */
+        NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+
+        notificationVerifier.verifyNotification("Reel","\uD83C\uDFAC Preparing your video... Just a moment");
         softAssertion.assertAll();
     }
 
