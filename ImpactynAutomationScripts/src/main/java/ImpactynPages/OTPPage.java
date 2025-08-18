@@ -18,7 +18,7 @@ public class OTPPage {
     private final By OTPInputLocator = By.xpath("//android.widget.EditText");
     private final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
 
-    private final By feedPageElement = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[3]/android.view.View[2]");
+    private final By feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
 
 
     public OTPPage(AppiumDriver driver) {

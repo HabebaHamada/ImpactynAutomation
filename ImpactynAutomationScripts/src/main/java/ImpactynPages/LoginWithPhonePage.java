@@ -1,5 +1,6 @@
 package ImpactynPages;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,6 @@ public class LoginWithPhonePage {
     private final AppiumDriver driver;
     private final WebDriverWait wait;
 
-    private final By phoneNumberInputLocator = By.xpath("//m5.e1/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[1]");
     private final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
     private final By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"What's your number?\"]");
 
@@ -25,7 +25,8 @@ public class LoginWithPhonePage {
 
     public void enterPhoneNumber(String phoneNumber) {
         System.out.println("Entering phone number: " + phoneNumber);
-        WebElement phoneInput = wait.until(ExpectedConditions.visibilityOfElementLocated(phoneNumberInputLocator));
+        String phoneNumberInputLocator = "new UiSelector().className(\"android.widget.EditText\").instance(0)";
+        WebElement phoneInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator(phoneNumberInputLocator)));
         phoneInput.sendKeys(phoneNumber);
     }
 
