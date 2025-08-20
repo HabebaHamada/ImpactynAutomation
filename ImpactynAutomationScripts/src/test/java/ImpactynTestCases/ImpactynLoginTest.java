@@ -2,25 +2,16 @@ package ImpactynTestCases;
 
 import ImpactynPages.*;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-
 
 public class ImpactynLoginTest extends BaseTest  {
 
-    @BeforeMethod
-    public void initializeSettings()
-    {
-
-        OnBoardingPage onboardingPage = new OnBoardingPage(driver);
-        onboardingPage.handleOnboardingFlow();
-    }
 
 
    @Test(priority = 4 , description = "Verify login with a valid phone number.")
     public void loginWithPhoneNumberTest() {
 
+        handleInitialPopups();
         System.out.println("Login with Phone Number Testcase Started : ");
 
         // 1. Initialize the first page object

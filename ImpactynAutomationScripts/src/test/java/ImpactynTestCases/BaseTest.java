@@ -5,7 +5,7 @@ import ImpactynPages.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import io.appium.java_client.ios.IOSDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,40 +18,51 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    public AppiumDriver driver;
-    public WebDriverWait wait;
-
-    private static DesiredCapabilities getDesiredCapabilities() {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("appium:platformVersion", "14.0");
-
-        caps.setCapability("appium:deviceName", "emulator-5554");
-        caps.setCapability("appium:automationName", "UiAutomator2");
-        caps.setCapability("appium:avd", "Medium_Phone");
-
-
-        caps.setCapability("appium:appPackage", "com.innov8eg.impactyn");
-        caps.setCapability("appium:appActivity", "com.innov8eg.impactyn.MainActivity");
-
-        // Ensure the app data is cleared before each run for a clean state
-        caps.setCapability("appium:noReset", false);
-        return caps;
-    }
+    protected AppiumDriver driver;
 
     @BeforeMethod
-    public void setup() {
-        DesiredCapabilities caps = getDesiredCapabilities();
+    public void setup() throws MalformedURLException {
 
-        URL url;
-        try {
-            url = new URL("http://127.0.0.1:4723/");
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+        // 2. Read a 'platform' variable from the command line. Defaults to 'android'.
+        // Example to run for iOS: mvn test -Dplatform=ios
+        String platform = System.getProperty("platform", "android").toLowerCase();
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        URL url = new URL("http://127.0.0.1:4723/"); // Appium server URL
+
+
+        switch (platform) {
+            case "android":
+                caps.setCapability("platformName", "Android");
+                caps.setCapability("appium:platformVersion", "14.0");
+                caps.setCapability("appium:deviceName", "emulator-5554");
+                caps.setCapability("appium:automationName", "UiAutomator2");
+                caps.setCapability("appium:avd", "Medium_Phone");
+                caps.setCapability("appium:appPackage", "com.innov8eg.impactyn");
+                caps.setCapability("appium:appActivity", "com.innov8eg.impactyn.MainActivity");
+
+                // Ensure the app data is cleared before each run for a clean state
+                caps.setCapability("appium:noReset", false);
+                // Create the specific driver for Android
+                driver = new AndroidDriver(url, caps);
+                break;
+
+            case "ios":
+                caps.setCapability("platformName", "iOS");
+                caps.setCapability("appium:automationName", "XCUITest");
+                caps.setCapability("appium:deviceName", "iPhone 14"); // <-- CHANGE TO YOUR SIMULATOR/DEVICE
+                caps.setCapability("appium:platformVersion", "16.2");   // <-- CHANGE IF NEEDED
+                // For iOS, you typically use 'bundleId' instead of package/activity
+                caps.setCapability("appium:bundleId", "com.innov8eg.impactyn");
+                caps.setCapability("appium:noReset", false);
+                // Create the specific driver for iOS
+                driver = new IOSDriver(url, caps);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Invalid platform provided! Use 'android' or 'ios'.");
         }
-
-        driver = new AndroidDriver(url, caps);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @AfterMethod
@@ -61,6 +72,11 @@ public class BaseTest {
         }
     }
 
+    protected void handleInitialPopups() {
+        System.out.println("--- PRE-TEST ACTION: Handling initial pop-ups ---");
+        OnBoardingPage onboarding = new OnBoardingPage(driver);
+        onboarding.handleOnboardingFlow();
+    }
     /**
      * This is a reusable login method that can be called by any test that needs it.
      * It's not a @Test itself, but a helper utility.
