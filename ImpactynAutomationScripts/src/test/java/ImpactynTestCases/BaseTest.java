@@ -16,7 +16,7 @@ import java.net.URL;
 import java.time.Duration;
 
 
-public class BaseTest {
+public abstract class BaseTest {
 
     protected AppiumDriver driver;
 
@@ -82,9 +82,6 @@ public class BaseTest {
      * It's not a @Test itself, but a helper utility.
      */
     protected void performLogin() {
-        System.out.println("--- PRE-TEST ACTION: Performing login ---");
-        OnBoardingPage onboarding = new OnBoardingPage(driver);
-        onboarding.handleOnboardingFlow();
 
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);

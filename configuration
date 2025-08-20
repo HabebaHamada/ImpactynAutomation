@@ -1,0 +1,5 @@
+# This works because "android" is the default in your BaseTest
+mvn test -Dtest=ImpactynLoginTest
+
+# This is the more explicit and clearer way
+mvn test -Dtest=ImpactynLoginTest -Dplatform=android
