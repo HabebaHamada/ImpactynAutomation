@@ -11,10 +11,11 @@ public class ImpactynLoginTest extends BaseTest  {
    @Test(priority = 4 , description = "Verify login with a valid phone number.")
     public void loginWithPhoneNumberTest() {
 
-        handleInitialPopups();
         System.out.println("Login with Phone Number Testcase Started : ");
 
-        // 1. Initialize the first page object
+       handleInitialPopups();
+
+       // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
 
         // 2. Perform actions using the page object methods
@@ -48,6 +49,8 @@ public class ImpactynLoginTest extends BaseTest  {
 
         System.out.println("Login with Facebook Testcase Started : ");
 
+        handleInitialPopups();
+
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
 
@@ -69,6 +72,8 @@ public class ImpactynLoginTest extends BaseTest  {
 
         System.out.println("Login with Snapchat Testcase Started : ");
 
+        handleInitialPopups();
+
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
 
@@ -89,6 +94,8 @@ public class ImpactynLoginTest extends BaseTest  {
     public void loginWithGoogleTest() {
 
         System.out.println("Login with Google Testcase Started : ");
+
+        handleInitialPopups();
 
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
