@@ -1,7 +1,9 @@
 package ImpactynPages;
 
+import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,21 +11,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class OTPPage {
+public class OTPPage extends BasePage {
 
-    private final AppiumDriver driver;
-    private final WebDriverWait wait;
-
-    private final By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-    private final By OTPInputLocator = By.xpath("//android.widget.EditText");
-    private final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-
-    private final By feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
-
+    private By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
+    private By OTPInputLocator = By.xpath("//android.widget.EditText");
+    private By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+    private By feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
 
     public OTPPage(AppiumDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
+        initializeLocators();
+    }
+
+    /**
+     * Initializes locators based on the platform determined in the BasePage.
+     */
+    private void initializeLocators() {
+        // 'platform' is inherited from BasePage
+        if (platform.is(Platform.ANDROID)) {
+            screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
+            OTPInputLocator = By.xpath("//android.widget.EditText");
+            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+
+        } else if (platform.is(Platform.IOS)) {
+            screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
+            OTPInputLocator = By.xpath("//android.widget.EditText");
+            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+        }
     }
 
     /*not used as this part is manually entered*/

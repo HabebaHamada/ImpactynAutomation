@@ -1,16 +1,16 @@
 package ImpactynPages;
 
 
+import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumDriver;
 
 
-public class LoginWithGooglePage {
+public class LoginWithGooglePage extends BasePage {
 
-    private final AppiumDriver driver;
 
 
     public LoginWithGooglePage(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public FeedPage clickChooseGoogleAccount() {

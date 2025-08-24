@@ -1,32 +1,40 @@
 package ImpactynPages;
 
+import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
-public class LoginWithPhonePage {
+public class LoginWithPhonePage extends BasePage {
 
-    private final AppiumDriver driver;
-    private final WebDriverWait wait;
-
-    private final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-    private final By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"What's your number?\"]");
-
+    private By nextBtnLocator ;
+    private By screenTitleLocator ;
+    private By phoneNumberInputLocator;
 
     public LoginWithPhonePage(AppiumDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
+        initializeLocators();
+    }
+
+    public void initializeLocators()
+    {
+        // 'platform' is inherited from BasePage
+        if (platform.is(Platform.ANDROID)) {
+            String phoneNumberInputAutomatorString = "new UiSelector().className(\"android.widget.EditText\").instance(0)";
+            phoneNumberInputLocator=AppiumBy.androidUIAutomator(phoneNumberInputAutomatorString);
+            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+            screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"What's your number?\"]");
+        } else if (platform.is(Platform.IOS)) {
+        }
     }
 
     public void enterPhoneNumber(String phoneNumber) {
         System.out.println("Entering phone number: " + phoneNumber);
-        String phoneNumberInputLocator = "new UiSelector().className(\"android.widget.EditText\").instance(0)";
-        WebElement phoneInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator(phoneNumberInputLocator)));
+        WebElement phoneInput = wait.until(ExpectedConditions.visibilityOfElementLocated(phoneNumberInputLocator));
         phoneInput.sendKeys(phoneNumber);
     }
 
