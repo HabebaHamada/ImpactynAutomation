@@ -15,64 +15,35 @@ public class FeedPage extends BasePage {
 
     private final Actions actions;
 
-    private By ForYouTextLocator;
-    private By FollowingTextLocator;
-    private By EarnButtonLocator ;
-    private By MentionBrandLocator;
-    private By AllowRecordingSettingsLocator;
-    private By BrandSelectionNameLocator;
-    private By ShareButtonLocator;
-    private By NavBarLocator;
-    private By ProgressBarLocator;
-    private By BrandsSuggestionBarLocator;
-    private By BrandSelectionLocator;
-    private By RatingSliderLocator;
-    private By FlipCameraLocator;
+    private final By ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+    private final By FollowingTextLocator = By.xpath("//android.widget.TextView[@text=\"Following\"]");
+    private final By EarnButtonLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
+
+    private final By MentionBrandLocator = By.xpath("//android.widget.EditText");
+    private final By AllowRecordingSettingsLocator = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+    private final By BrandSelectionNameLocator = By.xpath("//android.widget.TextView[@text=\"BRGR\"]");
+
+    private final By ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
+
+    String navBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(16)";
+    String progressBarClassName = "android.widget.ProgressBar";
+    String brandsSuggestionBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(8)";
+    String brandSelectionAutomatorString = "new UiSelector().className(\"android.view.View\").instance(9)";
+    String ratingSliderClassName = "android.widget.SeekBar";
+    String flipCameraAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";
+
+    private final By NavBarLocator= AppiumBy.androidUIAutomator(navBarAutomatorString);
+    private final By ProgressBarLocator= AppiumBy.className(progressBarClassName);
+    private final By BrandsSuggestionBarLocator=  AppiumBy.androidUIAutomator(brandsSuggestionBarAutomatorString);
+    private final By BrandSelectionLocator= AppiumBy.androidUIAutomator(brandSelectionAutomatorString);
+    private final By RatingSliderLocator= AppiumBy.className(ratingSliderClassName);
+    private final By FlipCameraLocator= AppiumBy.androidUIAutomator(flipCameraAutomatorString);
+
 
     public FeedPage(AppiumDriver driver) {
         super(driver);
         this.actions = new Actions(driver);
-        initializeLocators();
     }
-
-    /**
-     * Initializes locators based on the platform determined in the BasePage.
-     */
-    private void initializeLocators() {
-        // 'platform' is inherited from BasePage
-        if (platform.is(Platform.ANDROID)) {
-            ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
-            FollowingTextLocator = By.xpath("//android.widget.TextView[@text=\"Following\"]");
-            EarnButtonLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
-
-            MentionBrandLocator = By.xpath("//android.widget.EditText");
-            AllowRecordingSettingsLocator = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
-            BrandSelectionNameLocator = By.xpath("//android.widget.TextView[@text=\"BRGR\"]");
-
-            ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
-
-            String navBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(16)";
-            String progressBarClassName = "android.widget.ProgressBar";
-            String brandsSuggestionBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(8)";
-            String brandSelectionAutomatorString = "new UiSelector().className(\"android.view.View\").instance(9)";
-            String ratingSliderClassName = "android.widget.SeekBar";
-            String flipCameraAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";
-
-
-
-
-            NavBarLocator= AppiumBy.androidUIAutomator(navBarAutomatorString);
-            ProgressBarLocator= AppiumBy.className(progressBarClassName);
-            BrandsSuggestionBarLocator=  AppiumBy.androidUIAutomator(brandsSuggestionBarAutomatorString);
-            BrandSelectionLocator= AppiumBy.androidUIAutomator(brandSelectionAutomatorString);
-            RatingSliderLocator= AppiumBy.className(ratingSliderClassName);
-            FlipCameraLocator= AppiumBy.androidUIAutomator(flipCameraAutomatorString);
-
-
-        } else if (platform.is(Platform.IOS)) {
-        }
-    }
-
 
     public boolean isPageLoaded()
     {

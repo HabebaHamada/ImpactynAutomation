@@ -8,31 +8,14 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-
-
 public class LoginWithSnapchatPage extends BasePage {
 
-    private By ContinueBtnLocator;
-    private By SnapchatLoadingValidationLocator;
+    private final By ContinueBtnLocator= By.xpath("//android.widget.Button[@text=\"Continue\"]");
+    private final By SnapchatLoadingValidationLocator = By.xpath("//android.widget.TextView[@text=\"Connect to Impactyn (https://www.impactyn.io)?\"]");
+
 
     public LoginWithSnapchatPage(AppiumDriver driver) {
         super(driver);
-        initializeLocators();
-    }
-
-    /**
-     * Initializes locators based on the platform determined in the BasePage.
-     */
-    private void initializeLocators() {
-        // 'platform' is inherited from BasePage
-        if (platform.is(Platform.ANDROID)) {
-            ContinueBtnLocator= By.xpath("//android.widget.Button[@text=\"Continue\"]");
-            SnapchatLoadingValidationLocator = By.xpath("//android.widget.TextView[@text=\"Connect to Impactyn (https://www.impactyn.io)?\"]");
-
-        } else if (platform.is(Platform.IOS)) {
-            ContinueBtnLocator = By.xpath("//android.widget.Button[@text=\"Continue\"]");
-            SnapchatLoadingValidationLocator = By.xpath("//android.widget.TextView[@text=\"Connect to Impactyn (https://www.impactyn.io)?\"]");
-        }
     }
 
     public boolean isPageLoaded()

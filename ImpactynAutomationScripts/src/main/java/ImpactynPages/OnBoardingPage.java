@@ -12,27 +12,12 @@ import java.time.Duration;
 
 public class OnBoardingPage extends BasePage{
 
-    private  By allowWhileUsingAppLocator ;
-    private  By allowButtonLocator;
+    private final By allowWhileUsingAppLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]");
+    private final By  allowButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]");
+
 
     public OnBoardingPage(AppiumDriver driver) {
         super(driver);
-        initializeLocators();
-    }
-
-    /**
-     * Initializes locators based on the platform determined in the BasePage.
-     */
-    private void initializeLocators() {
-        // 'platform' is inherited from BasePage
-        if (platform.is(Platform.ANDROID)) {
-            allowWhileUsingAppLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]");
-            allowButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]");
-
-        } else if (platform.is(Platform.IOS)) {
-            allowWhileUsingAppLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]");
-            allowButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]");
-        }
     }
 
     public void handleOnboardingFlow() {

@@ -13,35 +13,14 @@ import java.time.Duration;
 
 public class OTPPage extends BasePage {
 
-    private By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-    private By OTPInputLocator = By.xpath("//android.widget.EditText");
-    private By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-    private By feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+    private final By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
+    private final By OTPInputLocator = By.xpath("//android.widget.EditText");
+    private final By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+    private final By feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
 
     public OTPPage(AppiumDriver driver) {
         super(driver);
-        initializeLocators();
     }
-
-    /**
-     * Initializes locators based on the platform determined in the BasePage.
-     */
-    private void initializeLocators() {
-        // 'platform' is inherited from BasePage
-        if (platform.is(Platform.ANDROID)) {
-            screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-            OTPInputLocator = By.xpath("//android.widget.EditText");
-            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
-
-        } else if (platform.is(Platform.IOS)) {
-            screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-            OTPInputLocator = By.xpath("//android.widget.EditText");
-            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
-        }
-    }
-
     /*not used as this part is manually entered*/
     public void enterOTP(String OTP) {
         System.out.println("Entering OTP: " + OTP);
