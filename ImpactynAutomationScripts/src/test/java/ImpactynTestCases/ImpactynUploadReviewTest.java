@@ -11,6 +11,7 @@ public class ImpactynUploadReviewTest extends BaseTest
 
     @BeforeMethod
     public void loginBeforeReviewTest() {
+        handleInitialPopups();
         // Call the reusable login method from our BaseTest
         performLogin();
     }

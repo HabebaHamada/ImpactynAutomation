@@ -1,8 +1,10 @@
 package ImpactynPages;
 
+import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,26 +12,47 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class FeedPage {
+public class FeedPage extends BasePage {
 
-    private final WebDriverWait wait;
+
     private final Actions actions;
 
-    private final By ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
-    private final By FollowingTextLocator = By.xpath("//android.widget.TextView[@text=\"Following\"]");
-    private final By EarnButtonLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
+    private By ForYouTextLocator;
+    private By FollowingTextLocator;
+    private By EarnButtonLocator ;
 
-    private final By MentionBrandLocator = By.xpath("//android.widget.EditText");
-    private final By AllowRecordingSettingsLocator = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
-    private final By BrandSelectionNameLocator = By.xpath("//android.widget.TextView[@text=\"BRGR\"]");
+    private By MentionBrandLocator;
+    private By AllowRecordingSettingsLocator;
+    private By BrandSelectionNameLocator;
 
-    private final By ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
+    private By ShareButtonLocator;
 
-
-    public FeedPage(AppiumDriver driver) {
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-        this.actions = new Actions(driver);
+    public FeedPage(AppiumDriver driver, Actions actions) {
+        super(driver);
+        this.actions = actions;
+        initializeLocators();
     }
+
+    /**
+     * Initializes locators based on the platform determined in the BasePage.
+     */
+    private void initializeLocators() {
+        // 'platform' is inherited from BasePage
+        if (platform.is(Platform.ANDROID)) {
+            ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+            FollowingTextLocator = By.xpath("//android.widget.TextView[@text=\"Following\"]");
+            EarnButtonLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
+
+            MentionBrandLocator = By.xpath("//android.widget.EditText");
+            AllowRecordingSettingsLocator = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+            BrandSelectionNameLocator = By.xpath("//android.widget.TextView[@text=\"BRGR\"]");
+
+            ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
+
+        } else if (platform.is(Platform.IOS)) {
+        }
+    }
+
 
     public boolean isPageLoaded()
     {
