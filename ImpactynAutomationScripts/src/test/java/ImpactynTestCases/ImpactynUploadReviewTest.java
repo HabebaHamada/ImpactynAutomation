@@ -45,7 +45,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         /*initialize a Notification Verification object */
         NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
 
-        notificationVerifier.verifyNotification("Reel","\uD83C\uDFAC Preparing your video... Just a moment");
+        notificationVerifier.verifyNotification("Reel","\u2060\u2060Done! Thanks for Impacting\uD83E\uDD73");
         softAssertion.assertAll();
     }
 
@@ -80,7 +80,7 @@ public class ImpactynUploadReviewTest extends BaseTest
        /*initialize a Notification Verification object */
         NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
 
-        notificationVerifier.verifyNotification("Reel","\uD83C\uDFAC Preparing your video... Just a moment");
+        notificationVerifier.verifyNotification("Reel","\u2060\u2060Done! Thanks for Impacting\uD83E\uDD73");
         softAssertion.assertAll();
     }
 

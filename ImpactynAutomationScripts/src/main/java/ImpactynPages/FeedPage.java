@@ -51,9 +51,9 @@ public class FeedPage extends BasePage {
 
             ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
 
-            String navBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(23)";
+            String navBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(16)";
             String progressBarClassName = "android.widget.ProgressBar";
-            String brandsSuggestionBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(7)";
+            String brandsSuggestionBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(8)";
             String brandSelectionAutomatorString = "new UiSelector().className(\"android.view.View\").instance(9)";
             String ratingSliderClassName = "android.widget.SeekBar";
             String flipCameraAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";
