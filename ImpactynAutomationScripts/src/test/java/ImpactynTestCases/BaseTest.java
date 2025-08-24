@@ -50,8 +50,8 @@ public abstract class BaseTest {
             case "ios":
                 caps.setCapability("platformName", "iOS");
                 caps.setCapability("appium:automationName", "XCUITest");
-                caps.setCapability("appium:deviceName", "iPhone 14"); // <-- CHANGE TO YOUR SIMULATOR/DEVICE
-                caps.setCapability("appium:platformVersion", "16.2");   // <-- CHANGE IF NEEDED
+                caps.setCapability("appium:deviceName", "iPhone 14");
+                caps.setCapability("appium:platformVersion", "16.2");
                 // For iOS, you typically use 'bundleId' instead of package/activity
                 caps.setCapability("appium:bundleId", "com.innov8eg.impactyn");
                 caps.setCapability("appium:noReset", false);
