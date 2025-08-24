@@ -8,9 +8,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 public class FeedPage extends BasePage {
 
@@ -20,16 +18,20 @@ public class FeedPage extends BasePage {
     private By ForYouTextLocator;
     private By FollowingTextLocator;
     private By EarnButtonLocator ;
-
     private By MentionBrandLocator;
     private By AllowRecordingSettingsLocator;
     private By BrandSelectionNameLocator;
-
     private By ShareButtonLocator;
+    private By NavBarLocator;
+    private By ProgressBarLocator;
+    private By BrandsSuggestionBarLocator;
+    private By BrandSelectionLocator;
+    private By RatingSliderLocator;
+    private By FlipCameraLocator;
 
-    public FeedPage(AppiumDriver driver, Actions actions) {
+    public FeedPage(AppiumDriver driver) {
         super(driver);
-        this.actions = actions;
+        this.actions = new Actions(driver);
         initializeLocators();
     }
 
@@ -49,6 +51,24 @@ public class FeedPage extends BasePage {
 
             ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
 
+            String navBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(23)";
+            String progressBarClassName = "android.widget.ProgressBar";
+            String brandsSuggestionBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(7)";
+            String brandSelectionAutomatorString = "new UiSelector().className(\"android.view.View\").instance(9)";
+            String ratingSliderClassName = "android.widget.SeekBar";
+            String flipCameraAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";
+
+
+
+
+            NavBarLocator= AppiumBy.androidUIAutomator(navBarAutomatorString);
+            ProgressBarLocator= AppiumBy.className(progressBarClassName);
+            BrandsSuggestionBarLocator=  AppiumBy.androidUIAutomator(brandsSuggestionBarAutomatorString);
+            BrandSelectionLocator= AppiumBy.androidUIAutomator(brandSelectionAutomatorString);
+            RatingSliderLocator= AppiumBy.className(ratingSliderClassName);
+            FlipCameraLocator= AppiumBy.androidUIAutomator(flipCameraAutomatorString);
+
+
         } else if (platform.is(Platform.IOS)) {
         }
     }
@@ -66,9 +86,8 @@ public class FeedPage extends BasePage {
     public void clickRecordReview()  {
 
         /*click the record review button in the Nav Bar*/
-        String navBarLocator = "new UiSelector().className(\"android.view.View\").instance(23)";
         WebElement RecordButton = wait.until(ExpectedConditions.elementToBeClickable(
-                AppiumBy.androidUIAutomator(navBarLocator))
+                NavBarLocator)
         );
         RecordButton.click();
 
@@ -78,11 +97,8 @@ public class FeedPage extends BasePage {
     }
 
     public void startCameraRecording(long reviewDurationInMillis) throws InterruptedException {
-        String progressBarLocator = "android.widget.ProgressBar";
         WebElement ProgressBar =  wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        AppiumBy.className(progressBarLocator)
-                )
+                ExpectedConditions.visibilityOfElementLocated(ProgressBarLocator)
         );
         ProgressBar.click();
 
@@ -90,9 +106,7 @@ public class FeedPage extends BasePage {
         Thread.sleep(reviewDurationInMillis);
 
         wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        AppiumBy.className(progressBarLocator)
-                )
+                ExpectedConditions.visibilityOfElementLocated(ProgressBarLocator)
         ).click();
     }
 
@@ -109,23 +123,16 @@ public class FeedPage extends BasePage {
         System.out.println("waiting for brandsSuggestionBar...");
 
 
-        String brandsSuggestionBarLocator = "new UiSelector().className(\"android.view.View\").instance(7)";
         wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        AppiumBy.androidUIAutomator(brandsSuggestionBarLocator)
-                )
+                ExpectedConditions.visibilityOfElementLocated(BrandsSuggestionBarLocator)
         );
         wait.until(ExpectedConditions.visibilityOfElementLocated(BrandSelectionNameLocator));
 
         System.out.println("waiting for brandSelection...");
 
         /*Select the Brand*/
-        String brandSelectionLocator = "new UiSelector().className(\"android.view.View\").instance(9)";
-
         WebElement brandSelection =  wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        AppiumBy.androidUIAutomator(brandSelectionLocator)
-                )
+                ExpectedConditions.visibilityOfElementLocated(BrandSelectionLocator)
         );
         brandSelection.click();
 
@@ -133,11 +140,8 @@ public class FeedPage extends BasePage {
 
     public void setReviewRating()
     {
-        String ratingSliderLocator = "android.widget.SeekBar";
-        WebElement RatingSlider =   wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        AppiumBy.className(ratingSliderLocator)
-                )
+        WebElement RatingSlider = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(RatingSliderLocator)
         );
         // To slide horizontally to the right by 50 pixels
         actions.dragAndDropBy(RatingSlider, 50, 0).perform();
@@ -154,13 +158,9 @@ public class FeedPage extends BasePage {
     public void setFrontCamera()
     {
        /*click flip camera button*/
-        String flipCameraLocator = "new UiSelector().className(\"android.widget.Button\").instance(0)";
         WebElement FlipCamera =wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        AppiumBy.androidUIAutomator(flipCameraLocator)
-                )
+                ExpectedConditions.visibilityOfElementLocated(FlipCameraLocator)
         );
         FlipCamera.click();
-
     }
 }
