@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bd91627-a3c0-4b7b-a23b-62280df255ab" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImpactynAutomationScripts/src/main/java/ImpactynPages/OnBoardingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ImpactynAutomationScripts/src/main/java/ImpactynPages/OnBoardingPage.java" afterDir="false" />
-    </list>
+    <list default="true" id="4bd91627-a3c0-4b7b-a23b-62280df255ab" name="Changes" comment="changing project name" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,12 +22,12 @@
     &quot;assignee&quot;: &quot;HabebaHamada&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/HabebaHamada/ImpactynAutomation.git&quot;,
-    &quot;accountId&quot;: &quot;8d6575f7-756c-4e57-b035-f03bb86e93e2&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/HabebaHamada/ImpactynAutomation.git",
+    "accountId": "53cf8121-3fb1-4bfd-bcbb-5d7943db59cf"
   }
-}</component>
+}]]></component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:/Program Files/php-8.4.8-Win32-vs17-x64/php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -49,7 +45,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/ImpactynAutomated",
+    "last_opened_file_path": "/Users/mostafa/Documents/ImpactynAutomation",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Problems",
     "project.structure.proportion": "0.15",
@@ -67,9 +63,22 @@
       <updated>1752753156236</updated>
       <workItem from="1753266418340" duration="39000" />
     </task>
+    <task id="LOCAL-00001" summary="changing project name">
+      <option name="closed" value="true" />
+      <created>1756046607382</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1756046607382</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="changing project name" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing project name" />
   </component>
 </project>
