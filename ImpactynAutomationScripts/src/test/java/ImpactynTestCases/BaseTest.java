@@ -22,7 +22,6 @@ public abstract class BaseTest {
     protected AppiumDriver driver;
     protected Platform platform;
 
-
     @BeforeMethod
     public void setup() throws MalformedURLException {
 
@@ -41,7 +40,7 @@ public abstract class BaseTest {
                 caps.setCapability("appium:platformVersion", "14.0");
                 caps.setCapability("appium:deviceName", "emulator-5554");
                 caps.setCapability("appium:automationName", "UiAutomator2");
-                caps.setCapability("appium:avd", "Medium_Phone");
+                caps.setCapability("appium:avd", "Medium_Phone_API_35");
                 caps.setCapability("appium:appPackage", "com.innov8eg.impactyn");
                 caps.setCapability("appium:appActivity", "com.innov8eg.impactyn.MainActivity");
 

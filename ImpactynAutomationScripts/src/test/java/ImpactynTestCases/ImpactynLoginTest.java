@@ -44,7 +44,7 @@ public class ImpactynLoginTest extends BaseTest  {
     }
 
 
-    @Test(priority = 1 , description = "Verify login with Facebook.")
+    @Test(priority = 3 , description = "Verify login with Facebook.")
     public void loginWithFacebookTest() {
 
         System.out.println("Login with Facebook Testcase Started : ");
@@ -90,12 +90,12 @@ public class ImpactynLoginTest extends BaseTest  {
 
     }
 
-    @Test(priority = 3, description = "Verify login with Google.")
+    @Test(priority = 1, description = "Verify login with Google.")
     public void loginWithGoogleTest() {
 
         System.out.println("Login with Google Testcase Started : ");
+         handleInitialPopups();
 
-        handleInitialPopups();
 
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
