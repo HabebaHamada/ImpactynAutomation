@@ -10,13 +10,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginWithFacebookPage extends BasePage {
 
-    private final By ContinueWithFacebookBtnLocator= By.xpath("//android.widget.Button[starts-with(@text, \"Continue as\")]");
-    private final By FacebookLoadingValidationLocator= By.xpath("//android.widget.TextView[@text=\"You previously logged into Impactyn with Facebook.\"]");
-
-
+    private  By ContinueWithFacebookBtnLocator;
+    private  By FacebookLoadingValidationLocator;
     public LoginWithFacebookPage(AppiumDriver driver) {
         super(driver);
+        initializeLocators();
     }
+    private void initializeLocators(){
+        // 'platform' is inherited from BasePage
+        if (platform.is(Platform.ANDROID)) {
+        ContinueWithFacebookBtnLocator= By.xpath("//android.widget.Button[starts-with(@text, \"Continue as\")]");
+        FacebookLoadingValidationLocator= By.xpath("//android.widget.TextView[@text=\"You previously logged into Impactyn with Facebook.\"]");
+    } else if (platform.is(Platform.IOS)) {
+        ContinueWithFacebookBtnLocator= By.xpath("//android.widget.Button[starts-with(@text, \"Continue as\")]");
+        FacebookLoadingValidationLocator= By.xpath("//android.widget.TextView[@text=\"You previously logged into Impactyn with Facebook.\"]");
+    }
+}
 
     public boolean isPageLoaded()
     {
