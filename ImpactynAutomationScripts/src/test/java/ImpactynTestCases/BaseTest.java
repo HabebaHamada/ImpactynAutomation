@@ -4,6 +4,7 @@ import ImpactynPages.*;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import io.appium.java_client.ios.IOSDriver;
 import org.testng.Assert;
@@ -19,6 +20,8 @@ import java.time.Duration;
 public abstract class BaseTest {
 
     protected AppiumDriver driver;
+    protected Platform platform;
+
 
     @BeforeMethod
     public void setup() throws MalformedURLException {
@@ -33,6 +36,7 @@ public abstract class BaseTest {
 
         switch (platform) {
             case "android":
+                this.platform = Platform.ANDROID;
                 caps.setCapability("platformName", "Android");
                 caps.setCapability("appium:platformVersion", "14.0");
                 caps.setCapability("appium:deviceName", "emulator-5554");
@@ -48,6 +52,8 @@ public abstract class BaseTest {
                 break;
 
             case "ios":
+                this.platform = Platform.IOS;
+
                 caps.setCapability("platformName", "iOS");
                 caps.setCapability("appium:automationName", "XCUITest");
                 caps.setCapability("appium:deviceName", "iPhone 14");
@@ -73,6 +79,8 @@ public abstract class BaseTest {
     }
 
     protected void handleInitialPopups() {
+        if (!this.platform.is(Platform.ANDROID)) return;
+
         System.out.println("--- PRE-TEST ACTION: Handling initial pop-ups ---");
         OnBoardingPage onboarding = new OnBoardingPage(driver);
         onboarding.handleOnboardingFlow();

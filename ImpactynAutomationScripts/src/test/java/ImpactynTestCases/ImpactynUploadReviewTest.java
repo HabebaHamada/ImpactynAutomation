@@ -1,6 +1,7 @@
 package ImpactynTestCases;
 
 import ImpactynPages.FeedPage;
+import org.openqa.selenium.Platform;
 import org.testng.asserts.SoftAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -42,10 +43,15 @@ public class ImpactynUploadReviewTest extends BaseTest
         /*soft Assertion Navigating to the 'Feed' page after Uploading*/
         softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
 
-        /*initialize a Notification Verification object */
-        NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+        if(this.platform == Platform.ANDROID) {
+            /*initialize a Notification Verification object */
+            NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
 
-        notificationVerifier.verifyNotification("Reel","\u2060\u2060Done! Thanks for Impacting\uD83E\uDD73");
+            notificationVerifier.verifyNotification("Reel", "\u2060\u2060Done! Thanks for Impacting\uD83E\uDD73");
+        } else if (this.platform == Platform.IOS) {
+            // add iOS code
+        }
+
         softAssertion.assertAll();
     }
 
