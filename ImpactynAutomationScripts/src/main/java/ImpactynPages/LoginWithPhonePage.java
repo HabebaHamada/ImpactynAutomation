@@ -30,6 +30,9 @@ public class LoginWithPhonePage extends BasePage {
         }
         else if (platform.is(Platform.IOS))
         {
+            phoneNumberInputLocator=By.xpath("//XCUIElementTypeTextField[@value=\"phone number\"]");
+            nextBtnLocator=By.xpath("//XCUIElementTypeStaticText[@name=\"Next\"]");
+            screenTitleLocator=AppiumBy.accessibilityId("What's your number?");
         }
     }
     public void enterPhoneNumber(String phoneNumber) {

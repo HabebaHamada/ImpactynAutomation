@@ -61,6 +61,9 @@ public class FeedPage extends BasePage {
             FlipCameraLocator= AppiumBy.androidUIAutomator(flipCameraAutomatorString);
 
         } else if (platform.is(Platform.IOS)) {
+            ForYouTextLocator=AppiumBy.accessibilityId("For you");
+            FollowingTextLocator=AppiumBy.accessibilityId("Following");
+            EarnButtonLocator=By.xpath("//XCUIElementTypeStaticText[@name=\"Earn\"]");
         }
     }
     public boolean isPageLoaded()

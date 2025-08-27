@@ -94,8 +94,8 @@ public class ImpactynLoginTest extends BaseTest  {
     public void loginWithGoogleTest() {
 
         System.out.println("Login with Google Testcase Started : ");
-         handleInitialPopups();
 
+        handleInitialPopups();
 
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);

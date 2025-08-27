@@ -2,6 +2,7 @@ package ImpactynPages;
 
 
 import ImpactynCore.BasePage;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
@@ -24,8 +25,8 @@ public class LoginWithSnapchatPage extends BasePage {
             ContinueBtnLocator= By.xpath("//android.widget.Button[@text=\"Continue\"]");
             SnapchatLoadingValidationLocator = By.xpath("//android.widget.TextView[@text=\"Connect to Impactyn (https://www.impactyn.io)?\"]");
         } else if (platform.is(Platform.IOS)) {
-            ContinueBtnLocator = By.xpath("//android.widget.Button[@text=\"Continue\"]");
-            SnapchatLoadingValidationLocator = By.xpath("//android.widget.TextView[@text=\"Connect to Impactyn (https://www.impactyn.io)?\"]");
+            ContinueBtnLocator = AppiumBy.accessibilityId("Continue");
+            SnapchatLoadingValidationLocator = AppiumBy.accessibilityId("Connect to Impactyn (https://www.impactyn.io)?");
         }
     }
 

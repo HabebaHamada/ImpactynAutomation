@@ -27,11 +27,6 @@ public class OnBoardingPage extends BasePage{
         allowWhileUsingAppLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]");
         allowButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]");
         }
-        else if (platform.is(Platform.IOS))
-        {
-        allowWhileUsingAppLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]");
-        allowButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_button\"]");
-        }
     }
 
     public void handleOnboardingFlow() {
