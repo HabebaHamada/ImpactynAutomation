@@ -27,6 +27,7 @@ public class FeedPage extends BasePage {
     private By BrandSelectionLocator;
     private By RatingSliderLocator;
     private By FlipCameraLocator;
+    private By NextAccesabilityLocator;
 
     public FeedPage(AppiumDriver driver) {
         super(driver);
@@ -64,6 +65,17 @@ public class FeedPage extends BasePage {
             ForYouTextLocator=AppiumBy.accessibilityId("For you");
             FollowingTextLocator=AppiumBy.accessibilityId("Following");
             EarnButtonLocator=By.xpath("//XCUIElementTypeStaticText[@name=\"Earn\"]");
+
+            NavBarLocator=By.xpath("//XCUIElementTypeTabBar[@name=\"Tab Bar\"]/XCUIElementTypeButton[3]");
+            ProgressBarLocator=By.xpath("//XCUIElementTypeApplication[@name=\"Impactyn\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[4]/XCUIElementTypeOther/XCUIElementTypeButton[2]");
+            MentionBrandLocator=By.xpath("//XCUIElementTypeTextField[@value=\"mention the brand\"]");
+            BrandsSuggestionBarLocator=By.xpath("(//XCUIElementTypeOther[@name=\"Horizontal scroll bar, 3 pages\"])[2]");
+            BrandSelectionLocator=By.xpath("//XCUIElementTypeCollectionView/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeImage");
+            RatingSliderLocator=AppiumBy.className("XCUIElementTypeSlider");
+            ShareButtonLocator=By.xpath("//XCUIElementTypeButton[@name=\"Share\"]");
+            FlipCameraLocator=AppiumBy.accessibilityId("flip");
+            NextAccesabilityLocator=AppiumBy.accessibilityId("AccessibilityIdentifiers.coachMarkNext");
+
         }
     }
     public boolean isPageLoaded()
@@ -83,9 +95,25 @@ public class FeedPage extends BasePage {
         );
         RecordButton.click();
 
-        /*Allow Video and Sound Settings For Recording*/
-        WebElement AllowRecording = wait.until(ExpectedConditions.elementToBeClickable(AllowRecordingSettingsLocator));
-        AllowRecording.click();
+        if (this.platform.is(Platform.ANDROID)) {
+            /*Allow Video and Sound Settings For Recording*/
+            WebElement AllowRecording = wait.until(ExpectedConditions.elementToBeClickable(AllowRecordingSettingsLocator));
+            AllowRecording.click();
+        }
+        else if (this.platform.is(Platform.IOS)){
+            /*Handle Coach Marks if present*/
+            try {
+                WebElement NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccesabilityLocator));
+                while (NextButton.isDisplayed()) {
+                    NextButton.click();
+                    // Re-locate the Next button after clicking
+                    NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccesabilityLocator));
+                }
+            } catch (Exception e) {
+                // If the Next button is not found, we assume there are no coach marks to handle
+                System.out.println("No coach marks to handle.");
+            }
+        }
     }
 
     public void startCameraRecording(long reviewDurationInMillis) throws InterruptedException {
