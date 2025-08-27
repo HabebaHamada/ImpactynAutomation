@@ -2,6 +2,7 @@ package ImpactynPages;
 
 import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TimeoutException;
@@ -29,7 +30,7 @@ public class OnBoardingPage extends BasePage{
         }
     }
 
-    public void handleOnboardingFlow() {
+    public void handleSystemAlert_Android() {
 
         handlePermissionPopup(allowWhileUsingAppLocator); // Handles Media/Location
         handlePermissionPopup(allowButtonLocator);        // Handles Notifications
@@ -49,6 +50,35 @@ public class OnBoardingPage extends BasePage{
             // This is now EXPECTED and SAFE. It just means the pop-up wasn't there.
             System.out.println("Permission pop-up not found. Continuing...");
         }
+    }
+
+    /*this method is used only for iOS system alert handling */
+    public void handleSystemAlert_iOS() {
+        System.out.println("Handling iOS system alert to handle Notification ...");
+
+        try {
+            // Step 1: Wait for the alert to be present on the screen.
+            // This is a crucial step to handle any small delays.
+            wait.until(ExpectedConditions.alertIsPresent());
+
+            // Step 2: Switch the driver's focus to the alert.
+            Alert systemAlert = driver.switchTo().alert();
+
+            // Step 3: You can get the text for verification (optional but good for debugging)
+            String alertText = systemAlert.getText();
+            System.out.println("Found system alert with text: " + alertText);
+
+            // Step 4: Accept the alert. This will click the default "Continue" button.
+            systemAlert.accept();
+
+            System.out.println("System alert accepted.");
+
+        } catch (Exception e) {
+            System.err.println("Failed to handle the system alert.");
+            // Optionally take a screenshot here for debugging
+            throw e;
+        }
+        System.out.println("System alert confirmed.");
     }
 
 

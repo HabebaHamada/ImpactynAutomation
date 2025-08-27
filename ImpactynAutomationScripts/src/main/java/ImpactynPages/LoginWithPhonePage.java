@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginWithPhonePage extends BasePage {
 
-
     private By nextBtnLocator ;
     private By screenTitleLocator ;
     private By phoneNumberInputLocator;

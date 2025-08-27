@@ -4,9 +4,11 @@ import ImpactynPages.*;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -60,8 +62,9 @@ public abstract class BaseTest {
                 caps.setCapability("appium:udid", "F663422D-8B08-4BC7-82F9-54A853CA9E67");
 
                 // For iOS, you typically use 'bundleId' instead of package/activity
-                caps.setCapability("appium:bundleId", "com.innov8.impactyn");
+                //caps.setCapability("appium:bundleId", "com.innov8.impactyn");
                 caps.setCapability("appium:noReset", false);
+                caps.setCapability("appium:app", "/Users/mostafa/Documents/ImpactynAutomation/Impactyn.app");
                 // Create the specific driver for iOS
                 driver = new IOSDriver(url, caps);
                 break;
@@ -80,12 +83,21 @@ public abstract class BaseTest {
     }
 
     protected void handleInitialPopups() {
-        if (!this.platform.is(Platform.ANDROID)) return;
+        if (this.platform.is(Platform.IOS))
+        {
+            System.out.println("--- PRE-TEST ACTION: Handling initial pop-ups ---");
+            OnBoardingPage onboarding = new OnBoardingPage(driver);
+            onboarding.handleSystemAlert_iOS();
+        }
+        else if (this.platform.is(Platform.ANDROID)) {
+            System.out.println("--- PRE-TEST ACTION: Handling initial pop-ups ---");
+            OnBoardingPage onboarding = new OnBoardingPage(driver);
+            onboarding.handleSystemAlert_Android();
+        }
 
-        System.out.println("--- PRE-TEST ACTION: Handling initial pop-ups ---");
-        OnBoardingPage onboarding = new OnBoardingPage(driver);
-        onboarding.handleOnboardingFlow();
     }
+
+
     /**
      * This is a reusable login method that can be called by any test that needs it.
      * It's not a @Test itself, but a helper utility.
