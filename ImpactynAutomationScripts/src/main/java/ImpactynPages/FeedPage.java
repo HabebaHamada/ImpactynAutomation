@@ -6,32 +6,36 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+/**
+ * FeedPage class represents the feed screen of the application.
+ * It provides methods to interact with various elements on the feed page.
+ * This class extends BasePage to inherit common functionality.
+ */
 
 public class FeedPage extends BasePage {
 
-
-    private final Actions actions;
     private By ForYouTextLocator;
     private By FollowingTextLocator;
     private By EarnButtonLocator ;
     private By MentionBrandLocator;
     private By AllowRecordingSettingsLocator;
-    private By BrandSelectionNameLocator;
     private By ShareButtonLocator;
-    private By NavBarLocator;
     private By ProgressBarLocator;
     private By BrandsSuggestionBarLocator;
     private By BrandSelectionLocator;
     private By RatingSliderLocator;
     private By FlipCameraLocator;
-    private By NextAccesabilityLocator;
+    private By NextAccessibilityLocator;
+    private By recordButtonLocator;
+    private By chooseFromGalleryLocator;
+    private By chooseVideoLocator;
+    private By confirmChoosenVideoLocator;
+    private By preprationReviewNotificationLocator;
+    private By finshingReviewNotificationLocator;
 
     public FeedPage(AppiumDriver driver) {
         super(driver);
-        this.actions = new Actions(driver);
         initializeLocators();
     }
     /**
@@ -44,17 +48,16 @@ public class FeedPage extends BasePage {
             EarnButtonLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
             MentionBrandLocator = By.xpath("//android.widget.EditText");
             AllowRecordingSettingsLocator = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
-            BrandSelectionNameLocator = By.xpath("//android.widget.TextView[@text=\"BRGR\"]");
             ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
 
-            String navBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(16)";
+            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(16)";
             String progressBarClassName = "android.widget.ProgressBar";
             String brandsSuggestionBarAutomatorString = "new UiSelector().className(\"android.view.View\").instance(8)";
             String brandSelectionAutomatorString = "new UiSelector().className(\"android.view.View\").instance(9)";
             String ratingSliderClassName = "android.widget.SeekBar";
             String flipCameraAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";
 
-            NavBarLocator= AppiumBy.androidUIAutomator(navBarAutomatorString);
+            recordButtonLocator= AppiumBy.androidUIAutomator(recordButtonAutomatorString);
             ProgressBarLocator= AppiumBy.className(progressBarClassName);
             BrandsSuggestionBarLocator=  AppiumBy.androidUIAutomator(brandsSuggestionBarAutomatorString);
             BrandSelectionLocator= AppiumBy.androidUIAutomator(brandSelectionAutomatorString);
@@ -66,7 +69,6 @@ public class FeedPage extends BasePage {
             FollowingTextLocator=AppiumBy.accessibilityId("Following");
             EarnButtonLocator=By.xpath("//XCUIElementTypeStaticText[@name=\"Earn\"]");
 
-            NavBarLocator=By.xpath("//XCUIElementTypeTabBar[@name=\"Tab Bar\"]/XCUIElementTypeButton[3]");
             ProgressBarLocator=By.xpath("//XCUIElementTypeApplication[@name=\"Impactyn\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[4]/XCUIElementTypeOther/XCUIElementTypeButton[2]");
             MentionBrandLocator=By.xpath("//XCUIElementTypeTextField[@value=\"mention the brand\"]");
             BrandsSuggestionBarLocator=By.xpath("(//XCUIElementTypeOther[@name=\"Horizontal scroll bar, 3 pages\"])[2]");
@@ -74,8 +76,14 @@ public class FeedPage extends BasePage {
             RatingSliderLocator=AppiumBy.className("XCUIElementTypeSlider");
             ShareButtonLocator=By.xpath("//XCUIElementTypeButton[@name=\"Share\"]");
             FlipCameraLocator=AppiumBy.accessibilityId("flip");
-            NextAccesabilityLocator=AppiumBy.accessibilityId("AccessibilityIdentifiers.coachMarkNext");
+            NextAccessibilityLocator =AppiumBy.accessibilityId("AccessibilityIdentifiers.coachMarkNext");
 
+            recordButtonLocator = AppiumBy.name("center_btn_ic");
+            chooseFromGalleryLocator = By.xpath("//XCUIElementTypeImage[@name='feed_selected']/..");
+            chooseVideoLocator = By.xpath("//XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeImage");
+            confirmChoosenVideoLocator = By.xpath("//XCUIElementTypeStaticText[@name=\"Done\"]");
+            preprationReviewNotificationLocator=AppiumBy.accessibilityId("Preparing your video...");
+            finshingReviewNotificationLocator=AppiumBy.accessibilityId("Keep Impactyn open to finish posting..");
         }
     }
     public boolean isPageLoaded()
@@ -90,9 +98,10 @@ public class FeedPage extends BasePage {
     public void clickRecordReview()  {
 
         /*click the record review button in the Nav Bar*/
-        WebElement RecordButton = wait.until(ExpectedConditions.elementToBeClickable(
-                NavBarLocator)
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                recordButtonLocator)
         );
+        WebElement RecordButton = wait.until(ExpectedConditions.elementToBeClickable(recordButtonLocator));
         RecordButton.click();
 
         if (this.platform.is(Platform.ANDROID)) {
@@ -103,11 +112,11 @@ public class FeedPage extends BasePage {
         else if (this.platform.is(Platform.IOS)){
             /*Handle Coach Marks if present*/
             try {
-                WebElement NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccesabilityLocator));
+                WebElement NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccessibilityLocator));
                 while (NextButton.isDisplayed()) {
                     NextButton.click();
                     // Re-locate the Next button after clicking
-                    NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccesabilityLocator));
+                    NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccessibilityLocator));
                 }
             } catch (Exception e) {
                 // If the Next button is not found, we assume there are no coach marks to handle
@@ -130,15 +139,15 @@ public class FeedPage extends BasePage {
         ).click();
     }
 
-    public void setMentionBrand(String Brand)
+    public void mentionBrand(String Brand)
     {
         System.out.println("Entering BRGR Brand...");
 
-        WebElement MentionBrand = wait.until(ExpectedConditions.visibilityOfElementLocated(MentionBrandLocator));
+        WebElement mentionBrandTextField = wait.until(ExpectedConditions.visibilityOfElementLocated(MentionBrandLocator));
 
-        MentionBrand.click();
-
-        MentionBrand.sendKeys(Brand);
+        mentionBrandTextField.click();
+        mentionBrandTextField.clear(); // Ensure field is empty
+        mentionBrandTextField.sendKeys(Brand);
 
         System.out.println("waiting for brandsSuggestionBar...");
 
@@ -146,7 +155,6 @@ public class FeedPage extends BasePage {
         wait.until(
                 ExpectedConditions.visibilityOfElementLocated(BrandsSuggestionBarLocator)
         );
-        wait.until(ExpectedConditions.visibilityOfElementLocated(BrandSelectionNameLocator));
 
         System.out.println("waiting for brandSelection...");
 
@@ -163,8 +171,13 @@ public class FeedPage extends BasePage {
         WebElement RatingSlider = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(RatingSliderLocator)
         );
-        // To slide horizontally to the right by 50 pixels
-        actions.dragAndDropBy(RatingSlider, 50, 0).perform();
+        if (platform.is(Platform.IOS)) {
+            // Set the slider value using JavaScript for XCUIElementTypeSlider
+            RatingSlider.sendKeys("0.5"); // Set to 50%, adjust as needed
+        } else {
+            // For Android, use dragAndDropBy
+            RatingSlider.sendKeys("5.5"); // Set to 50%, adjust as needed
+        }
     }
 
     public void shareReview()
@@ -175,12 +188,53 @@ public class FeedPage extends BasePage {
 
     }
 
-    public void setFrontCamera()
+    public void flipCamera()
     {
        /*click flip camera button*/
         WebElement FlipCamera =wait.until(
                 ExpectedConditions.visibilityOfElementLocated(FlipCameraLocator)
         );
         FlipCamera.click();
+    }
+
+    public void chooseFromGallery()
+    {
+        WebElement ChooseFromGallery= wait.until(
+                ExpectedConditions.visibilityOfElementLocated(chooseFromGalleryLocator)
+        );
+        ChooseFromGallery.click();
+
+        WebElement ChooseVideo= wait.until(
+                ExpectedConditions.visibilityOfElementLocated(chooseVideoLocator)
+        );
+        ChooseVideo.click();
+
+        WebElement ConfirmChoosenVideo= wait.until(
+                ExpectedConditions.visibilityOfElementLocated(confirmChoosenVideoLocator)
+        );
+        ConfirmChoosenVideo.click();
+    }
+
+    public boolean verifyUploadingMessages() {
+        try {
+            // Wait for the "Preparing your video..." notification
+            WebElement preparingNotification = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(preprationReviewNotificationLocator)
+            );
+            boolean isPreparingVisible = preparingNotification.isDisplayed();
+            System.out.println("\"Preparing your video...\" notification is visible: " + isPreparingVisible);
+
+            // Wait for the "Keep Impactyn open to finish posting.." notification
+            WebElement finishingNotification = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(finshingReviewNotificationLocator)
+            );
+            boolean isFinishingVisible = finishingNotification.isDisplayed();
+            System.out.println("\"Keep Impactyn open to finish posting..\" notification is visible: " + isFinishingVisible);
+
+            return isPreparingVisible && isFinishingVisible;
+        } catch (Exception e) {
+            System.out.println("An error occurred while verifying uploading messages: " + e.getMessage());
+            return false;
+        }
     }
 }

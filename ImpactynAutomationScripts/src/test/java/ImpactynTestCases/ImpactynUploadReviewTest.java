@@ -17,7 +17,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         performLogin();
     }
 
-    @Test (priority = 1 , description = "Verify user can upload a new review from Back camera")
+    @Test (priority = 2 , description = "Verify user can upload a new review from Back camera")
     public void UploadBackCameraReview() throws InterruptedException {
 
         SoftAssert softAssertion = new SoftAssert();
@@ -32,7 +32,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         feedPage.startCameraRecording(20000);
 
         /*mention Brand*/
-        feedPage.setMentionBrand("BRGR");
+        feedPage.mentionBrand("BRGR");
 
         /*set rating for the Review*/
         feedPage.setReviewRating();
@@ -47,15 +47,15 @@ public class ImpactynUploadReviewTest extends BaseTest
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
 
-            notificationVerifier.verifyNotification("Reel", "\u2060\u2060Done! Thanks for Impacting\uD83E\uDD73");
+            notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
         } else if (this.platform == Platform.IOS) {
-            // add iOS code
+            softAssertion.assertTrue(feedPage.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
 
         softAssertion.assertAll();
     }
 
-    @Test (priority = 2 , description = "Verify user can upload a new review from Front camera")
+    @Test (priority = 3 , description = "Verify user can upload a new review from Front camera")
     public void UploadFrontCameraReview() throws InterruptedException {
         SoftAssert softAssertion = new SoftAssert();
 
@@ -66,13 +66,13 @@ public class ImpactynUploadReviewTest extends BaseTest
         feedPage.clickRecordReview();
 
         /*Flipping Camera to Front Camera*/
-        feedPage.setFrontCamera();
+        feedPage.flipCamera();
 
         /*Camera Recording for 20 seconds*/
         feedPage.startCameraRecording(20000);
 
         /*mention Brand*/
-        feedPage.setMentionBrand("BRGR");
+        feedPage.mentionBrand("BRGR");
 
         /*set rating for the Review*/
         feedPage.setReviewRating();
@@ -83,10 +83,49 @@ public class ImpactynUploadReviewTest extends BaseTest
         /*soft Assertion Navigating to the 'Feed' page after Uploading*/
         softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
 
-       /*initialize a Notification Verification object */
-        NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+        if(this.platform == Platform.ANDROID) {
+            /*initialize a Notification Verification object */
+            NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
 
-        notificationVerifier.verifyNotification("Reel","\u2060\u2060Done! Thanks for Impacting\uD83E\uDD73");
+            notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+        } else if (this.platform == Platform.IOS) {
+            softAssertion.assertTrue(feedPage.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
+        }
+        softAssertion.assertAll();
+    }
+
+    @Test (priority = 1 , description = "Verify user can upload a new review from Gallery")
+    public void UploadGalleryReview() throws InterruptedException {
+        SoftAssert softAssertion = new SoftAssert();
+
+        // 1. Initialize the first page object
+        FeedPage feedPage = new FeedPage(driver);
+
+        feedPage.clickRecordReview();
+
+        /*Choosing from Gallery*/
+        feedPage.chooseFromGallery();
+
+        /*mention Brand*/
+        feedPage.mentionBrand("BRGR");
+
+        /*set rating for the Review*/
+        feedPage.setReviewRating();
+
+        /*Uploading the Review*/
+        feedPage.shareReview();
+
+        /*soft Assertion Navigating to the 'Feed' page after Uploading*/
+        softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
+
+        if(this.platform == Platform.ANDROID) {
+            /*initialize a Notification Verification object */
+            NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+
+            notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+        } else if (this.platform == Platform.IOS) {
+            softAssertion.assertTrue(feedPage.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
+        }
         softAssertion.assertAll();
     }
 
