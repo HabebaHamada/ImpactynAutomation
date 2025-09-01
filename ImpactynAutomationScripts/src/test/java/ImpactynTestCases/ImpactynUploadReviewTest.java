@@ -1,6 +1,7 @@
 package ImpactynTestCases;
 
 import ImpactynPages.FeedPage;
+import ImpactynPages.UploadReview;
 import org.openqa.selenium.Platform;
 import org.testng.asserts.SoftAssert;
 import org.testng.annotations.BeforeMethod;
@@ -26,19 +27,21 @@ public class ImpactynUploadReviewTest extends BaseTest
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Plus Icon From nav bar*/
-        feedPage.clickRecordReview();
+        UploadReview uploadReview=feedPage.clickRecordReview();
+
+        uploadReview.AllowRecordingSettings();
 
         /*Camera Recording for 20 seconds*/
-        feedPage.startCameraRecording(20000);
+        uploadReview.startCameraRecording(20);
 
         /*mention Brand*/
-        feedPage.mentionBrand("BRGR");
+        uploadReview.mentionBrand("BRGR");
 
         /*set rating for the Review*/
-        feedPage.setReviewRating();
+        uploadReview.setReviewRating();
 
         /*Uploading the Review*/
-        feedPage.shareReview();
+        uploadReview.shareReview();
 
         /*soft Assertion Navigating to the 'Feed' page after Uploading*/
         softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
@@ -46,10 +49,9 @@ public class ImpactynUploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
-
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
         } else if (this.platform == Platform.IOS) {
-            softAssertion.assertTrue(feedPage.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
+            softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
 
         softAssertion.assertAll();
@@ -63,22 +65,24 @@ public class ImpactynUploadReviewTest extends BaseTest
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Plus Icon From nav bar*/
-        feedPage.clickRecordReview();
+        UploadReview uploadReview= feedPage.clickRecordReview();
+
+        uploadReview.AllowRecordingSettings();
 
         /*Flipping Camera to Front Camera*/
-        feedPage.flipCamera();
+        uploadReview.flipCamera();
 
         /*Camera Recording for 20 seconds*/
-        feedPage.startCameraRecording(20000);
+        uploadReview.startCameraRecording(20);
 
         /*mention Brand*/
-        feedPage.mentionBrand("BRGR");
+        uploadReview.mentionBrand("BRGR");
 
         /*set rating for the Review*/
-        feedPage.setReviewRating();
+        uploadReview.setReviewRating();
 
        /*Uploading the Review*/
-        feedPage.shareReview();
+        uploadReview.shareReview();
 
         /*soft Assertion Navigating to the 'Feed' page after Uploading*/
         softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
@@ -89,7 +93,7 @@ public class ImpactynUploadReviewTest extends BaseTest
 
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
         } else if (this.platform == Platform.IOS) {
-            softAssertion.assertTrue(feedPage.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
+            softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
         softAssertion.assertAll();
     }
@@ -101,19 +105,21 @@ public class ImpactynUploadReviewTest extends BaseTest
         // 1. Initialize the first page object
         FeedPage feedPage = new FeedPage(driver);
 
-        feedPage.clickRecordReview();
+        UploadReview uploadReview= feedPage.clickRecordReview();
+
+        uploadReview.AllowRecordingSettings();
 
         /*Choosing from Gallery*/
-        feedPage.chooseFromGallery();
+        uploadReview.chooseFromGallery();
 
         /*mention Brand*/
-        feedPage.mentionBrand("BRGR");
+        uploadReview.mentionBrand("BRGR");
 
         /*set rating for the Review*/
-        feedPage.setReviewRating();
+        uploadReview.setReviewRating();
 
         /*Uploading the Review*/
-        feedPage.shareReview();
+        uploadReview.shareReview();
 
         /*soft Assertion Navigating to the 'Feed' page after Uploading*/
         softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
@@ -124,10 +130,9 @@ public class ImpactynUploadReviewTest extends BaseTest
 
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
         } else if (this.platform == Platform.IOS) {
-            softAssertion.assertTrue(feedPage.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
+            softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
         softAssertion.assertAll();
     }
-
 
 }

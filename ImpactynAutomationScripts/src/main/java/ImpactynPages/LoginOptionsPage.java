@@ -114,7 +114,6 @@ public class LoginOptionsPage extends BasePage {
 
         } catch (Exception e) {
             System.err.println("Failed to handle the system alert.");
-            // Optionally take a screenshot here for debugging
             throw e;
         }
         System.out.println("System alert confirmed.");

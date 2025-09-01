@@ -13,10 +13,10 @@ public abstract class BasePage {
 
     public BasePage(AppiumDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         // Determine the platform once and store it
         this.platform = driver.getCapabilities().getPlatformName();
-        System.out.println("BasePage initialized for platform: " + this.platform.name());
+        //System.out.println("BasePage initialized for platform: " + this.platform.name());
     }
 }

@@ -32,7 +32,6 @@ public class NotificationVerifier {
 
             // Step 1: Cast the driver to Android Driver
             // Step 2: Open Notifications bar
-            // This is the key part: (AndroidDriver) driver
             ((AndroidDriver) driver).openNotifications();
 
 
