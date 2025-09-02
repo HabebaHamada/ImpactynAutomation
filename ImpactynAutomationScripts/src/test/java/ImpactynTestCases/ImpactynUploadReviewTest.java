@@ -18,7 +18,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         performLogin();
     }
 
-    @Test (priority = 2 , description = "Verify user can upload a new review from Back camera")
+    @Test (priority = 3 , description = "Verify user can upload a new review from Back camera")
     public void UploadBackCameraReview() throws InterruptedException {
 
         SoftAssert softAssertion = new SoftAssert();
@@ -57,7 +57,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         softAssertion.assertAll();
     }
 
-    @Test (priority = 3 , description = "Verify user can upload a new review from Front camera")
+    @Test (priority = 1 , description = "Verify user can upload a new review from Front camera")
     public void UploadFrontCameraReview() throws InterruptedException {
         SoftAssert softAssertion = new SoftAssert();
 
@@ -98,7 +98,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         softAssertion.assertAll();
     }
 
-    @Test (priority = 1 , description = "Verify user can upload a new review from Gallery")
+    @Test (priority = 2 , description = "Verify user can upload a new review from Gallery")
     public void UploadGalleryReview() throws InterruptedException {
         SoftAssert softAssertion = new SoftAssert();
 

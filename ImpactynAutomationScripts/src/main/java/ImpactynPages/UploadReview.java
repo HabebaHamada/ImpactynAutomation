@@ -112,14 +112,19 @@ public class UploadReview extends BasePage {
         ).click();
     }
 
-    public void mentionBrand(String Brand) {
+    public void mentionBrand(String Brand) throws InterruptedException {
         System.out.println("Entering BRGR Brand...");
 
         WebElement mentionBrandTextField = wait.until(ExpectedConditions.visibilityOfElementLocated(MentionBrandLocator));
 
         mentionBrandTextField.click();
         mentionBrandTextField.clear(); // Ensure field is empty
-        mentionBrandTextField.sendKeys(Brand);
+        Thread.sleep(5000); // Wait for 5 seconds to ensure the field is ready
+        for (char c : (Brand).toCharArray()) {
+            mentionBrandTextField.sendKeys(Character.toString(c));
+            Thread.sleep(500); // Adjust delay as needed
+        }
+        Thread.sleep(5000); // Wait for 5 seconds to ensure the field is ready
 
         System.out.println("waiting for brandsSuggestionBar...");
 
@@ -166,7 +171,7 @@ public class UploadReview extends BasePage {
         FlipCamera.click();
     }
 
-    public void chooseFromGallery() {
+    public void chooseFromGallery() throws InterruptedException {
         WebElement ChooseFromGallery = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ChooseFromGalleryLocator)
         );
@@ -179,6 +184,7 @@ public class UploadReview extends BasePage {
         );
         ChooseVideo.click();
 
+        Thread.sleep(3000);
         WebElement ConfirmChosenVideo = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ConfirmChosenVideoLocator)
         );
