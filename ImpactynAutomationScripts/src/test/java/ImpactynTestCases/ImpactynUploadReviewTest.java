@@ -1,7 +1,8 @@
 package ImpactynTestCases;
 
+import ImpactynPages.EarnPage;
 import ImpactynPages.FeedPage;
-import ImpactynPages.UploadReview;
+import ImpactynPages.UploadReviewPage;
 import org.openqa.selenium.Platform;
 import org.testng.asserts.SoftAssert;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +19,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         performLogin();
     }
 
-    @Test (priority = 3 , description = "Verify user can upload a new review from Back camera")
+    @Test (priority = 4 , description = "Verify user can upload a new review from Back camera")
     public void UploadBackCameraReview() throws InterruptedException {
 
         SoftAssert softAssertion = new SoftAssert();
@@ -27,9 +28,9 @@ public class ImpactynUploadReviewTest extends BaseTest
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Plus Icon From nav bar*/
-        UploadReview uploadReview=feedPage.clickRecordReview();
+        UploadReviewPage uploadReview=feedPage.clickRecordReview();
 
-        uploadReview.AllowRecordingSettings();
+        uploadReview.allowRecordingSettings();
 
         /*Camera Recording for 20 seconds*/
         uploadReview.startCameraRecording(20);
@@ -57,7 +58,7 @@ public class ImpactynUploadReviewTest extends BaseTest
         softAssertion.assertAll();
     }
 
-    @Test (priority = 1 , description = "Verify user can upload a new review from Front camera")
+    @Test (priority = 3 , description = "Verify user can upload a new review from Front camera")
     public void UploadFrontCameraReview() throws InterruptedException {
         SoftAssert softAssertion = new SoftAssert();
 
@@ -65,9 +66,9 @@ public class ImpactynUploadReviewTest extends BaseTest
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Plus Icon From nav bar*/
-        UploadReview uploadReview= feedPage.clickRecordReview();
+        UploadReviewPage uploadReview= feedPage.clickRecordReview();
 
-        uploadReview.AllowRecordingSettings();
+        uploadReview.allowRecordingSettings();
 
         /*Flipping Camera to Front Camera*/
         uploadReview.flipCamera();
@@ -105,9 +106,9 @@ public class ImpactynUploadReviewTest extends BaseTest
         // 1. Initialize the first page object
         FeedPage feedPage = new FeedPage(driver);
 
-        UploadReview uploadReview= feedPage.clickRecordReview();
+        UploadReviewPage uploadReview= feedPage.clickRecordReview();
 
-        uploadReview.AllowRecordingSettings();
+        uploadReview.allowRecordingSettings();
 
         /*Choosing from Gallery*/
         uploadReview.chooseFromGallery();
@@ -133,6 +134,24 @@ public class ImpactynUploadReviewTest extends BaseTest
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
         softAssertion.assertAll();
+    }
+
+    @Test (priority = 1 , description = "Verify user can upload a new review from Earn page")
+    public void UploadFromEarnPage()
+    {
+        SoftAssert softAssertion = new SoftAssert();
+
+        // 1. Initialize the first page object
+        FeedPage feedPage = new FeedPage(driver);
+
+        // 2. Clicking on Earn Button From nav bar
+        EarnPage earnPage= feedPage.clickEarnButton();
+
+        earnPage.allowLocationAccess();
+
+
+
+
     }
 
 }

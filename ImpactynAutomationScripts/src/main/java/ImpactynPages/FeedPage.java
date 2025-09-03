@@ -17,8 +17,10 @@ public class FeedPage extends BasePage {
 
     private By ForYouTextLocator;
     private By FollowingTextLocator;
-    private By EarnButtonLocator ;
+    private By ChallengeIconLocator;
+    private By EarnButtonLocator;
     private By RecordButtonLocator;
+    private By ProfileButtonLocator ;
 
     public FeedPage(AppiumDriver driver) {
         super(driver);
@@ -33,26 +35,28 @@ public class FeedPage extends BasePage {
 
             ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
             FollowingTextLocator = By.xpath("//android.widget.TextView[@text=\"Following\"]");
-            EarnButtonLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
+            ChallengeIconLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
             RecordButtonLocator = AppiumBy.androidUIAutomator(recordButtonAutomatorString);
 
         } else if (platform.is(Platform.IOS)) {
             ForYouTextLocator=AppiumBy.accessibilityId("For you");
             FollowingTextLocator=AppiumBy.accessibilityId("Following");
-            EarnButtonLocator=By.xpath("//XCUIElementTypeStaticText[@name=\"Earn\"]");
+            ChallengeIconLocator =By.xpath("//XCUIElementTypeStaticText[@name=\"Earn\"]");
             RecordButtonLocator = AppiumBy.name("center_btn_ic");
+            EarnButtonLocator = By.xpath("//XCUIElementTypeButton[@name=\"Earn\"]");
+            ProfileButtonLocator = By.xpath("//XCUIElementTypeButton[@name=\"Profile\"]");
         }
     }
     public boolean isPageLoaded()
     {
-       boolean ForYouValidation=      wait.until(ExpectedConditions.visibilityOfElementLocated(ForYouTextLocator)).isDisplayed();
-       boolean FollowingValidation=   wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
-       boolean EarnButtonValidation=  wait.until(ExpectedConditions.visibilityOfElementLocated(EarnButtonLocator)).isDisplayed();
-
-       return (ForYouValidation||FollowingValidation||EarnButtonValidation);
+       boolean ForYouValidation        = wait.until(ExpectedConditions.visibilityOfElementLocated(ForYouTextLocator)).isDisplayed();
+       boolean FollowingValidation     = wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
+       boolean ChallengeIconValidation = wait.until(ExpectedConditions.visibilityOfElementLocated(ChallengeIconLocator)).isDisplayed();
+       boolean EarnButtonValidation    = wait.until(ExpectedConditions.visibilityOfElementLocated(EarnButtonLocator)).isDisplayed();
+       return (ForYouValidation||FollowingValidation|| ChallengeIconValidation||EarnButtonValidation);
     }
 
-    public UploadReview clickRecordReview()  {
+    public UploadReviewPage clickRecordReview()  {
 
         /*click the record review button in the Nav Bar*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -61,7 +65,32 @@ public class FeedPage extends BasePage {
         WebElement RecordButton = wait.until(ExpectedConditions.elementToBeClickable(RecordButtonLocator));
         RecordButton.click();
 
-        return new UploadReview(driver);
+        return new UploadReviewPage(driver);
+
+    }
+
+    public EarnPage clickEarnButton()  {
+
+        /*click the Earn button in the Nav Bar*/
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                EarnButtonLocator)
+        );
+        WebElement EarnButton = wait.until(ExpectedConditions.elementToBeClickable(EarnButtonLocator));
+        EarnButton.click();
+
+        return new EarnPage(driver);
+
+    }
+    public ProfilePage clickProfileButton()  {
+
+        /*click the Profile button in the Nav Bar*/
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                ProfileButtonLocator)
+        );
+        WebElement ProfileButton = wait.until(ExpectedConditions.elementToBeClickable(ProfileButtonLocator));
+        ProfileButton.click();
+
+        return new ProfilePage(driver);
 
     }
 }

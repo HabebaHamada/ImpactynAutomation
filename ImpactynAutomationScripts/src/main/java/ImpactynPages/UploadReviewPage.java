@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UploadReview extends BasePage {
+public class UploadReviewPage extends BasePage {
 
     private By MentionBrandLocator;
     private By AllowRecordingSettingsLocator;
@@ -28,7 +28,7 @@ public class UploadReview extends BasePage {
     private By PreparationReviewNotificationLocator;
     private By FinishingReviewNotificationLocator;
 
-    public UploadReview(AppiumDriver driver) {
+    public UploadReviewPage(AppiumDriver driver) {
         super(driver);
         initializeLocators();
     }
@@ -75,7 +75,7 @@ public class UploadReview extends BasePage {
         }
     }
 
-    public void AllowRecordingSettings() {
+    public void allowRecordingSettings() {
         if (this.platform.is(Platform.ANDROID)) {
             /*Allow Video and Sound Settings For Recording*/
             WebElement AllowRecording = wait.until(ExpectedConditions.elementToBeClickable(AllowRecordingSettingsLocator));
@@ -177,7 +177,7 @@ public class UploadReview extends BasePage {
         );
         ChooseFromGallery.click();
 
-        AllowGalleryAccess();
+        allowGalleryAccess();
 
         WebElement ChooseVideo = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ChooseVideoLocator)
@@ -186,7 +186,7 @@ public class UploadReview extends BasePage {
 
         Thread.sleep(3000);
         WebElement ConfirmChosenVideo = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(ConfirmChosenVideoLocator)
+                ExpectedConditions.elementToBeClickable(ConfirmChosenVideoLocator)
         );
         ConfirmChosenVideo.click();
     }
@@ -214,7 +214,7 @@ public class UploadReview extends BasePage {
         }
     }
 
-    private void AllowGalleryAccess() {
+    private void allowGalleryAccess() {
         if (this.platform.is(Platform.IOS)) {
             System.out.println("Attempting to handle iOS system alert for gallery access...");
             boolean alertHandled = false;
