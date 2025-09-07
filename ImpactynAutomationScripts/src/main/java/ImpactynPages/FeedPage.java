@@ -27,7 +27,8 @@ public class FeedPage extends BasePage {
         initializeLocators();
     }
     /**
-     * Initializes locators based on the platform determined in the BasePage. */
+     * Initializes locators based on the platform determined in the BasePage.
+     * */
     private void initializeLocators() {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
@@ -50,8 +51,7 @@ public class FeedPage extends BasePage {
             ProfileButtonLocator = By.xpath("//XCUIElementTypeButton[@name=\"Profile\"]");
         }
     }
-    public boolean isPageLoaded()
-    {
+    public boolean isPageLoaded() {
        boolean ForYouValidation        = wait.until(ExpectedConditions.visibilityOfElementLocated(ForYouTextLocator)).isDisplayed();
        boolean FollowingValidation     = wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
        boolean ChallengeIconValidation = wait.until(ExpectedConditions.visibilityOfElementLocated(ChallengeIconLocator)).isDisplayed();

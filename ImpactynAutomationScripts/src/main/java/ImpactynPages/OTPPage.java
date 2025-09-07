@@ -28,14 +28,14 @@ public class OTPPage extends BasePage {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
             screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-            OTPInputLocator = By.xpath("//android.widget.EditText");
-            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+            OTPInputLocator    = By.xpath("//android.widget.EditText");
+            nextBtnLocator     = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+            feedPageElement    = By.xpath("//android.widget.TextView[@text=\"For You\"]");
         } else if (platform.is(Platform.IOS)) {
             screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-            OTPInputLocator = By.xpath("//android.widget.EditText");
-            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+            OTPInputLocator    = By.xpath("//android.widget.EditText");
+            nextBtnLocator     = By.xpath("//android.widget.TextView[@text=\"Next\"]");
+            feedPageElement    = By.xpath("//android.widget.TextView[@text=\"For You\"]");
         }
     }
     /*not used as this part is manually entered*/

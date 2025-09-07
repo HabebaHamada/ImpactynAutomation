@@ -58,8 +58,8 @@ public class UploadReviewPage extends BasePage {
 
         } else if (platform.is(Platform.IOS)) {
 
-            ProgressBarLocator = By.xpath("//XCUIElementTypeApplication[@name=\"Impactyn\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[4]/XCUIElementTypeOther/XCUIElementTypeButton[2]");
             MentionBrandLocator = By.xpath("//XCUIElementTypeTextField[@value=\"mention the brand\"]");
+            ProgressBarLocator = By.xpath("//XCUIElementTypeApplication[@name=\"Impactyn\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[4]/XCUIElementTypeOther/XCUIElementTypeButton[2]");
             BrandsSuggestionBarLocator = By.xpath("(//XCUIElementTypeOther[@name=\"Horizontal scroll bar, 3 pages\"])[2]");
             BrandSelectionLocator = By.xpath("//XCUIElementTypeCollectionView/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeImage");
             RatingSliderLocator = AppiumBy.className("XCUIElementTypeSlider");

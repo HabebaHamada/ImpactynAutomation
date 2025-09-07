@@ -20,9 +20,10 @@ public class LoginWithPhonePage extends BasePage {
         initializeLocators();
     }
     public void initializeLocators()
-    {    // 'platform' is inherited from BasePage
+    {
         if (platform.is(Platform.ANDROID)) {
             String phoneNumberInputAutomatorString = "new UiSelector().className(\"android.widget.EditText\").instance(0)";
+
             phoneNumberInputLocator=AppiumBy.androidUIAutomator(phoneNumberInputAutomatorString);
             nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
             screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"What's your number?\"]");

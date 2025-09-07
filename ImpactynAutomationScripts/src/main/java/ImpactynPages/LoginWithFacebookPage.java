@@ -17,7 +17,6 @@ public class LoginWithFacebookPage extends BasePage {
         initializeLocators();
     }
     private void initializeLocators(){
-        // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
         ContinueWithFacebookBtnLocator= By.xpath("//android.widget.Button[starts-with(@text, \"Continue as\")]");
         FacebookLoadingValidationLocator= By.xpath("//android.widget.TextView[@text=\"You previously logged into Impactyn with Facebook.\"]");

@@ -21,7 +21,7 @@ public class LoginOptionsPage extends BasePage {
         initializeLocators();
     }
     public void initializeLocators()
-    {    // 'platform' is inherited from BasePage
+    {
         if (platform.is(Platform.ANDROID)) {
 
             String   usePhoneEmailBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";

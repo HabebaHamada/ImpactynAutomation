@@ -35,7 +35,6 @@ public class ProfilePage extends BasePage {
 
     void initializeLocators()
     {
-        // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
 
             EditProfileButtonLocator = By.xpath("//android.widget.TextView[@text=\"Edit Profile\"]");
