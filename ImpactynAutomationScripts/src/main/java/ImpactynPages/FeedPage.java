@@ -31,12 +31,15 @@ public class FeedPage extends BasePage {
     private void initializeLocators() {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
-            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(16)";
+            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(18)";
+            String profileButtonAutomatorString = "new UiSelector().text(\"Profile\")";
 
             ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
             FollowingTextLocator = By.xpath("//android.widget.TextView[@text=\"Following\"]");
             ChallengeIconLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
+            EarnButtonLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[2]");
             RecordButtonLocator = AppiumBy.androidUIAutomator(recordButtonAutomatorString);
+            ProfileButtonLocator = AppiumBy.androidUIAutomator(profileButtonAutomatorString);
 
         } else if (platform.is(Platform.IOS)) {
             ForYouTextLocator=AppiumBy.accessibilityId("For you");

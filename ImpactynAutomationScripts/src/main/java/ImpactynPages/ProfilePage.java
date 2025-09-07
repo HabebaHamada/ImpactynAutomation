@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
@@ -14,7 +15,6 @@ import java.util.Map;
 public class ProfilePage extends BasePage {
 
     private By EditProfileButtonLocator;
-    private By EditProfileTextLocator;
     private By NameEditingTextFieldLocator;
     private By BioEditingTextFieldLocator;
     private By SaveButtonLocator;
@@ -22,6 +22,7 @@ public class ProfilePage extends BasePage {
     private By PhotoEditingLocator;
     private By SelectGalleryLocator;
     private By PhotoSelectedLocator;
+    private By CropButtonLocator;
     private By ConfirmChosenPhotoLocator;
     private By NameTextLocator;
     private By BioTextLocator;
@@ -37,11 +38,22 @@ public class ProfilePage extends BasePage {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
 
+            EditProfileButtonLocator = By.xpath("//android.widget.TextView[@text=\"Edit Profile\"]");
+            NameEditingTextFieldLocator = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(0)");
+            BioEditingTextFieldLocator = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(1)");
+            SaveButtonLocator = AppiumBy.androidUIAutomator("new UiSelector().text(\"Save\")");
+            CloseButtonLocator = AppiumBy.className("android.widget.Button");
+            PhotoEditingLocator = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.view.View\").instance(3)");
+            SelectGalleryLocator = AppiumBy.androidUIAutomator("new UiSelector().text(\"Gallery\")");
+            PhotoSelectedLocator = AppiumBy.id("com.google.android.providers.media.module:id/icon_thumbnail");
+            CropButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.innov8eg.impactyn:id/crop_image_menu_crop\"]");
+            NameTextLocator = By.xpath("//android.widget.TextView[contains(@text, 'Followers')]/preceding-sibling::android.widget.TextView[2]");
+            BioTextLocator = By.xpath("//android.widget.TextView[contains(@text, 'Followers')]/following-sibling::android.widget.TextView[1]");
+            SuccessSavingMessageLocator = By.xpath("//android.widget.Toast[1]");
 
         } else if (platform.is(Platform.IOS)) {
 
             EditProfileButtonLocator = AppiumBy.accessibilityId("Edit Profile");
-            EditProfileTextLocator = By.xpath("(//XCUIElementTypeStaticText[@name=\"Edit Profile\"])[2]");
             NameEditingTextFieldLocator = By.xpath("//XCUIElementTypeOther/XCUIElementTypeTextField[1]");
             BioEditingTextFieldLocator = By.xpath("//XCUIElementTypeOther/XCUIElementTypeTextField[2]");
             SaveButtonLocator = AppiumBy.accessibilityId("Save");
@@ -88,7 +100,25 @@ public class ProfilePage extends BasePage {
 
     public boolean verifySuccessMessage()
     {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(SuccessSavingMessageLocator)).isDisplayed();
+        if (this.platform.is(Platform.IOS)) {
+            System.out.println("Waiting for the success toast message to appear...");
+
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(SuccessSavingMessageLocator)).isDisplayed();
+        } else {
+            System.out.println("Waiting for the success toast message to appear...");
+
+            // For Android Toasts, we wait for PRESENCE in the DOM.
+            WebElement toastElement = wait.until(ExpectedConditions.presenceOfElementLocated(SuccessSavingMessageLocator));
+
+            // Optional but highly recommended: Log the toast text for better debugging.
+            String toastText = toastElement.getText();
+            System.out.println("Found toast message with text: " + toastText);
+
+            // If the line above was successful without throwing an exception,
+            // it means the element was found. We can now confidently return true.
+            return true;
+        }
+
     }
 
     public void clickPhotoEditing() {
@@ -135,30 +165,32 @@ public class ProfilePage extends BasePage {
 
     public void allowCameraAccess()
     {
-        System.out.println("Handling iOS system alert to Allow Camera...");
+        if (this.platform.is(Platform.IOS)) {
+            System.out.println("Handling iOS system alert to Allow Camera...");
 
-        try {
-            // Step 1: Wait for the alert to be present on the screen.
-            // This is a crucial step to handle any small delays.
-            wait.until(ExpectedConditions.alertIsPresent());
+            try {
+                // Step 1: Wait for the alert to be present on the screen.
+                // This is a crucial step to handle any small delays.
+                wait.until(ExpectedConditions.alertIsPresent());
 
-            // Step 2: Switch the driver's focus to the alert.
-            Alert systemAlert = driver.switchTo().alert();
+                // Step 2: Switch the driver's focus to the alert.
+                Alert systemAlert = driver.switchTo().alert();
 
-            // Step 3: You can get the text for verification (optional but good for debugging)
-            String alertText = systemAlert.getText();
-            System.out.println("Found system alert with text: " + alertText);
+                // Step 3: You can get the text for verification (optional but good for debugging)
+                String alertText = systemAlert.getText();
+                System.out.println("Found system alert with text: " + alertText);
 
-            // Step 4: Accept the alert. This will click the default "Continue" button.
-            systemAlert.accept();
+                // Step 4: Accept the alert. This will click the default "Continue" button.
+                systemAlert.accept();
 
-            System.out.println("System alert accepted.");
+                System.out.println("System alert accepted.");
 
-        } catch (Exception e) {
-            System.err.println("Failed to handle the system alert.");
-            throw e;
+            } catch (Exception e) {
+                System.err.println("Failed to handle the system alert.");
+                throw e;
+            }
+            System.out.println("System alert confirmed.");
         }
-        System.out.println("System alert confirmed.");
     }
 
     public void selectFromGallery() {
@@ -168,7 +200,13 @@ public class ProfilePage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(PhotoSelectedLocator)).click();
     }
     public void confirmChosenPhoto() {
-        wait.until(ExpectedConditions.elementToBeClickable(ConfirmChosenPhotoLocator)).click();
+        if (this.platform.is(Platform.IOS)) {
+            wait.until(ExpectedConditions.elementToBeClickable(ConfirmChosenPhotoLocator)).click();
+        }
+        else if (this.platform.is(Platform.ANDROID))
+        {
+            wait.until(ExpectedConditions.elementToBeClickable(CropButtonLocator)).click();
+        }
     }
 
 }

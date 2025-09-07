@@ -1,6 +1,5 @@
 package ImpactynTestCases;
 
-import ImpactynPages.EarnPage;
 import ImpactynPages.FeedPage;
 import ImpactynPages.ProfilePage;
 import org.testng.annotations.BeforeMethod;
@@ -16,8 +15,8 @@ public class ImpactynEditProfileTest extends BaseTest {
         performLogin();
     }
 
-    @Test(priority = 1, description = "Verify user can Edit his name and bio from Edit profile section")
-    public void EditNameAndBio() {
+    @Test(priority = 2, description = "Verify user can Edit his name and bio from Edit profile section")
+    public void EditNameAndBio() throws InterruptedException {
         SoftAssert softAssertion = new SoftAssert();
 
         // 1. Initialize the first page object
@@ -34,10 +33,11 @@ public class ImpactynEditProfileTest extends BaseTest {
         softAssertion.assertEquals(profilePage.getNameText(), "TestUser", "Name not updated correctly");
         softAssertion.assertEquals(profilePage.getBioText(), "This is a test bio", "Bio not updated correctly");
 
+
         softAssertion.assertAll();
     }
 
-    @Test(priority = 2, description = "Verify user can Edit his photo from Edit profile section")
+    @Test(priority = 1, description = "Verify user can Edit his photo from Edit profile section")
     public void EditProfilePhoto() {
         SoftAssert softAssertion = new SoftAssert();
 
@@ -59,11 +59,9 @@ public class ImpactynEditProfileTest extends BaseTest {
         profilePage.clickSaveButton();
 
 
-        //softAssertion.assertTrue(profilePage.verifySuccessMessage(), "Profile update success message not displayed");
-
-       // softAssertion.assertAll();
-
-    }
-
+        softAssertion.assertTrue(profilePage.verifySuccessMessage(), "Profile update success message not displayed");
+        softAssertion.assertAll();
 
     }
+
+}

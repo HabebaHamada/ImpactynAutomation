@@ -46,6 +46,7 @@ public abstract class BaseTest {
 
                 // Ensure the app data is cleared before each run for a clean state
                 caps.setCapability("appium:noReset", false);
+                caps.setCapability("appium:enforceXPath1", true);
                 // Create the specific driver for Android
                 driver = new AndroidDriver(url, caps);
                 break;
