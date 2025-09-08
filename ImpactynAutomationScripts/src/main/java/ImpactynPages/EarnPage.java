@@ -1,24 +1,30 @@
 package ImpactynPages;
 
 import ImpactynCore.BasePage;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
-
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EarnPage extends BasePage {
 
+    private By allowWhileUsingAppLocator;
+
     public EarnPage(AppiumDriver driver) {
         super(driver);
         initializeLocators();
     }
+
     private void initializeLocators() {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
-
-        } else if (platform.is(Platform.IOS)) {
-
+            allowWhileUsingAppLocator = AppiumBy.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
         }
     }
 
@@ -56,6 +62,19 @@ public class EarnPage extends BasePage {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+            }
+        }
+        else if (this.platform.is(Platform.ANDROID))
+        {
+            try {
+                // This wait is specific to this action.
+                WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+                System.out.println("Checking for permission pop-up with locator: " + allowWhileUsingAppLocator);
+                shortWait.until(ExpectedConditions.elementToBeClickable(allowWhileUsingAppLocator)).click();
+                System.out.println("Permission pop-up handled successfully.");
+            } catch (TimeoutException e) {
+                // This is now EXPECTED and SAFE. It just means the pop-up wasn't there.
+                System.out.println("Permission pop-up not found. Continuing...");
             }
         }
     }

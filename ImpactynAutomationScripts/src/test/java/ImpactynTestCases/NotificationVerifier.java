@@ -20,7 +20,6 @@ public class NotificationVerifier {
     private final AppiumDriver driver;
     private final WebDriverWait wait;
 
-    // Constructor to initialize a driver and wait
     public NotificationVerifier(AppiumDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -33,7 +32,6 @@ public class NotificationVerifier {
             // Step 1: Cast the driver to Android Driver
             // Step 2: Open Notifications bar
             ((AndroidDriver) driver).openNotifications();
-
 
             // Step 3: Wait for the notification elements to be visible
             // Standard Android resource-ids for notification title and text
@@ -85,8 +83,8 @@ public class NotificationVerifier {
         // Get the element's location and size
         int startX = element.getRect().getX() + (element.getRect().getWidth() / 2);
         int startY = element.getRect().getY() + (element.getRect().getHeight() / 2);
-        // Swipe down just a little bit
-        int endY = startY + (element.getRect().getHeight()); // Swipe down by the height of the element
+        // Swipe down by the height of the element
+        int endY = startY + (element.getRect().getHeight());
 
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence swipe = new Sequence(finger, 1);

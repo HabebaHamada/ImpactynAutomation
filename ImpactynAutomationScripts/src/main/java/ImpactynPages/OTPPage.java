@@ -8,24 +8,23 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class OTPPage extends BasePage {
 
-    private By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-    private By OTPInputLocator = By.xpath("//android.widget.EditText");
-    private By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-    private By feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+    private By screenTitleLocator ;
+    private By OTPInputLocator ;
+    private By nextBtnLocator ;
+    private By feedPageElement ;
 
     public OTPPage(AppiumDriver driver) {
         super(driver);
         initializeLocators();
     }
     /**
-     * Initializes locators based on the platform determined in the BasePage. */
+     * Initializes locators based on the platform determined in the BasePage.
+     **/
     private void initializeLocators() {
-        // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
             screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
             OTPInputLocator    = By.xpath("//android.widget.EditText");

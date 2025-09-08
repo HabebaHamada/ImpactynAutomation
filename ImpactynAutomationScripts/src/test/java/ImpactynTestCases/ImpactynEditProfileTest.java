@@ -16,7 +16,7 @@ public class ImpactynEditProfileTest extends BaseTest {
     }
 
     @Test(priority = 2, description = "Verify user can Edit his name and bio from Edit profile section")
-    public void EditNameAndBio() throws InterruptedException {
+    public void EditNameAndBio()  {
         SoftAssert softAssertion = new SoftAssert();
 
         // 1. Initialize the first page object

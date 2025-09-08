@@ -11,10 +11,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginOptionsPage extends BasePage {
 
-    By usePhoneEmailBtnLocator;
-    By useFacebookBtnLocator;
-    By useSnapchatBtnLocator;
-    By useGoogleBtnLocator;
+    private By usePhoneEmailBtnLocator;
+    private By useFacebookBtnLocator;
+    private By useSnapchatBtnLocator;
+    private By useGoogleBtnLocator;
 
     public LoginOptionsPage(AppiumDriver driver) {
         super(driver);
@@ -23,15 +23,16 @@ public class LoginOptionsPage extends BasePage {
     public void initializeLocators()
     {
         if (platform.is(Platform.ANDROID)) {
+            String usePhoneEmailBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";
+            String useFacebookBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(1)";
+            String useSnapchatBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(2)";
+            String useGoogleBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(3)";
 
-            String   usePhoneEmailBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(0)";
-            String   useFacebookBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(1)";
-            String   useSnapchatBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(2)";
-            String   useGoogleBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(3)";
             usePhoneEmailBtnLocator=AppiumBy.androidUIAutomator(usePhoneEmailBtnAutomatorString);
             useFacebookBtnLocator=AppiumBy.androidUIAutomator(useFacebookBtnAutomatorString);
             useSnapchatBtnLocator=AppiumBy.androidUIAutomator(useSnapchatBtnAutomatorString);
             useGoogleBtnLocator=AppiumBy.androidUIAutomator(useGoogleBtnAutomatorString);
+
         } else if (platform.is(Platform.IOS)) {
             usePhoneEmailBtnLocator=AppiumBy.accessibilityId("Use phone or email");
             useFacebookBtnLocator=AppiumBy.accessibilityId("Continue with Facebook");
@@ -39,7 +40,7 @@ public class LoginOptionsPage extends BasePage {
             useGoogleBtnLocator=AppiumBy.accessibilityId("Continue with Google");
         }
     }
-    // Public method to perform an action on this page
+
     public LoginWithPhonePage clickUsePhoneOrEmail() {
         System.out.println("Clicking on 'Use phone or email' button.");
         WebElement phoneEmailButton =  wait.until(ExpectedConditions.elementToBeClickable(usePhoneEmailBtnLocator));
@@ -116,6 +117,5 @@ public class LoginOptionsPage extends BasePage {
             System.err.println("Failed to handle the system alert.");
             throw e;
         }
-        System.out.println("System alert confirmed.");
     }
 }

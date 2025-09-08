@@ -91,7 +91,6 @@ public class ImpactynUploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
-
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
@@ -128,7 +127,6 @@ public class ImpactynUploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
-
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");

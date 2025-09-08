@@ -8,7 +8,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class OnBoardingPage extends BasePage{
@@ -20,7 +19,8 @@ public class OnBoardingPage extends BasePage{
         super(driver);
         initializeLocators();
     }
-    /** * Initializes locators based on the platform determined in the BasePage.
+    /**
+     * * Initializes locators based on the platform determined in the BasePage.
      */
     private void initializeLocators() {
         // 'platform' is inherited from BasePage

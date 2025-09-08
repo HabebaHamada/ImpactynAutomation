@@ -6,20 +6,17 @@ import org.testng.annotations.Test;
 
 public class ImpactynLoginTest extends BaseTest  {
 
-
-
    @Test(priority = 4 , description = "Verify login with a valid phone number.")
     public void loginWithPhoneNumberTest() {
 
         System.out.println("Login with Phone Number Testcase Started : ");
 
-       handleInitialPopups();
+        handleInitialPopups();
 
        // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
 
         // 2. Perform actions using the page object methods
-        // This line clicks the button and returns the next page object
         LoginWithPhonePage loginWithPhonePage = loginOptionsPage.clickUsePhoneOrEmail();
 
         // 3. Verify that we landed on the correct page
@@ -55,7 +52,6 @@ public class ImpactynLoginTest extends BaseTest  {
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
 
         // 2. Perform actions using the page object methods
-        // This line clicks the button and returns the next page object
         LoginWithFacebookPage loginWithFacebook = loginOptionsPage.clickLoginWithFacebook();
 
         //3.Click continue with facebook
@@ -78,7 +74,6 @@ public class ImpactynLoginTest extends BaseTest  {
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
 
         // 2. Perform actions using the page object methods
-        // This line clicks the button and returns the next page object
         LoginWithSnapchatPage loginWithSnapchat = loginOptionsPage.clickLoginWithSnapchat();
 
         //3.Click continue with facebook

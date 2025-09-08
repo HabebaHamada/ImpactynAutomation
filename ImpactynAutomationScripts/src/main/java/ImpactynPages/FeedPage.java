@@ -56,7 +56,8 @@ public class FeedPage extends BasePage {
        boolean FollowingValidation     = wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
        boolean ChallengeIconValidation = wait.until(ExpectedConditions.visibilityOfElementLocated(ChallengeIconLocator)).isDisplayed();
        boolean EarnButtonValidation    = wait.until(ExpectedConditions.visibilityOfElementLocated(EarnButtonLocator)).isDisplayed();
-       return (ForYouValidation||FollowingValidation|| ChallengeIconValidation||EarnButtonValidation);
+
+       return (ForYouValidation && FollowingValidation && ChallengeIconValidation && EarnButtonValidation);
     }
 
     public UploadReviewPage clickRecordReview()  {

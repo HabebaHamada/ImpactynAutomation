@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +36,7 @@ public class UploadReviewPage extends BasePage {
      * Initializes locators based on the platform determined in the BasePage.
      */
     private void initializeLocators() {
-        // 'platform' is inherited from BasePage
+
         if (platform.is(Platform.ANDROID)) {
 
             MentionBrandLocator = By.xpath("//android.widget.EditText");
