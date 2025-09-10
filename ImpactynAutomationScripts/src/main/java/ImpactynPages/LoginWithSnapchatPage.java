@@ -1,6 +1,5 @@
 package ImpactynPages;
 
-
 import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;

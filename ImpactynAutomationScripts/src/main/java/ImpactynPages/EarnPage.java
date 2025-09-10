@@ -15,6 +15,7 @@ import java.util.Map;
 public class EarnPage extends BasePage {
 
     private By allowWhileUsingAppLocator;
+    private By reviewToInspireButtonLocator;
 
     public EarnPage(AppiumDriver driver) {
         super(driver);
@@ -25,12 +26,13 @@ public class EarnPage extends BasePage {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
             allowWhileUsingAppLocator = AppiumBy.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+            reviewToInspireButtonLocator = AppiumBy.androidUIAutomator("new UiSelector().text(\"Review to Inspire\").instance(0)");
         }
     }
 
-    public void allowLocationAccess() {
+    public void allowAccess() {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for location access...");
+            System.out.println("Attempting to handle iOS system alert for access...");
             boolean alertHandled = false;
             for (int i = 0; i < 5; i++) {
                 try {
@@ -77,5 +79,12 @@ public class EarnPage extends BasePage {
                 System.out.println("Permission pop-up not found. Continuing...");
             }
         }
+    }
+
+    public UploadReviewPage clickReviewToInspire()
+    {
+        System.out.println("Clicking Review To Inspire button");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(reviewToInspireButtonLocator)).click();
+        return new UploadReviewPage(driver);
     }
 }

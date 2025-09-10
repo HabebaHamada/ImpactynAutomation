@@ -52,6 +52,8 @@ public class FeedPage extends BasePage {
         }
     }
     public boolean isPageLoaded() {
+
+        System.out.println("Verifying that redirecting to Feed Page is done");
        boolean ForYouValidation        = wait.until(ExpectedConditions.visibilityOfElementLocated(ForYouTextLocator)).isDisplayed();
        boolean FollowingValidation     = wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
        boolean ChallengeIconValidation = wait.until(ExpectedConditions.visibilityOfElementLocated(ChallengeIconLocator)).isDisplayed();
@@ -75,6 +77,9 @@ public class FeedPage extends BasePage {
 
     public EarnPage clickEarnButton()  {
 
+        System.out.println("Navigating to Earn Page");
+
+
         /*click the Earn button in the Nav Bar*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 EarnButtonLocator)
@@ -86,6 +91,8 @@ public class FeedPage extends BasePage {
 
     }
     public ProfilePage clickProfileButton()  {
+
+        System.out.println("Navigating to Profile Page");
 
         /*click the Profile button in the Nav Bar*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(
