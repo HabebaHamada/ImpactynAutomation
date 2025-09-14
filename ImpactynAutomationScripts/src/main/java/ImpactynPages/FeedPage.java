@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 /**
  * FeedPage class represents the feed screen of the application.
  * It provides methods to interact with various elements on the feed page.
@@ -32,7 +33,7 @@ public class FeedPage extends BasePage {
     private void initializeLocators() {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
-            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(18)";
+            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(17)";
             String profileButtonAutomatorString = "new UiSelector().text(\"Profile\")";
 
             ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
@@ -53,7 +54,7 @@ public class FeedPage extends BasePage {
     }
     public boolean isPageLoaded() {
 
-        System.out.println("Verifying that redirecting to Feed Page is done");
+        logger.info("Verifying that redirecting to Feed Page is done");
        boolean ForYouValidation        = wait.until(ExpectedConditions.visibilityOfElementLocated(ForYouTextLocator)).isDisplayed();
        boolean FollowingValidation     = wait.until(ExpectedConditions.visibilityOfElementLocated(FollowingTextLocator)).isDisplayed();
        boolean ChallengeIconValidation = wait.until(ExpectedConditions.visibilityOfElementLocated(ChallengeIconLocator)).isDisplayed();
@@ -77,7 +78,7 @@ public class FeedPage extends BasePage {
 
     public EarnPage clickEarnButton()  {
 
-        System.out.println("Navigating to Earn Page");
+        logger.info("Navigating to Earn Page");
 
 
         /*click the Earn button in the Nav Bar*/
@@ -92,7 +93,7 @@ public class FeedPage extends BasePage {
     }
     public ProfilePage clickProfileButton()  {
 
-        System.out.println("Navigating to Profile Page");
+        logger.info("Navigating to Profile Page");
 
         /*click the Profile button in the Nav Bar*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(

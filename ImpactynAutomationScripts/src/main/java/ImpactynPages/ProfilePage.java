@@ -120,6 +120,7 @@ public class ProfilePage extends BasePage {
     }
 
     public void clickPhotoEditing() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PhotoEditingLocator));
         wait.until(ExpectedConditions.elementToBeClickable(PhotoEditingLocator)).click();
     }
 

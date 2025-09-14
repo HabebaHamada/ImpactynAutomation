@@ -32,8 +32,7 @@ public class EarnPage extends BasePage {
 
     public void allowAccess() {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for access...");
-            boolean alertHandled = false;
+            logger.info("Attempting to handle iOS system alert for access...");
             for (int i = 0; i < 5; i++) {
                 try {
                     // Wait briefly before each attempt
@@ -49,17 +48,15 @@ public class EarnPage extends BasePage {
                         params.put("buttonLabel", "Allow While Using App");
                         driver.executeScript("mobile:alert", params);
 
-                        System.out.println("Successfully clicked Allow While Using App button");
-                        alertHandled = true;
+                        logger.info("Successfully clicked Allow While Using App button");
                         break;
-                    } catch (Exception alertEx) {
+                    } catch (Exception _) {
                         // Try alternative method
                         Map<String, String> params = new HashMap<>();
                         params.put("action", "accept");
                         driver.executeScript("mobile: acceptAlert", params);
 
-                        System.out.println("Successfully handled alert using alternative method");
-                        alertHandled = true;
+                        logger.info("Successfully handled alert using alternative method");
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -71,20 +68,21 @@ public class EarnPage extends BasePage {
             try {
                 // This wait is specific to this action.
                 WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-                System.out.println("Checking for permission pop-up with locator: " + allowWhileUsingAppLocator);
+                logger.info("Checking for permission pop-up with locator: " + allowWhileUsingAppLocator);
                 shortWait.until(ExpectedConditions.elementToBeClickable(allowWhileUsingAppLocator)).click();
-                System.out.println("Permission pop-up handled successfully.");
-            } catch (TimeoutException e) {
+                logger.info("Permission pop-up handled successfully.");
+            } catch (TimeoutException _) {
                 // This is now EXPECTED and SAFE. It just means the pop-up wasn't there.
-                System.out.println("Permission pop-up not found. Continuing...");
+                logger.info("Permission pop-up not found. Continuing...");
             }
         }
     }
 
     public UploadReviewPage clickReviewToInspire()
     {
-        System.out.println("Clicking Review To Inspire button");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(reviewToInspireButtonLocator)).click();
+        logger.info("Clicking Review To Inspire button");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(reviewToInspireButtonLocator));
+        wait.until(ExpectedConditions.elementToBeClickable(reviewToInspireButtonLocator)).click();
         return new UploadReviewPage(driver);
     }
 }
