@@ -43,7 +43,7 @@ public class ProfilePage extends BasePage {
             CloseButtonLocator = AppiumBy.className("android.widget.Button");
             PhotoEditingLocator = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.view.View\").instance(3)");
             SelectGalleryLocator = AppiumBy.androidUIAutomator("new UiSelector().text(\"Gallery\")");
-            PhotoSelectedLocator = AppiumBy.id("com.google.android.providers.media.module:id/icon_thumbnail");
+            PhotoSelectedLocator = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.google.android.providers.media.module:id/icon_thumbnail\").instance(0)");
             CropButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.innov8eg.impactyn:id/crop_image_menu_crop\"]");
             NameTextLocator = By.xpath("//android.widget.TextView[contains(@text, 'Followers')]/preceding-sibling::android.widget.TextView[2]");
             BioTextLocator = By.xpath("//android.widget.TextView[contains(@text, 'Followers')]/following-sibling::android.widget.TextView[1]");

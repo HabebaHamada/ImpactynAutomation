@@ -23,6 +23,7 @@ public class ImpactynEditProfileTest extends BaseTest {
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Profile Icon From nav bar*/
+        feedPage.clickProfileButton();
         ProfilePage profilePage = feedPage.clickProfileButton();
 
         profilePage.clickEditProfileButton();
@@ -45,6 +46,7 @@ public class ImpactynEditProfileTest extends BaseTest {
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Profile Icon From nav bar*/
+        feedPage.clickProfileButton();
         ProfilePage profilePage = feedPage.clickProfileButton();
 
         profilePage.clickEditProfileButton();
