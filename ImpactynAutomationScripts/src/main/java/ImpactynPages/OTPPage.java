@@ -39,13 +39,13 @@ public class OTPPage extends BasePage {
     }
     /*not used as this part is manually entered*/
     public void enterOTP(String OTP) {
-        System.out.println("Entering OTP: " + OTP);
+        logger.info("Entering OTP: " + OTP);
         WebElement phoneInput = wait.until(ExpectedConditions.visibilityOfElementLocated(OTPInputLocator));
         phoneInput.sendKeys(OTP);
     }
 
     public void clickNext(){
-        System.out.println("Clicking the 'Next' button.");
+        logger.info("Clicking the 'Next' button.");
         WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(nextBtnLocator));
         nextButton.click();
     }
@@ -55,8 +55,8 @@ public class OTPPage extends BasePage {
     }
 
     public FeedPage waitForManualOtpAndProceed() {
-        System.out.println(">>> WAITING FOR 65 SECONDS FOR MANUAL OTP ENTRY <<<");
-        System.out.println(">>> Please enter the OTP on the device now... <<<");
+        logger.info(">>> WAITING FOR 65 SECONDS FOR MANUAL OTP ENTRY <<<");
+        logger.info(">>> Please enter the OTP on the device now... <<<");
 
         // Create a special WebDriverWait with a long timeout just for this step.
         WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(65)); // 60s + 5s buffer
@@ -66,12 +66,12 @@ public class OTPPage extends BasePage {
             // This only happens after the OTP is entered and the app navigates.
             longWait.until(ExpectedConditions.visibilityOfElementLocated(feedPageElement));
 
-            System.out.println("OTP entry detected. Proceeding to the feed page.");
+            logger.info("OTP entry detected. Proceeding to the feed page.");
             return new FeedPage(driver);
 
         } catch (TimeoutException e) {
             // This block will be executed if you fail to enter the OTP within 65 seconds.
-            System.err.println("Timeout! OTP was not entered in time.");
+            logger.warning("Timeout! OTP was not entered in time.");
             // We re-throw the exception to make sure the test fails clearly.
             throw new TimeoutException("Test failed because manual OTP entry timed out.", e);
         }

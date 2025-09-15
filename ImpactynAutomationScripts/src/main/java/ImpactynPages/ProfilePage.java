@@ -99,18 +99,18 @@ public class ProfilePage extends BasePage {
     public boolean verifySuccessMessage()
     {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Waiting for the success toast message to appear...");
+            logger.info("Waiting for the success toast message to appear...");
 
             return wait.until(ExpectedConditions.visibilityOfElementLocated(SuccessSavingMessageLocator)).isDisplayed();
         } else {
-            System.out.println("Waiting for the success toast message to appear...");
+            logger.info("Waiting for the success toast message to appear...");
 
             // For Android Toasts, we wait for PRESENCE in the DOM.
             WebElement toastElement = wait.until(ExpectedConditions.presenceOfElementLocated(SuccessSavingMessageLocator));
 
             // Optional but highly recommended: Log the toast text for better debugging.
             String toastText = toastElement.getText();
-            System.out.println("Found toast message with text: " + toastText);
+            logger.info("Found toast message with text: " + toastText);
 
             // If the line above was successful without throwing an exception,
             // it means the element was found. We can now confidently return true.
@@ -126,13 +126,11 @@ public class ProfilePage extends BasePage {
 
     public void allowPhotoAccess() {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for photo access...");
-            boolean alertHandled = false;
+            logger.info("Attempting to handle iOS system alert for photo access...");
             for (int i = 0; i < 5; i++) {
                 try {
                     // Wait briefly before each attempt
                     Thread.sleep(1000);
-
                     try {
                         // Check if alert exists first
                         driver.switchTo().alert();
@@ -143,17 +141,15 @@ public class ProfilePage extends BasePage {
                         params.put("buttonLabel", "Allow Full Access");
                         driver.executeScript("mobile:alert", params);
 
-                        System.out.println("Successfully clicked Allow Full Access button");
-                        alertHandled = true;
+                        logger.info("Successfully clicked Allow Full Access button");
                         break;
-                    } catch (Exception alertEx) {
+                    } catch (Exception _) {
                         // Try alternative method
                         java.util.Map<String, String> params = new java.util.HashMap<>();
                         params.put("action", "accept");
                         driver.executeScript("mobile: acceptAlert", params);
 
-                        System.out.println("Successfully handled alert using alternative method");
-                        alertHandled = true;
+                        logger.info("Successfully handled alert using alternative method");
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -165,7 +161,7 @@ public class ProfilePage extends BasePage {
     public void allowCameraAccess()
     {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Handling iOS system alert to Allow Camera...");
+            logger.info("Handling iOS system alert to Allow Camera...");
 
             try {
                 // Step 1: Wait for the alert to be present on the screen.
@@ -177,18 +173,18 @@ public class ProfilePage extends BasePage {
 
                 // Step 3: You can get the text for verification (optional but good for debugging)
                 String alertText = systemAlert.getText();
-                System.out.println("Found system alert with text: " + alertText);
+                logger.info("Found system alert with text: " + alertText);
 
                 // Step 4: Accept the alert. This will click the default "Continue" button.
                 systemAlert.accept();
 
-                System.out.println("System alert accepted.");
+                logger.info("System alert accepted.");
 
             } catch (Exception e) {
-                System.err.println("Failed to handle the system alert.");
+                logger.warning("Failed to handle the system alert.");
                 throw e;
             }
-            System.out.println("System alert confirmed.");
+            logger.info("System alert confirmed.");
         }
     }
 

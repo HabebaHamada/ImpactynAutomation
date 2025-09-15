@@ -42,7 +42,7 @@ public class LoginOptionsPage extends BasePage {
     }
 
     public LoginWithPhonePage clickUsePhoneOrEmail() {
-        System.out.println("Clicking on 'Use phone or email' button.");
+        logger.info("Clicking on 'Use phone or email' button.");
         WebElement phoneEmailButton =  wait.until(ExpectedConditions.elementToBeClickable(usePhoneEmailBtnLocator));
         phoneEmailButton.click();
 
@@ -51,7 +51,7 @@ public class LoginOptionsPage extends BasePage {
     }
 
     public LoginWithFacebookPage clickLoginWithFacebook(){
-        System.out.println("Clicking on 'Continue With Facebook' button.");
+        logger.info("Clicking on 'Continue With Facebook' button.");
         WebElement facebookButton = wait.until(ExpectedConditions.elementToBeClickable(useFacebookBtnLocator));
         facebookButton.click();
 
@@ -65,7 +65,7 @@ public class LoginOptionsPage extends BasePage {
     }
 
    public LoginWithSnapchatPage clickLoginWithSnapchat(){
-        System.out.println("Clicking on 'Continue With Snapchat' button.");
+        logger.info("Clicking on 'Continue With Snapchat' button.");
         WebElement snapchatButton = wait.until(ExpectedConditions.elementToBeClickable(useSnapchatBtnLocator));
         snapchatButton.click();
 
@@ -79,7 +79,7 @@ public class LoginOptionsPage extends BasePage {
     }
 
   public LoginWithGooglePage clickLoginWithGoogle(){
-        System.out.println("Clicking on 'Continue With Google' button.");
+        logger.info("Clicking on 'Continue With Google' button.");
         WebElement googleButton= wait.until(ExpectedConditions.elementToBeClickable(useGoogleBtnLocator));
         googleButton.click();
 
@@ -94,7 +94,7 @@ public class LoginOptionsPage extends BasePage {
 
     /*this method is used only for iOS system alert handling */
     private void confirmSignIn() {
-        System.out.println("Handling iOS system alert to confirm sign-in...");
+        logger.info("Handling iOS system alert to confirm sign-in...");
 
         try {
             // Step 1: Wait for the alert to be present on the screen.
@@ -106,15 +106,15 @@ public class LoginOptionsPage extends BasePage {
 
             // Step 3: You can get the text for verification (optional but good for debugging)
             String alertText = systemAlert.getText();
-            System.out.println("Found system alert with text: " + alertText);
+            logger.info("Found system alert with text: " + alertText);
 
             // Step 4: Accept the alert. This will click the default "Continue" button.
             systemAlert.accept();
 
-            System.out.println("System alert accepted.");
+            logger.info("System alert accepted.");
 
         } catch (Exception e) {
-            System.err.println("Failed to handle the system alert.");
+            logger.warning("Failed to handle the system alert.");
             throw e;
         }
     }

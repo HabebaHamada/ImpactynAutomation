@@ -12,6 +12,10 @@ import org.testng.annotations.Test;
 public class ImpactynUploadReviewTest extends BaseTest
 {
 
+    public ImpactynUploadReviewTest() {
+        super();
+    }
+
     @BeforeMethod
     public void loginBeforeReviewTest() {
         handleInitialPopups();

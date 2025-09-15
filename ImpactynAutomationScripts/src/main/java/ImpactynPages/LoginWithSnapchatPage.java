@@ -32,14 +32,14 @@ public class LoginWithSnapchatPage extends BasePage {
 
     public boolean isPageLoaded()
     {
-        System.out.println("Validating that Snapchat Login page is Fully Loaded.");
+        logger.info("Validating that Snapchat Login page is Fully Loaded.");
         return wait.until(ExpectedConditions.visibilityOfElementLocated(SnapchatLoadingValidationLocator)).isDisplayed();
     }
 
     public FeedPage clickContinueWithSnapchat() {
 
         if (isPageLoaded()) {
-            System.out.println("Clicking the 'Continue' button.");
+            logger.info("Clicking the 'Continue' button.");
             WebElement ContinueWithFacebookButton = wait.until(ExpectedConditions.elementToBeClickable(ContinueBtnLocator));
             ContinueWithFacebookButton.click();
             return new FeedPage(driver);

@@ -20,6 +20,7 @@ public abstract class BaseTest {
     protected AppiumDriver driver;
     protected Platform platform;
 
+
     @BeforeMethod
     public void setup() throws MalformedURLException {
 

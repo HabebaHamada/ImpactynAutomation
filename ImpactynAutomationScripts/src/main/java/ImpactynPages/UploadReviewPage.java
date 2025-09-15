@@ -101,7 +101,7 @@ public class UploadReviewPage extends BasePage {
         );
         ProgressBar.click();
 
-        System.out.println("Recording for " + reviewDurationInSeconds * 1000 + " milliseconds...");
+        logger.info("Recording for " + reviewDurationInSeconds * 1000 + " milliseconds...");
         Thread.sleep(reviewDurationInSeconds * 1000L);
 
         /*click the progress bar to stop recording*/
@@ -111,27 +111,24 @@ public class UploadReviewPage extends BasePage {
     }
 
     public void mentionBrand(String Brand) throws InterruptedException {
-        System.out.println("Entering BRGR Brand...");
+        logger.info("Entering BRGR Brand...");
 
         WebElement mentionBrandTextField = wait.until(ExpectedConditions.visibilityOfElementLocated(MentionBrandLocator));
 
         mentionBrandTextField.click();
         mentionBrandTextField.clear(); // Ensure field is empty
         Thread.sleep(5000); // Wait for 5 seconds to ensure the field is ready
-        for (char c : (Brand).toCharArray()) {
-            mentionBrandTextField.sendKeys(Character.toString(c));
-            Thread.sleep(500); // Adjust delay as needed
-        }
+        mentionBrandTextField.sendKeys(Brand);
         Thread.sleep(5000); // Wait for 5 seconds to ensure the field is ready
 
-        System.out.println("waiting for brandsSuggestionBar...");
+        logger.info("waiting for brandsSuggestionBar...");
 
 
         wait.until(
                 ExpectedConditions.visibilityOfElementLocated(BrandsSuggestionBarLocator)
         );
 
-        System.out.println("waiting for brandSelection...");
+        logger.info("waiting for brandSelection...");
 
         /*Select the Brand*/
         WebElement brandSelection = wait.until(
@@ -171,7 +168,7 @@ public class UploadReviewPage extends BasePage {
 
     public void chooseFromGallery() throws InterruptedException {
 
-        System.out.println("Selecting Video to Upload as a Review");
+        logger.info("Selecting Video to Upload as a Review");
 
         WebElement ChooseFromGallery = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ChooseFromGalleryLocator)
@@ -185,7 +182,7 @@ public class UploadReviewPage extends BasePage {
         );
         ChooseVideo.click();
 
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
         WebElement ConfirmChosenVideo = wait.until(
                 ExpectedConditions.elementToBeClickable(ConfirmChosenVideoLocator));
@@ -201,22 +198,21 @@ public class UploadReviewPage extends BasePage {
                 ExpectedConditions.visibilityOfElementLocated(PreparationReviewNotificationLocator)
         );
         boolean isPreparingVisible = preparingNotification.isDisplayed();
-        System.out.println("\"Preparing your video...\" notification is visible: " + isPreparingVisible);
+        logger.info("\"Preparing your video...\" notification is visible: " + isPreparingVisible);
 
         // Wait for the "Keep Impactyn open to finish posting.." notification
         WebElement finishingNotification = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(FinishingReviewNotificationLocator)
         );
         boolean isFinishingVisible = finishingNotification.isDisplayed();
-        System.out.println("\"Keep Impactyn open to finish posting..\" notification is visible: " + isFinishingVisible);
+        logger.info("\"Keep Impactyn open to finish posting..\" notification is visible: " + isFinishingVisible);
 
         return isPreparingVisible && isFinishingVisible;
     }
 
     private void allowGalleryAccess() {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for gallery access...");
-            boolean alertHandled = false;
+            logger.info("Attempting to handle iOS system alert for gallery access...");
             for (int i = 0; i < 5; i++) {
                 try {
                     // Wait briefly before each attempt
@@ -232,17 +228,15 @@ public class UploadReviewPage extends BasePage {
                         params.put("buttonLabel", "Allow Full Access");
                         driver.executeScript("mobile:alert", params);
 
-                        System.out.println("Successfully clicked Allow Full Access button");
-                        alertHandled = true;
+                        logger.info("Successfully clicked Allow Full Access button");
                         break;
-                    } catch (Exception alertEx) {
+                    } catch (Exception _) {
                         // Try alternative method
                         Map<String, String> params = new HashMap<>();
                         params.put("action", "accept");
                         driver.executeScript("mobile: acceptAlert", params);
 
-                        System.out.println("Successfully handled alert using alternative method");
-                        alertHandled = true;
+                        logger.info("Successfully handled alert using alternative method");
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

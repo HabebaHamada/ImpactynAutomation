@@ -51,7 +51,7 @@ public class NotificationVerifier {
                 // Use a very short wait to check for existence without wasting time.
                 new WebDriverWait(driver, Duration.ofSeconds(1)).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id(standardTextLocator)));
                 System.out.println("Notification was already expanded.");
-            } catch (Exception e) {
+            } catch (Exception _) {
                 // 3. If it's not expanded, expand it now.
                 System.out.println("Notification is collapsed. Performing swipe to expand...");
                 expandNotification(notificationTitle); // Swipe on the title element to pull it down.

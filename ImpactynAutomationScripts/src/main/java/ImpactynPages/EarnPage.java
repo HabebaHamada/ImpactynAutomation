@@ -73,7 +73,7 @@ public class EarnPage extends BasePage {
                 logger.info("Permission pop-up handled successfully.");
             } catch (TimeoutException _) {
                 // This is now EXPECTED and SAFE. It just means the pop-up wasn't there.
-                logger.info("Permission pop-up not found. Continuing...");
+                logger.warning("Permission pop-up not found. Continuing...");
             }
         }
     }

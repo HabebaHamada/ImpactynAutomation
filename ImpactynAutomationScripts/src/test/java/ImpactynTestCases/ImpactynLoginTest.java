@@ -6,7 +6,11 @@ import org.testng.annotations.Test;
 
 public class ImpactynLoginTest extends BaseTest  {
 
-   @Test(priority = 4 , description = "Verify login with a valid phone number.")
+    public ImpactynLoginTest() {
+        super();
+    }
+
+    @Test(priority = 4 , description = "Verify login with a valid phone number.")
     public void loginWithPhoneNumberTest() {
 
         System.out.println("Login with Phone Number Testcase Started : ");

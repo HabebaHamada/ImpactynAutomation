@@ -8,6 +8,10 @@ import org.testng.asserts.SoftAssert;
 
 public class ImpactynEditProfileTest extends BaseTest {
 
+    public ImpactynEditProfileTest() {
+        super();
+    }
+
     @BeforeMethod
     public void loginBeforeReviewTest() {
         handleInitialPopups();

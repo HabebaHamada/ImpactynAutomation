@@ -33,7 +33,7 @@ public class FeedPage extends BasePage {
     private void initializeLocators() {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
-            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(17)";
+            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(21)";
             String profileButtonAutomatorString = "new UiSelector().text(\"Profile\")";
 
             ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");

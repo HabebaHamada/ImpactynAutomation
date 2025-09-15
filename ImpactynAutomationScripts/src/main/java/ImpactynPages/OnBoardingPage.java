@@ -35,7 +35,7 @@ public class OnBoardingPage extends BasePage{
         handlePermissionPopup(allowWhileUsingAppLocator); // Handles Media/Location
         handlePermissionPopup(allowButtonLocator);        // Handles Notifications
         handlePermissionPopup(allowButtonLocator);
-        System.out.println("Onboarding screen found and done.");
+        logger.info("Onboarding screen found and done.");
 
     }
 
@@ -43,18 +43,18 @@ public class OnBoardingPage extends BasePage{
         try {
             // This wait is specific to this action.
             WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            System.out.println("Checking for permission pop-up with locator: " + locator);
+            logger.info("Checking for permission pop-up with locator: " + locator);
             shortWait.until(ExpectedConditions.elementToBeClickable(locator)).click();
-            System.out.println("Permission pop-up handled successfully.");
+            logger.info("Permission pop-up handled successfully.");
         } catch (TimeoutException e) {
             // This is now EXPECTED and SAFE. It just means the pop-up wasn't there.
-            System.out.println("Permission pop-up not found. Continuing...");
+            logger.warning("Permission pop-up not found. Continuing...");
         }
     }
 
     /*this method is used only for iOS system alert handling */
     public void handleSystemAlert_iOS() {
-        System.out.println("Handling iOS system alert to handle Notification ...");
+        logger.info("Handling iOS system alert to handle Notification ...");
 
         try {
             // Step 1: Wait for the alert to be present on the screen.
@@ -66,19 +66,19 @@ public class OnBoardingPage extends BasePage{
 
             // Step 3: You can get the text for verification (optional but good for debugging)
             String alertText = systemAlert.getText();
-            System.out.println("Found system alert with text: " + alertText);
+            logger.info("Found system alert with text: " + alertText);
 
             // Step 4: Accept the alert. This will click the default "Continue" button.
             systemAlert.accept();
 
-            System.out.println("System alert accepted.");
+            logger.info("System alert accepted.");
 
         } catch (Exception e) {
-            System.err.println("Failed to handle the system alert.");
+            logger.warning("Failed to handle the system alert.");
             // Optionally take a screenshot here for debugging
             throw e;
         }
-        System.out.println("System alert confirmed.");
+        logger.info("System alert confirmed.");
     }
 
 

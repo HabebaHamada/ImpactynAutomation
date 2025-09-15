@@ -10,8 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginWithFacebookPage extends BasePage {
 
-    private  By ContinueWithFacebookBtnLocator;
-    private  By FacebookLoadingValidationLocator;
+    private By ContinueWithFacebookBtnLocator;
+    private By FacebookLoadingValidationLocator;
 
     public LoginWithFacebookPage(AppiumDriver driver) {
         super(driver);
@@ -30,14 +30,14 @@ public class LoginWithFacebookPage extends BasePage {
 
     public boolean isPageLoaded()
     {
-        System.out.println("Validating that Facebook Login page is Fully Loaded.");
+        logger.info("Validating that Facebook Login page is Fully Loaded.");
         return wait.until(ExpectedConditions.visibilityOfElementLocated(FacebookLoadingValidationLocator)).isDisplayed();
     }
 
     public FeedPage clickContinueWithFacebook() {
 
         if (isPageLoaded()) {
-            System.out.println("Clicking the 'Continue as ' button.");
+            logger.info("Clicking the 'Continue as ' button.");
             WebElement ContinueWithFacebookButton = wait.until(ExpectedConditions.elementToBeClickable(ContinueWithFacebookBtnLocator));
             ContinueWithFacebookButton.click();
             return new FeedPage(driver);
