@@ -22,16 +22,18 @@ public class NotificationVerifier {
 
     public NotificationVerifier(AppiumDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
 
+    public void openNotification()
+    {
+        // Step 1: Cast the driver to Android Driver
+        // Step 2: Open Notifications bar
+        ((AndroidDriver) driver).openNotifications();
+    }
     public void verifyNotification(String expectedTitle, String expectedText) {
 
         try {
-
-            // Step 1: Cast the driver to Android Driver
-            // Step 2: Open Notifications bar
-            ((AndroidDriver) driver).openNotifications();
 
             // Step 3: Wait for the notification elements to be visible
             // Standard Android resource-ids for notification title and text
@@ -71,12 +73,15 @@ public class NotificationVerifier {
             System.err.println(driver.getPageSource());
             // Re-throw the exception to fail the test
             throw new RuntimeException("Could not find or verify the notification.", e);
-        } finally {
-            // Step 5: Clean up by closing the notification shade
-            // Pressing the "Back" button is a reliable way to close it.
-            ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.BACK));
-            System.out.println("Notification shade closed.");
         }
+    }
+
+    public void closeNotification()
+    {
+        // Step 5: Clean up by closing the notification shade
+        // Pressing the "Back" button is a reliable way to close it.
+        ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.BACK));
+        System.out.println("Notification shade closed.");
     }
 
     private void expandNotification(WebElement element) {

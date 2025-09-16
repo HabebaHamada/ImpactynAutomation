@@ -54,7 +54,9 @@ public class ImpactynUploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+            notificationVerifier.openNotification();
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+            notificationVerifier.closeNotification();
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
@@ -95,7 +97,10 @@ public class ImpactynUploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+            notificationVerifier.openNotification();
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+            notificationVerifier.closeNotification();
+
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
@@ -131,7 +136,11 @@ public class ImpactynUploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+            notificationVerifier.openNotification();
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+            //notificationVerifier.verifyNotification("Reel", "You're about to make an Impact(100%)");
+            //notificationVerifier.verifyNotification("", "Done! Thanks for Impacting");
+            notificationVerifier.closeNotification();
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
@@ -169,7 +178,11 @@ public class ImpactynUploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+            notificationVerifier.openNotification();
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+           // notificationVerifier.verifyNotification("Reel", "You're about to make an Impact(100%)");
+          //  notificationVerifier.verifyNotification("", "Done! Thanks for Impacting");
+            notificationVerifier.closeNotification();
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
