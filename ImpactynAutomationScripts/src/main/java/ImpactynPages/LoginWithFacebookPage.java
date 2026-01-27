@@ -33,13 +33,13 @@ public class LoginWithFacebookPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(FacebookLoadingValidationLocator)).isDisplayed();
     }
 
-    public FeedPage clickContinueWithFacebook() {
+    public HomePage clickContinueWithFacebook() {
 
         if (isPageLoaded()) {
             System.out.println("Clicking the 'Continue as ' button.");
             WebElement ContinueWithFacebookButton = wait.until(ExpectedConditions.elementToBeClickable(ContinueWithFacebookBtnLocator));
             ContinueWithFacebookButton.click();
-            return new FeedPage(driver);
+            return new HomePage(driver);
         }
         return null;
     }

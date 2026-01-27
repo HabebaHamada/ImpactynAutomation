@@ -26,7 +26,7 @@ public class LoginWithSnapchatPage extends BasePage {
             SnapchatLoadingValidationLocator = By.xpath("//android.widget.TextView[@text=\"Connect to Impactyn (https://www.impactyn.io)?\"]");
         } else if (platform.is(Platform.IOS)) {
             ContinueBtnLocator = AppiumBy.accessibilityId("Continue");
-            SnapchatLoadingValidationLocator = AppiumBy.accessibilityId("Connect to Impactyn (https://www.impactyn.io)?");
+            SnapchatLoadingValidationLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND label CONTAINS 'Continue to Impactyn'");
         }
     }
 
@@ -36,13 +36,13 @@ public class LoginWithSnapchatPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(SnapchatLoadingValidationLocator)).isDisplayed();
     }
 
-    public FeedPage clickContinueWithSnapchat() {
+    public HomePage clickContinueWithSnapchat() {
 
         if (isPageLoaded()) {
             System.out.println("Clicking the 'Continue' button.");
             WebElement ContinueWithFacebookButton = wait.until(ExpectedConditions.elementToBeClickable(ContinueBtnLocator));
             ContinueWithFacebookButton.click();
-            return new FeedPage(driver);
+            return new HomePage(driver);
         }
         return null;
     }

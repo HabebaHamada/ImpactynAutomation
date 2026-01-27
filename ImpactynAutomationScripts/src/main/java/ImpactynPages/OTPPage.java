@@ -1,6 +1,7 @@
 package ImpactynPages;
 
 import ImpactynCore.BasePage;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
@@ -13,10 +14,10 @@ import java.time.Duration;
 
 public class OTPPage extends BasePage {
 
-    private By screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-    private By OTPInputLocator = By.xpath("//android.widget.EditText");
-    private By nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-    private By feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+    private By screenTitleLocator ;
+    private By OTPInputLocator ;
+    private By nextBtnLocator ;
+    private By homePageElement ;
 
     public OTPPage(AppiumDriver driver) {
         super(driver);
@@ -30,12 +31,12 @@ public class OTPPage extends BasePage {
             screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
             OTPInputLocator = By.xpath("//android.widget.EditText");
             nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+            homePageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
         } else if (platform.is(Platform.IOS)) {
-            screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"Enter the code we just texted you\"]");
-            OTPInputLocator = By.xpath("//android.widget.EditText");
-            nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
-            feedPageElement = By.xpath("//android.widget.TextView[@text=\"For You\"]");
+            screenTitleLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND value == 'Enter the code we just\\ntexted you '");
+            OTPInputLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeTextField' AND value == 'Enter the code'");
+            nextBtnLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND value == 'Next'");
+            homePageElement = AppiumBy.accessibilityId("smallLogo");
         }
     }
     /*not used as this part is manually entered*/
@@ -55,7 +56,7 @@ public class OTPPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(screenTitleLocator)).isDisplayed();
     }
 
-    public FeedPage waitForManualOtpAndProceed() {
+    public HomePage waitForManualOtpAndProceed() {
         System.out.println(">>> WAITING FOR 65 SECONDS FOR MANUAL OTP ENTRY <<<");
         System.out.println(">>> Please enter the OTP on the device now... <<<");
 
@@ -63,12 +64,12 @@ public class OTPPage extends BasePage {
         WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(65)); // 60s + 5s buffer
 
         try {
-            // The script will pause here and wait for the feed page element to become visible.
+            // The script will pause here and wait for the home page element to become visible.
             // This only happens after the OTP is entered and the app navigates.
-            longWait.until(ExpectedConditions.visibilityOfElementLocated(feedPageElement));
+            longWait.until(ExpectedConditions.visibilityOfElementLocated(homePageElement));
 
             System.out.println("OTP entry detected. Proceeding to the feed page.");
-            return new FeedPage(driver);
+            return new HomePage(driver);
 
         } catch (TimeoutException e) {
             // This block will be executed if you fail to enter the OTP within 65 seconds.

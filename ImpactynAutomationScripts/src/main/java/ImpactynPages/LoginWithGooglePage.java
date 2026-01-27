@@ -13,8 +13,8 @@ public class LoginWithGooglePage extends BasePage {
         super(driver);
     }
 
-    public FeedPage clickChooseGoogleAccount() {
-        return new FeedPage(driver);
+    public HomePage clickChooseGoogleAccount() {
+        return new HomePage(driver);
     }
 
 

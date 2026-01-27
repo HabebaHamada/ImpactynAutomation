@@ -1,3 +1,0 @@
-1. complete sign up for iOS
-2. complete upload review for iOS
-3. starting automate for both android and ios with the same script 

@@ -55,7 +55,7 @@ public abstract class BaseTest {
 
                 caps.setCapability("platformName", "iOS");
                 caps.setCapability("appium:automationName", "XCUITest");
-                caps.setCapability("appium:deviceName", "iPhone 14");
+                caps.setCapability("appium:deviceName", "iPhone 16 Pro");
                 caps.setCapability("appium:platformVersion", "18.2");
                 caps.setCapability("appium:udid", "F663422D-8B08-4BC7-82F9-54A853CA9E67");
 
@@ -109,9 +109,9 @@ public abstract class BaseTest {
         // This line clicks the button
         LoginWithGooglePage loginWithGoogle=loginOptionsPage.clickLoginWithGoogle();
 
-        FeedPage feedPage=loginWithGoogle.clickChooseGoogleAccount();
+        HomePage homePage=loginWithGoogle.clickChooseGoogleAccount();
         // Assert that the login was successful as a precondition check
-        Assert.assertTrue(feedPage.isPageLoaded(), "PRECONDITION FAILED: Could not log in before test.");
+        Assert.assertTrue(homePage.isPageLoaded(), "PRECONDITION FAILED: Could not log in before test.");
         System.out.println("--- PRE-TEST ACTION: Login Successful ---");
     }
 

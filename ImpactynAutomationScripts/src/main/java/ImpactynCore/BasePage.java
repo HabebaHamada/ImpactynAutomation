@@ -17,6 +17,6 @@ public abstract class BasePage {
 
         // Determine the platform once and store it
         this.platform = driver.getCapabilities().getPlatformName();
-        //System.out.println("BasePage initialized for platform: " + this.platform.name());
+        System.out.println("BasePage initialized for platform: " + this.platform.name());
     }
 }
