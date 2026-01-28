@@ -18,8 +18,10 @@ public class LoginWithSnapchatPage extends BasePage {
         super(driver);
         initializeLocators();
     }
-    /** * Initializes locators based on the platform determined in the BasePage.
-     */private void initializeLocators() {
+    /*
+     * Initializes locators based on the platform determined in the BasePage.
+     */
+    private void initializeLocators() {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
             ContinueBtnLocator= By.xpath("//android.widget.Button[@text=\"Continue\"]");

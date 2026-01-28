@@ -113,7 +113,7 @@ public class UploadReviewPage extends BasePage {
     }
 
     public void mentionBrand(String Brand) throws InterruptedException {
-        System.out.println("Entering BRGR Brand...");
+        System.out.println("mentioning Brand...");
 
         WebElement mentionBrandTextField = wait.until(ExpectedConditions.visibilityOfElementLocated(MentionBrandLocator));
 
@@ -143,7 +143,7 @@ public class UploadReviewPage extends BasePage {
 
     }
 
-    public void setReviewRating() {
+        public void setReviewRating(String ratingValue) {
         WebElement RatingSlider = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(RatingSliderLocator)
         );
@@ -152,14 +152,15 @@ public class UploadReviewPage extends BasePage {
             RatingSlider.sendKeys("0.5"); // Set to 50%, adjust as needed
         } else {
             // For Android SeekBar, set the value using sendKeys
-            RatingSlider.sendKeys("5.5"); // Set to 50%, adjust as needed
+            RatingSlider.sendKeys(ratingValue);
         }
     }
 
-    public void shareReview() {
+    public FeedPage shareReview() {
         /*click share button*/
         WebElement ShareButton = wait.until(ExpectedConditions.visibilityOfElementLocated(ShareButtonLocator));
         ShareButton.click();
+        return new FeedPage(driver);
 
     }
 

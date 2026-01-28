@@ -55,9 +55,9 @@ public abstract class BaseTest {
 
                 caps.setCapability("platformName", "iOS");
                 caps.setCapability("appium:automationName", "XCUITest");
-                caps.setCapability("appium:deviceName", "iPhone 16 Pro");
-                caps.setCapability("appium:platformVersion", "18.2");
-                caps.setCapability("appium:udid", "F663422D-8B08-4BC7-82F9-54A853CA9E67");
+                caps.setCapability("appium:deviceName", "iPhone 16");
+                caps.setCapability("appium:platformVersion", "26.0");
+                caps.setCapability("appium:udid", "FF31FD29-EC49-4FE8-A1A5-D8E301AD6C69");
 
                 // For iOS, you typically use 'bundleId' instead of package/activity
                 //caps.setCapability("appium:bundleId", "com.innov8.impactyn");

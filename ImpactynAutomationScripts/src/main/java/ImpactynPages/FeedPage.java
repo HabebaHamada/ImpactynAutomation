@@ -31,18 +31,14 @@ public class FeedPage extends BasePage {
     private void initializeLocators() {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
-            String recordButtonAutomatorString = "new UiSelector().className(\"android.view.View\").instance(16)";
-
             ForYouTextLocator = By.xpath("//android.widget.TextView[@text=\"For You\"]");
             FollowingTextLocator = By.xpath("//android.widget.TextView[@text=\"Following\"]");
             ChallengeIconLocator = By.xpath("(//android.widget.TextView[@text=\"Earn\"])[1]");
-            RecordButtonLocator = AppiumBy.androidUIAutomator(recordButtonAutomatorString);
 
         } else if (platform.is(Platform.IOS)) {
             ForYouTextLocator=AppiumBy.accessibilityId("For you");
             FollowingTextLocator=AppiumBy.accessibilityId("Following");
             ChallengeIconLocator =By.xpath("//XCUIElementTypeStaticText[@name=\"Earn\"]");
-            RecordButtonLocator = AppiumBy.name("center_btn_ic");
             EarnButtonLocator = By.xpath("//XCUIElementTypeButton[@name=\"Earn\"]");
             ProfileButtonLocator = By.xpath("//XCUIElementTypeButton[@name=\"Profile\"]");
         }
@@ -56,18 +52,6 @@ public class FeedPage extends BasePage {
        return (ForYouValidation||FollowingValidation|| ChallengeIconValidation||EarnButtonValidation);
     }
 
-    public UploadReviewPage clickRecordReview()  {
-
-        /*click the record review button in the Nav Bar*/
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                RecordButtonLocator)
-        );
-        WebElement RecordButton = wait.until(ExpectedConditions.elementToBeClickable(RecordButtonLocator));
-        RecordButton.click();
-
-        return new UploadReviewPage(driver);
-
-    }
 
     public EarnPage clickEarnButton()  {
 
