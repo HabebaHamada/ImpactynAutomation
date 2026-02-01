@@ -1,27 +1,24 @@
 package ImpactynPages;
 
 import ImpactynCore.BasePage;
+
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class UploadReviewPage extends BasePage {
 
     private By MentionBrandLocator;
-    private By AllowRecordingSettingsLocator;
     private By ShareButtonLocator;
     private By ProgressBarLocator;
     private By BrandsSuggestionBarLocator;
     private By BrandSelectionLocator;
     private By RatingSliderLocator;
     private By FlipCameraLocator;
-    private By NextAccessibilityLocator;
     private By ChooseFromGalleryLocator;
     private By ChooseVideoLocator;
     private By ConfirmChosenVideoLocator;
@@ -41,7 +38,6 @@ public class UploadReviewPage extends BasePage {
         if (platform.is(Platform.ANDROID)) {
 
             MentionBrandLocator = By.xpath("//android.widget.EditText");
-            AllowRecordingSettingsLocator = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
             ShareButtonLocator = By.xpath("//android.widget.TextView[@text=\"Share\"]");
 
             String progressBarClassName = "android.widget.ProgressBar";
@@ -60,12 +56,11 @@ public class UploadReviewPage extends BasePage {
 
             ProgressBarLocator = By.xpath("//XCUIElementTypeApplication[@name=\"Impactyn\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[4]/XCUIElementTypeOther/XCUIElementTypeButton[2]");
             MentionBrandLocator = By.xpath("//XCUIElementTypeTextField[@value=\"mention the brand\"]");
-            BrandsSuggestionBarLocator = By.xpath("(//XCUIElementTypeOther[@name=\"Horizontal scroll bar, 3 pages\"])[2]");
+            BrandsSuggestionBarLocator = By.xpath("//XCUIElementTypeCollectionView");
             BrandSelectionLocator = By.xpath("//XCUIElementTypeCollectionView/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeImage");
             RatingSliderLocator = AppiumBy.className("XCUIElementTypeSlider");
-            ShareButtonLocator = By.xpath("//XCUIElementTypeButton[@name=\"Share\"]");
+            ShareButtonLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'Share'");
             FlipCameraLocator = AppiumBy.accessibilityId("flip");
-            NextAccessibilityLocator = AppiumBy.accessibilityId("AccessibilityIdentifiers.coachMarkNext");
 
             ChooseFromGalleryLocator = By.xpath("//XCUIElementTypeImage[@name='feed_selected']/..");
             ChooseVideoLocator = By.xpath("//XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeImage");
@@ -75,29 +70,8 @@ public class UploadReviewPage extends BasePage {
         }
     }
 
-    public void allowRecordingSettings() {
-        if (this.platform.is(Platform.ANDROID)) {
-            /*Allow Video and Sound Settings For Recording*/
-            WebElement AllowRecording = wait.until(ExpectedConditions.elementToBeClickable(AllowRecordingSettingsLocator));
-            AllowRecording.click();
-        } else if (this.platform.is(Platform.IOS)) {
-            /*Handle Coach Marks if present*/
-            try {
-                WebElement NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccessibilityLocator));
-                while (NextButton.isDisplayed()) {
-                    NextButton.click();
-                    // Re-locate the Next button after clicking
-                    NextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(NextAccessibilityLocator));
-                }
-            } catch (Exception e) {
-                // If the Next button is not found, we assume there are no coach marks to handle
-                System.out.println("No more coach marks to handle.");
-            }
-        }
-    }
-
     public void startCameraRecording(int reviewDurationInSeconds) throws InterruptedException {
-        /*click the record button to start recording*/
+        /*click the progress bar to start recording*/
         WebElement ProgressBar = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ProgressBarLocator)
         );
@@ -106,7 +80,7 @@ public class UploadReviewPage extends BasePage {
         System.out.println("Recording for " + reviewDurationInSeconds * 1000 + " milliseconds...");
         Thread.sleep(reviewDurationInSeconds * 1000L);
 
-        /*click the progress bar to stop recording*/
+        /*click the progress bar again to stop recording*/
         wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ProgressBarLocator)
         ).click();
@@ -126,13 +100,6 @@ public class UploadReviewPage extends BasePage {
         }
         Thread.sleep(5000); // Wait for 5 seconds to ensure the field is ready
 
-        System.out.println("waiting for brandsSuggestionBar...");
-
-
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(BrandsSuggestionBarLocator)
-        );
-
         System.out.println("waiting for brandSelection...");
 
         /*Select the Brand*/
@@ -140,25 +107,19 @@ public class UploadReviewPage extends BasePage {
                 ExpectedConditions.visibilityOfElementLocated(BrandSelectionLocator)
         );
         brandSelection.click();
-
     }
 
-        public void setReviewRating(String ratingValue) {
+    public void setReviewRating(String ratingValue) {
         WebElement RatingSlider = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(RatingSliderLocator)
         );
-        if (platform.is(Platform.IOS)) {
-            // Set the slider value using JavaScript for XCUIElementTypeSlider
-            RatingSlider.sendKeys("0.5"); // Set to 50%, adjust as needed
-        } else {
-            // For Android SeekBar, set the value using sendKeys
             RatingSlider.sendKeys(ratingValue);
-        }
     }
 
     public FeedPage shareReview() {
         /*click share button*/
-        WebElement ShareButton = wait.until(ExpectedConditions.visibilityOfElementLocated(ShareButtonLocator));
+        WebElement ShareButton = wait.until(ExpectedConditions.elementToBeClickable(ShareButtonLocator));
+        System.out.println("Clicking Share Button...");
         ShareButton.click();
         return new FeedPage(driver);
 
@@ -178,7 +139,8 @@ public class UploadReviewPage extends BasePage {
         );
         ChooseFromGallery.click();
 
-        allowGalleryAccess();
+        SystemAlertsPage alerts= new SystemAlertsPage(driver);
+        alerts.allowGalleryAccess();
 
         WebElement ChooseVideo = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ChooseVideoLocator)
@@ -212,44 +174,6 @@ public class UploadReviewPage extends BasePage {
         } catch (Exception e) {
             System.out.println("An error occurred while verifying uploading messages: " + e.getMessage());
             return false;
-        }
-    }
-
-    private void allowGalleryAccess() {
-        if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for gallery access...");
-            boolean alertHandled = false;
-            for (int i = 0; i < 5; i++) {
-                try {
-                    // Wait briefly before each attempt
-                    Thread.sleep(1000);
-
-                    try {
-                        // Check if alert exists first
-                        driver.switchTo().alert();
-
-                        // Use different approach for iOS alert
-                        Map<String, Object> params = new HashMap<>();
-                        params.put("action", "accept");
-                        params.put("buttonLabel", "Allow Full Access");
-                        driver.executeScript("mobile:alert", params);
-
-                        System.out.println("Successfully clicked Allow Full Access button");
-                        alertHandled = true;
-                        break;
-                    } catch (Exception alertEx) {
-                        // Try alternative method
-                        Map<String, String> params = new HashMap<>();
-                        params.put("action", "accept");
-                        driver.executeScript("mobile: acceptAlert", params);
-
-                        System.out.println("Successfully handled alert using alternative method");
-                        alertHandled = true;
-                    }
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
     }
 }

@@ -3,13 +3,9 @@ package ImpactynPages;
 import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProfilePage extends BasePage {
 
@@ -85,82 +81,13 @@ public class ProfilePage extends BasePage {
     public void clickCloseButton() {
         wait.until(ExpectedConditions.elementToBeClickable(CloseButtonLocator)).click();
     }
-
     public boolean verifySuccessMessage()
     {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(SuccessSavingMessageLocator)).isDisplayed();
     }
-
     public void clickPhotoEditing() {
         wait.until(ExpectedConditions.elementToBeClickable(PhotoEditingLocator)).click();
     }
-
-    public void allowPhotoAccess() {
-        if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for photo access...");
-            boolean alertHandled = false;
-            for (int i = 0; i < 5; i++) {
-                try {
-                    // Wait briefly before each attempt
-                    Thread.sleep(1000);
-
-                    try {
-                        // Check if alert exists first
-                        driver.switchTo().alert();
-
-                        // Use different approach for iOS alert
-                        Map<String, Object> params = new HashMap<>();
-                        params.put("action", "accept");
-                        params.put("buttonLabel", "Allow Full Access");
-                        driver.executeScript("mobile:alert", params);
-
-                        System.out.println("Successfully clicked Allow Full Access button");
-                        alertHandled = true;
-                        break;
-                    } catch (Exception alertEx) {
-                        // Try alternative method
-                        java.util.Map<String, String> params = new java.util.HashMap<>();
-                        params.put("action", "accept");
-                        driver.executeScript("mobile: acceptAlert", params);
-
-                        System.out.println("Successfully handled alert using alternative method");
-                        alertHandled = true;
-                    }
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    }
-
-    public void allowCameraAccess()
-    {
-        System.out.println("Handling iOS system alert to Allow Camera...");
-
-        try {
-            // Step 1: Wait for the alert to be present on the screen.
-            // This is a crucial step to handle any small delays.
-            wait.until(ExpectedConditions.alertIsPresent());
-
-            // Step 2: Switch the driver's focus to the alert.
-            Alert systemAlert = driver.switchTo().alert();
-
-            // Step 3: You can get the text for verification (optional but good for debugging)
-            String alertText = systemAlert.getText();
-            System.out.println("Found system alert with text: " + alertText);
-
-            // Step 4: Accept the alert. This will click the default "Continue" button.
-            systemAlert.accept();
-
-            System.out.println("System alert accepted.");
-
-        } catch (Exception e) {
-            System.err.println("Failed to handle the system alert.");
-            throw e;
-        }
-        System.out.println("System alert confirmed.");
-    }
-
     public void selectFromGallery() {
         wait.until(ExpectedConditions.elementToBeClickable(SelectGalleryLocator)).click();
     }

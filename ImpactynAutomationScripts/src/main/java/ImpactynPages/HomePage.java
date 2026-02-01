@@ -1,8 +1,10 @@
 package ImpactynPages;
 
 import ImpactynCore.BasePage;
+
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
@@ -26,14 +28,11 @@ public class HomePage extends BasePage {
             homePageIdentifier = AppiumBy.accessibilityId("smallLogo");
             RecordButtonLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'center btn ic'");;}
     }
+
     public boolean isPageLoaded() {
 
-        boolean homePageLoadingValidation  = wait.until(ExpectedConditions.visibilityOfElementLocated(homePageIdentifier)).isDisplayed();
-
-        return (homePageLoadingValidation);
+        return( wait.until(ExpectedConditions.visibilityOfElementLocated(homePageIdentifier)).isDisplayed());
     }
-
-
     public UploadReviewPage clickRecordReview()  {
 
         /*click the record review button in the Nav Bar*/
@@ -41,6 +40,5 @@ public class HomePage extends BasePage {
         RecordButton.click();
 
         return new UploadReviewPage(driver);
-
     }
 }

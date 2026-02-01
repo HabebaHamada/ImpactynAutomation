@@ -11,7 +11,8 @@ public class ImpactynLoginTest extends BaseTest  {
 
         System.out.println("Login with Snapchat Testcase Started : ");
 
-        handleInitialPopups();
+        SystemAlertsPage alertsPage= new SystemAlertsPage(driver);
+        alertsPage.handleInitialPopups();
 
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
@@ -34,7 +35,8 @@ public class ImpactynLoginTest extends BaseTest  {
 
         System.out.println("Login with Google Testcase Started : ");
 
-        handleInitialPopups();
+        SystemAlertsPage alertsPage= new SystemAlertsPage(driver);
+        alertsPage.handleInitialPopups();
 
         // 1. Initialize the first page object
         LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
@@ -55,7 +57,8 @@ public class ImpactynLoginTest extends BaseTest  {
 //
 //        System.out.println("Login with Phone Number Testcase Started : ");
 //
-//       handleInitialPopups();
+//        SystemAlertsPage alertsPage= new SystemAlertsPage(driver);
+//        alertsPage.handleInitialPopups();
 //
 //       // 1. Initialize the first page object
 //        LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);
@@ -91,7 +94,8 @@ public class ImpactynLoginTest extends BaseTest  {
 //
 //        System.out.println("Login with Facebook Testcase Started : ");
 //
-//        handleInitialPopups();
+//        SystemAlertsPage alertsPage= new SystemAlertsPage(driver);
+//        alertsPage.handleInitialPopups();
 //
 //        // 1. Initialize the first page object
 //        LoginOptionsPage loginOptionsPage = new LoginOptionsPage(driver);

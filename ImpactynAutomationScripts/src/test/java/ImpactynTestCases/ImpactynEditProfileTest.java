@@ -3,6 +3,7 @@ package ImpactynTestCases;
 import ImpactynPages.EarnPage;
 import ImpactynPages.FeedPage;
 import ImpactynPages.ProfilePage;
+import ImpactynPages.SystemAlertsPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -11,7 +12,9 @@ public class ImpactynEditProfileTest extends BaseTest {
 
     @BeforeMethod
     public void loginBeforeReviewTest() {
-        handleInitialPopups();
+
+        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
+        systemAlertsPage.handleInitialPopups();
         // Call the reusable login method from our BaseTest
         performLogin();
     }
@@ -50,8 +53,10 @@ public class ImpactynEditProfileTest extends BaseTest {
         profilePage.clickEditProfileButton();
         profilePage.clickPhotoEditing();
 
-        profilePage.allowPhotoAccess();
-        profilePage.allowCameraAccess();
+
+        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
+        systemAlertsPage.allowCameraAccess();
+
         profilePage.selectFromGallery();
         profilePage.choosePhoto();
         profilePage.confirmChosenPhoto();

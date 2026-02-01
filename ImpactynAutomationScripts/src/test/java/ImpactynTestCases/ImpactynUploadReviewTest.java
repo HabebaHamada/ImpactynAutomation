@@ -1,6 +1,8 @@
 package ImpactynTestCases;
 
+import ImpactynPages.SystemAlertsPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -9,7 +11,9 @@ import java.util.Map;
 import ImpactynPages.FeedPage;
 import ImpactynPages.HomePage;
 import ImpactynPages.UploadReviewPage;
+
 import org.openqa.selenium.Platform;
+
 import org.testng.annotations.DataProvider;
 import org.testng.asserts.SoftAssert;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +25,9 @@ public class ImpactynUploadReviewTest extends BaseTest
 
     @BeforeMethod
     public void loginBeforeReviewTest() {
-        handleInitialPopups();
+        SystemAlertsPage alertsPage= new SystemAlertsPage(driver);
+        alertsPage.handleInitialPopups();
+
         // Call the reusable login method from our BaseTest
         performLogin();
     }
@@ -54,7 +60,8 @@ public class ImpactynUploadReviewTest extends BaseTest
         /*Clicking on Plus Icon From nav bar*/
         UploadReviewPage uploadReview=homePage.clickRecordReview();
 
-        uploadReview.allowRecordingSettings();
+        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
+        systemAlertsPage.allowRecordingSettings();
 
         /*Camera Recording for 20 seconds*/
         uploadReview.startCameraRecording(Integer.parseInt(recordingDuration));
@@ -92,7 +99,9 @@ public class ImpactynUploadReviewTest extends BaseTest
 //        /*Clicking on Plus Icon From nav bar*/
 //        UploadReviewPage uploadReview= feedPage.clickRecordReview();
 //
-//        uploadReview.allowRecordingSettings();
+//
+//        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
+//        systemAlertsPage.allowRecordingSettings();
 //
 //        /*Flipping Camera to Front Camera*/
 //        uploadReview.flipCamera();
@@ -132,7 +141,9 @@ public class ImpactynUploadReviewTest extends BaseTest
 //
 //        UploadReviewPage uploadReview= feedPage.clickRecordReview();
 //
-//        uploadReview.allowRecordingSettings();
+//
+//        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
+//        systemAlertsPage.allowRecordingSettings();
 //
 //        /*Choosing from Gallery*/
 //        uploadReview.chooseFromGallery();
@@ -171,7 +182,9 @@ public class ImpactynUploadReviewTest extends BaseTest
 //        // 2. Clicking on Earn Button From nav bar
 //        EarnPage earnPage= feedPage.clickEarnButton();
 //
-//        earnPage.allowLocationAccess();
+//
+//        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
+//        systemAlertsPage.allowLocationAccess();
 //
 //
 //
