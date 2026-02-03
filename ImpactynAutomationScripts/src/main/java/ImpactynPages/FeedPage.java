@@ -53,7 +53,7 @@ public class FeedPage extends BasePage {
     }
 
 
-    public EarnPage clickEarnButton()  {
+    public DiscoverPage clickEarnButton()  {
 
         /*click the Earn button in the Nav Bar*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -62,7 +62,7 @@ public class FeedPage extends BasePage {
         WebElement EarnButton = wait.until(ExpectedConditions.elementToBeClickable(EarnButtonLocator));
         EarnButton.click();
 
-        return new EarnPage(driver);
+        return new DiscoverPage(driver);
 
     }
     public ProfilePage clickProfileButton()  {

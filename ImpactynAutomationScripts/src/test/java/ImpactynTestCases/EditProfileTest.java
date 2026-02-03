@@ -1,6 +1,5 @@
 package ImpactynTestCases;
 
-import ImpactynPages.EarnPage;
 import ImpactynPages.FeedPage;
 import ImpactynPages.ProfilePage;
 import ImpactynPages.SystemAlertsPage;
@@ -8,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class ImpactynEditProfileTest extends BaseTest {
+public class EditProfileTest extends BaseTest {
 
     @BeforeMethod
     public void loginBeforeReviewTest() {

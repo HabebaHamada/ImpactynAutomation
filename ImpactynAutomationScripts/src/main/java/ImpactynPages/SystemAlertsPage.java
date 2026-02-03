@@ -255,6 +255,4 @@ public class SystemAlertsPage extends BasePage {
         }
     }
 
-
-
 }

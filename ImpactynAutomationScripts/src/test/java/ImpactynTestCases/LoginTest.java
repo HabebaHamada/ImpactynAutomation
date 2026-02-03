@@ -4,7 +4,7 @@ import ImpactynPages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ImpactynLoginTest extends BaseTest  {
+public class LoginTest extends BaseTest  {
 
     @Test(priority = 2, description = "Verify login with Snapchat.")
     public void loginWithSnapchatTest() {

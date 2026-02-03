@@ -14,6 +14,7 @@ public class HomePage extends BasePage {
 
     private By homePageIdentifier ;
     private By RecordButtonLocator ;
+    private By DiscoverButtonLocator ;
 
     public HomePage(AppiumDriver driver) {
         super(driver);
@@ -26,7 +27,9 @@ public class HomePage extends BasePage {
             homePageIdentifier = By.id("com.innov8eg.impactyn:id/home_page_element_id"); // Replace with actual Android locator
         } else if (platform.is(Platform.IOS)) {
             homePageIdentifier = AppiumBy.accessibilityId("smallLogo");
-            RecordButtonLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'center btn ic'");;}
+            RecordButtonLocator = AppiumBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'center btn ic'");
+            DiscoverButtonLocator = AppiumBy.accessibilityId("Discover");
+        }
     }
 
     public boolean isPageLoaded() {
@@ -40,5 +43,13 @@ public class HomePage extends BasePage {
         RecordButton.click();
 
         return new UploadReviewPage(driver);
+    }
+    public DiscoverPage clickDiscoverButton()  {
+
+        /*click the Earn button in the Nav Bar*/
+        WebElement DiscoverButton = wait.until(ExpectedConditions.elementToBeClickable(DiscoverButtonLocator));
+        DiscoverButton.click();
+
+        return new DiscoverPage(driver);
     }
 }
