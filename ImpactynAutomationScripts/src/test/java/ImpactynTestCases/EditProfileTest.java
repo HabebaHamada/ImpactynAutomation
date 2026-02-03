@@ -9,10 +9,6 @@ import org.testng.asserts.SoftAssert;
 
 public class EditProfileTest extends BaseTest {
 
-    public ImpactynEditProfileTest() {
-        super();
-    }
-
     @BeforeMethod
     public void loginBeforeReviewTest() {
 

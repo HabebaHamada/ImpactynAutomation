@@ -59,19 +59,18 @@ public class FeedPage extends BasePage {
 
         return (ForYouValidation && FollowingValidation && ChallengeIconValidation && EarnButtonValidation);
     }
+    public DiscoverPage clickEarnButton()  {
 
-        public DiscoverPage clickEarnButton()  {
+        /*click the Earn button in the Nav Bar*/
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                EarnButtonLocator)
+        );
+        WebElement EarnButton = wait.until(ExpectedConditions.elementToBeClickable(EarnButtonLocator));
+        EarnButton.click();
 
-            /*click the Earn button in the Nav Bar*/
-            wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    EarnButtonLocator)
-            );
-            WebElement EarnButton = wait.until(ExpectedConditions.elementToBeClickable(EarnButtonLocator));
-            EarnButton.click();
+        return new DiscoverPage(driver);
 
-            return new DiscoverPage(driver);
-
-        }
+    }
     public ProfilePage clickProfileButton()  {
 
         /*click the Profile button in the Nav Bar*/

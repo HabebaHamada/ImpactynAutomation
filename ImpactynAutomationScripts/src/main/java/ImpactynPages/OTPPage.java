@@ -56,7 +56,7 @@ public class OTPPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(screenTitleLocator)).isDisplayed();
     }
 
-    public FeedPage waitForManualOtpAndProceed() {
+    public HomePage waitForManualOtpAndProceed() {
         logger.info(">>> WAITING FOR 65 SECONDS FOR MANUAL OTP ENTRY <<<");
         logger.info(">>> Please enter the OTP on the device now... <<<");
 
@@ -66,9 +66,9 @@ public class OTPPage extends BasePage {
         try {
             // The script will pause here and wait for the feed page element to become visible.
             // This only happens after the OTP is entered and the app navigates.
-            longWait.until(ExpectedConditions.visibilityOfElementLocated(feedPageElement));
+            longWait.until(ExpectedConditions.visibilityOfElementLocated(homePageElement));
 
-            System.out.println("OTP entry detected. Proceeding to the feed page.");
+            logger.info("OTP entry detected. Proceeding to the Home page.");
             return new HomePage(driver);
 
         } catch (TimeoutException e) {

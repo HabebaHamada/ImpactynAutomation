@@ -3,13 +3,11 @@ package ImpactynPages;
 import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.WebElement;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProfilePage extends BasePage {
 
@@ -111,6 +109,7 @@ public class ProfilePage extends BasePage {
             WebElement toastElement = wait.until(ExpectedConditions.presenceOfElementLocated(SuccessSavingMessageLocator));
 
             // Optional but highly recommended: Log the toast text for better debugging.
+            assert toastElement != null;
             String toastText = toastElement.getText();
             logger.info("Found toast message with text: " + toastText);
 

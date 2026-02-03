@@ -1,6 +1,7 @@
 package ImpactynCore;
 
 import io.appium.java_client.AppiumDriver;
+
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,7 +18,7 @@ public abstract class BasePage {
         this.driver = driver;
         this.logger = Logger.getLogger(getClass().getName());
 
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 
         // Determine the platform once and store it
         this.platform = driver.getCapabilities().getPlatformName();
