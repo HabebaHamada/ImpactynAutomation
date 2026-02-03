@@ -26,10 +26,12 @@ public class LoginOptionsPage extends BasePage {
             String useFacebookBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(1)";
             String useSnapchatBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(2)";
             String useGoogleBtnAutomatorString = "new UiSelector().className(\"android.widget.Button\").instance(3)";
-            usePhoneEmailBtnLocator = AppiumBy.androidUIAutomator(usePhoneEmailBtnAutomatorString);
-            useFacebookBtnLocator = AppiumBy.androidUIAutomator(useFacebookBtnAutomatorString);
-            useSnapchatBtnLocator = AppiumBy.androidUIAutomator(useSnapchatBtnAutomatorString);
-            useGoogleBtnLocator = AppiumBy.androidUIAutomator(useGoogleBtnAutomatorString);
+
+            usePhoneEmailBtnLocator=AppiumBy.androidUIAutomator(usePhoneEmailBtnAutomatorString);
+            useFacebookBtnLocator=AppiumBy.androidUIAutomator(useFacebookBtnAutomatorString);
+            useSnapchatBtnLocator=AppiumBy.androidUIAutomator(useSnapchatBtnAutomatorString);
+            useGoogleBtnLocator=AppiumBy.androidUIAutomator(useGoogleBtnAutomatorString);
+
         } else if (platform.is(Platform.IOS)) {
             usePhoneEmailBtnLocator = AppiumBy.accessibilityId("Use phone or email");
             useFacebookBtnLocator = AppiumBy.accessibilityId("Continue with Facebook");
@@ -38,7 +40,7 @@ public class LoginOptionsPage extends BasePage {
         }
     }
     public LoginWithPhonePage clickUsePhoneOrEmail() {
-        System.out.println("Clicking on 'Use phone or email' button.");
+        logger.info("Clicking on 'Use phone or email' button.");
         WebElement phoneEmailButton =  wait.until(ExpectedConditions.elementToBeClickable(usePhoneEmailBtnLocator));
         phoneEmailButton.click();
 
@@ -46,7 +48,7 @@ public class LoginOptionsPage extends BasePage {
         return new LoginWithPhonePage(driver);
     }
     public LoginWithFacebookPage clickLoginWithFacebook(){
-        System.out.println("Clicking on 'Continue With Facebook' button.");
+        logger.info("Clicking on 'Continue With Facebook' button.");
         WebElement facebookButton = wait.until(ExpectedConditions.elementToBeClickable(useFacebookBtnLocator));
         facebookButton.click();
 
@@ -62,7 +64,7 @@ public class LoginOptionsPage extends BasePage {
     }
 
    public LoginWithSnapchatPage clickLoginWithSnapchat(){
-        System.out.println("Clicking on 'Continue With Snapchat' button.");
+        logger.info("Clicking on 'Continue With Snapchat' button.");
         WebElement snapchatButton = wait.until(ExpectedConditions.elementToBeClickable(useSnapchatBtnLocator));
         snapchatButton.click();
 
@@ -78,7 +80,7 @@ public class LoginOptionsPage extends BasePage {
     }
 
   public LoginWithGooglePage clickLoginWithGoogle(){
-        System.out.println("Clicking on 'Continue With Google' button.");
+        logger.info("Clicking on 'Continue With Google' button.");
         WebElement googleButton= wait.until(ExpectedConditions.elementToBeClickable(useGoogleBtnLocator));
         googleButton.click();
 

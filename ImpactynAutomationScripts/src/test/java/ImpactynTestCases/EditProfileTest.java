@@ -9,6 +9,10 @@ import org.testng.asserts.SoftAssert;
 
 public class EditProfileTest extends BaseTest {
 
+    public ImpactynEditProfileTest() {
+        super();
+    }
+
     @BeforeMethod
     public void loginBeforeReviewTest() {
 
@@ -18,14 +22,15 @@ public class EditProfileTest extends BaseTest {
         performLogin();
     }
 
-    @Test(priority = 1, description = "Verify user can Edit his name and bio from Edit profile section")
-    public void EditNameAndBio() {
+    @Test(priority = 2, description = "Verify user can Edit his name and bio from Edit profile section")
+    public void EditNameAndBio()  {
         SoftAssert softAssertion = new SoftAssert();
 
         // 1. Initialize the first page object
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Profile Icon From nav bar*/
+        feedPage.clickProfileButton();
         ProfilePage profilePage = feedPage.clickProfileButton();
 
         profilePage.clickEditProfileButton();
@@ -36,10 +41,11 @@ public class EditProfileTest extends BaseTest {
         softAssertion.assertEquals(profilePage.getNameText(), "TestUser", "Name not updated correctly");
         softAssertion.assertEquals(profilePage.getBioText(), "This is a test bio", "Bio not updated correctly");
 
+
         softAssertion.assertAll();
     }
 
-    @Test(priority = 2, description = "Verify user can Edit his photo from Edit profile section")
+    @Test(priority = 1, description = "Verify user can Edit his photo from Edit profile section")
     public void EditProfilePhoto() {
         SoftAssert softAssertion = new SoftAssert();
 
@@ -47,6 +53,7 @@ public class EditProfileTest extends BaseTest {
         FeedPage feedPage = new FeedPage(driver);
 
         /*Clicking on Profile Icon From nav bar*/
+        feedPage.clickProfileButton();
         ProfilePage profilePage = feedPage.clickProfileButton();
 
         profilePage.clickEditProfileButton();
@@ -63,11 +70,9 @@ public class EditProfileTest extends BaseTest {
         profilePage.clickSaveButton();
 
 
-        //softAssertion.assertTrue(profilePage.verifySuccessMessage(), "Profile update success message not displayed");
-
-       // softAssertion.assertAll();
-
-    }
-
+        softAssertion.assertTrue(profilePage.verifySuccessMessage(), "Profile update success message not displayed");
+        softAssertion.assertAll();
 
     }
+
+}

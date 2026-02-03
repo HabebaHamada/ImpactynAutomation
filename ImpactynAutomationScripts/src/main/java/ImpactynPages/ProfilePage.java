@@ -3,9 +3,13 @@ package ImpactynPages;
 import ImpactynCore.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfilePage extends BasePage {
 
@@ -18,6 +22,7 @@ public class ProfilePage extends BasePage {
     private By PhotoEditingLocator;
     private By SelectGalleryLocator;
     private By PhotoSelectedLocator;
+    private By CropButtonLocator;
     private By ConfirmChosenPhotoLocator;
     private By NameTextLocator;
     private By BioTextLocator;
@@ -33,6 +38,18 @@ public class ProfilePage extends BasePage {
         // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
 
+            EditProfileButtonLocator = By.xpath("//android.widget.TextView[@text=\"Edit Profile\"]");
+            NameEditingTextFieldLocator = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(0)");
+            BioEditingTextFieldLocator = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(1)");
+            SaveButtonLocator = AppiumBy.androidUIAutomator("new UiSelector().text(\"Save\")");
+            CloseButtonLocator = AppiumBy.className("android.widget.Button");
+            PhotoEditingLocator = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.view.View\").instance(3)");
+            SelectGalleryLocator = AppiumBy.androidUIAutomator("new UiSelector().text(\"Gallery\")");
+            PhotoSelectedLocator = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.google.android.providers.media.module:id/icon_thumbnail\").instance(0)");
+            CropButtonLocator = By.xpath("//android.widget.Button[@resource-id=\"com.innov8eg.impactyn:id/crop_image_menu_crop\"]");
+            NameTextLocator = By.xpath("//android.widget.TextView[contains(@text, 'Followers')]/preceding-sibling::android.widget.TextView[2]");
+            BioTextLocator = By.xpath("//android.widget.TextView[contains(@text, 'Followers')]/following-sibling::android.widget.TextView[1]");
+            SuccessSavingMessageLocator = By.xpath("//android.widget.Toast[1]");
 
         } else if (platform.is(Platform.IOS)) {
 
@@ -83,9 +100,28 @@ public class ProfilePage extends BasePage {
     }
     public boolean verifySuccessMessage()
     {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(SuccessSavingMessageLocator)).isDisplayed();
+        if (this.platform.is(Platform.IOS)) {
+            logger.info("Waiting for the success toast message to appear...");
+
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(SuccessSavingMessageLocator)).isDisplayed();
+        } else {
+            logger.info("Waiting for the success toast message to appear...");
+
+            // For Android Toasts, we wait for PRESENCE in the DOM.
+            WebElement toastElement = wait.until(ExpectedConditions.presenceOfElementLocated(SuccessSavingMessageLocator));
+
+            // Optional but highly recommended: Log the toast text for better debugging.
+            String toastText = toastElement.getText();
+            logger.info("Found toast message with text: " + toastText);
+
+            // If the line above was successful without throwing an exception,
+            // it means the element was found. We can now confidently return true.
+            return true;
+        }
+
     }
     public void clickPhotoEditing() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PhotoEditingLocator));
         wait.until(ExpectedConditions.elementToBeClickable(PhotoEditingLocator)).click();
     }
     public void selectFromGallery() {
@@ -95,7 +131,13 @@ public class ProfilePage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(PhotoSelectedLocator)).click();
     }
     public void confirmChosenPhoto() {
-        wait.until(ExpectedConditions.elementToBeClickable(ConfirmChosenPhotoLocator)).click();
+        if (this.platform.is(Platform.IOS)) {
+            wait.until(ExpectedConditions.elementToBeClickable(ConfirmChosenPhotoLocator)).click();
+        }
+        else if (this.platform.is(Platform.ANDROID))
+        {
+            wait.until(ExpectedConditions.elementToBeClickable(CropButtonLocator)).click();
+        }
     }
 
 }

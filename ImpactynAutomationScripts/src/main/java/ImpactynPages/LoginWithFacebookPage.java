@@ -10,14 +10,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginWithFacebookPage extends BasePage {
 
-    private  By ContinueWithFacebookBtnLocator;
-    private  By FacebookLoadingValidationLocator;
+    private By ContinueWithFacebookBtnLocator;
+    private By FacebookLoadingValidationLocator;
+
     public LoginWithFacebookPage(AppiumDriver driver) {
         super(driver);
         initializeLocators();
     }
+
     private void initializeLocators(){
-        // 'platform' is inherited from BasePage
         if (platform.is(Platform.ANDROID)) {
         ContinueWithFacebookBtnLocator= By.xpath("//android.widget.Button[starts-with(@text, \"Continue as\")]");
         FacebookLoadingValidationLocator= By.xpath("//android.widget.TextView[@text=\"You previously logged into Impactyn with Facebook.\"]");
@@ -29,14 +30,14 @@ public class LoginWithFacebookPage extends BasePage {
 
     public boolean isPageLoaded()
     {
-        System.out.println("Validating that Facebook Login page is Fully Loaded.");
+        logger.info("Validating that Facebook Login page is Fully Loaded.");
         return wait.until(ExpectedConditions.visibilityOfElementLocated(FacebookLoadingValidationLocator)).isDisplayed();
     }
 
     public HomePage clickContinueWithFacebook() {
 
         if (isPageLoaded()) {
-            System.out.println("Clicking the 'Continue as ' button.");
+            logger.info("Clicking the 'Continue as ' button.");
             WebElement ContinueWithFacebookButton = wait.until(ExpectedConditions.elementToBeClickable(ContinueWithFacebookBtnLocator));
             ContinueWithFacebookButton.click();
             return new HomePage(driver);

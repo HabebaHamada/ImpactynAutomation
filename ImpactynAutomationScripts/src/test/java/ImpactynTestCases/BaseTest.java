@@ -13,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -47,6 +48,7 @@ public abstract class BaseTest {
 
                 // Ensure the app data is cleared before each run for a clean state
                 caps.setCapability("appium:noReset", false);
+                caps.setCapability("appium:enforceXPath1", true);
                 // Create the specific driver for Android
                 driver = new AndroidDriver(url, caps);
                 break;
@@ -62,10 +64,9 @@ public abstract class BaseTest {
                 caps.setCapability("appium:udid", "E89DBB85-21DB-42F5-BF3D-E796D7695D32");
 
                 // For iOS, you typically use 'bundleId' instead of package/activity
+                //caps.setCapability("appium:bundleId", "com.innov8.impactyn");
                 caps.setCapability("appium:noReset", false);
                 caps.setCapability("appium:app", "/Users/mostafa/Documents/ImpactynAutomation/Impactyn.app");
-                //caps.setCapability("appium:bundleId", "com.innov8.impactyn");
-
                 // Create the specific driver for iOS
                 driver = new IOSDriver(url, caps);
                 break;
@@ -82,7 +83,6 @@ public abstract class BaseTest {
             driver.quit();
         }
     }
-
     /**
      * This is a reusable login method that can be called by any test that needs it.
      * It's not a @Test itself, but a helper utility.

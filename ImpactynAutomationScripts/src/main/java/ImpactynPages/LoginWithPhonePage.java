@@ -20,9 +20,10 @@ public class LoginWithPhonePage extends BasePage {
         initializeLocators();
     }
     public void initializeLocators()
-    {    // 'platform' is inherited from BasePage
+    {
         if (platform.is(Platform.ANDROID)) {
             String phoneNumberInputAutomatorString = "new UiSelector().className(\"android.widget.EditText\").instance(0)";
+
             phoneNumberInputLocator=AppiumBy.androidUIAutomator(phoneNumberInputAutomatorString);
             nextBtnLocator = By.xpath("//android.widget.TextView[@text=\"Next\"]");
             screenTitleLocator = By.xpath("//android.widget.TextView[@text=\"What's your number?\"]");
@@ -35,13 +36,13 @@ public class LoginWithPhonePage extends BasePage {
         }
     }
     public void enterPhoneNumber(String phoneNumber) {
-        System.out.println("Entering phone number: " + phoneNumber);
+        logger.info("Entering phone number: " + phoneNumber);
         WebElement phoneInput = wait.until(ExpectedConditions.visibilityOfElementLocated(phoneNumberInputLocator));
         phoneInput.sendKeys(phoneNumber);
     }
 
     public OTPPage clickNext() {
-        System.out.println("Clicking the 'Next' button.");
+        logger.info("Clicking the 'Next' button.");
         WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(nextBtnLocator));
         nextButton.click();
         return new OTPPage(driver);

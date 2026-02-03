@@ -20,20 +20,20 @@ public class NotificationVerifier {
     private final AppiumDriver driver;
     private final WebDriverWait wait;
 
-    // Constructor to initialize a driver and wait
     public NotificationVerifier(AppiumDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
 
+    public void openNotification()
+    {
+        // Step 1: Cast the driver to Android Driver
+        // Step 2: Open Notifications bar
+        ((AndroidDriver) driver).openNotifications();
+    }
     public void verifyNotification(String expectedTitle, String expectedText) {
 
         try {
-
-            // Step 1: Cast the driver to Android Driver
-            // Step 2: Open Notifications bar
-            ((AndroidDriver) driver).openNotifications();
-
 
             // Step 3: Wait for the notification elements to be visible
             // Standard Android resource-ids for notification title and text
@@ -53,7 +53,7 @@ public class NotificationVerifier {
                 // Use a very short wait to check for existence without wasting time.
                 new WebDriverWait(driver, Duration.ofSeconds(1)).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id(standardTextLocator)));
                 System.out.println("Notification was already expanded.");
-            } catch (Exception e) {
+            } catch (Exception _) {
                 // 3. If it's not expanded, expand it now.
                 System.out.println("Notification is collapsed. Performing swipe to expand...");
                 expandNotification(notificationTitle); // Swipe on the title element to pull it down.
@@ -73,20 +73,23 @@ public class NotificationVerifier {
             System.err.println(driver.getPageSource());
             // Re-throw the exception to fail the test
             throw new RuntimeException("Could not find or verify the notification.", e);
-        } finally {
-            // Step 5: Clean up by closing the notification shade
-            // Pressing the "Back" button is a reliable way to close it.
-            ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.BACK));
-            System.out.println("Notification shade closed.");
         }
+    }
+
+    public void closeNotification()
+    {
+        // Step 5: Clean up by closing the notification shade
+        // Pressing the "Back" button is a reliable way to close it.
+        ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.BACK));
+        System.out.println("Notification shade closed.");
     }
 
     private void expandNotification(WebElement element) {
         // Get the element's location and size
         int startX = element.getRect().getX() + (element.getRect().getWidth() / 2);
         int startY = element.getRect().getY() + (element.getRect().getHeight() / 2);
-        // Swipe down just a little bit
-        int endY = startY + (element.getRect().getHeight()); // Swipe down by the height of the element
+        // Swipe down by the height of the element
+        int endY = startY + (element.getRect().getHeight());
 
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence swipe = new Sequence(finger, 1);

@@ -107,6 +107,7 @@ public class UploadReviewPage extends BasePage {
                 ExpectedConditions.visibilityOfElementLocated(BrandSelectionLocator)
         );
         brandSelection.click();
+
     }
 
     public void setReviewRating(String ratingValue) {
@@ -134,6 +135,9 @@ public class UploadReviewPage extends BasePage {
     }
 
     public void chooseFromGallery() throws InterruptedException {
+
+        logger.info("Selecting Video to Upload as a Review");
+
         WebElement ChooseFromGallery = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ChooseFromGalleryLocator)
         );
@@ -147,33 +151,31 @@ public class UploadReviewPage extends BasePage {
         );
         ChooseVideo.click();
 
-        Thread.sleep(3000);
+        Thread.sleep(5000);
+
         WebElement ConfirmChosenVideo = wait.until(
-                ExpectedConditions.elementToBeClickable(ConfirmChosenVideoLocator)
-        );
+                ExpectedConditions.elementToBeClickable(ConfirmChosenVideoLocator));
+
         ConfirmChosenVideo.click();
+
     }
 
     public boolean verifyUploadingMessages() {
-        try {
-            // Wait for the "Preparing your video..." notification
-            WebElement preparingNotification = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(PreparationReviewNotificationLocator)
-            );
-            boolean isPreparingVisible = preparingNotification.isDisplayed();
-            System.out.println("\"Preparing your video...\" notification is visible: " + isPreparingVisible);
 
-            // Wait for the "Keep Impactyn open to finish posting.." notification
-            WebElement finishingNotification = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(FinishingReviewNotificationLocator)
-            );
-            boolean isFinishingVisible = finishingNotification.isDisplayed();
-            System.out.println("\"Keep Impactyn open to finish posting..\" notification is visible: " + isFinishingVisible);
+        // Wait for the "Preparing your video..." notification
+        WebElement preparingNotification = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(PreparationReviewNotificationLocator)
+        );
+        boolean isPreparingVisible = preparingNotification.isDisplayed();
+        logger.info("\"Preparing your video...\" notification is visible: " + isPreparingVisible);
 
-            return isPreparingVisible && isFinishingVisible;
-        } catch (Exception e) {
-            System.out.println("An error occurred while verifying uploading messages: " + e.getMessage());
-            return false;
-        }
+        // Wait for the "Keep Impactyn open to finish posting.." notification
+        WebElement finishingNotification = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(FinishingReviewNotificationLocator)
+        );
+        boolean isFinishingVisible = finishingNotification.isDisplayed();
+        logger.info("\"Keep Impactyn open to finish posting..\" notification is visible: " + isFinishingVisible);
+
+        return isPreparingVisible && isFinishingVisible;
     }
 }
