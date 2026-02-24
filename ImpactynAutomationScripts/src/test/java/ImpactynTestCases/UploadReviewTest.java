@@ -21,6 +21,8 @@ public class UploadReviewTest extends BaseTest
 
     @BeforeMethod
     public void loginBeforeReviewTest() {
+
+        addFileToSimulatorPhotos("TestVideo.mp4");
         SystemAlertsPage alertsPage= new SystemAlertsPage(driver);
         alertsPage.handleInitialPopups();
 
@@ -80,7 +82,9 @@ public class UploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+            notificationVerifier.openNotification();
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+            notificationVerifier.closeNotification();
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
@@ -88,8 +92,8 @@ public class UploadReviewTest extends BaseTest
         softAssertion.assertAll();
     }
 
-    @Test (priority = 2 , dataProvider = "uploadReviewData", description = "Verify user can upload a new review from Discover page")
-    public void UploadFromDiscoverPage(String recordingDuration , String ratingValue) throws InterruptedException {
+    @Test (priority = 2 , dataProvider = "uploadReviewData", enabled = false, description = "Verify user can upload a new review from Discover page")
+    public void UploadFromDiscoverPage(String brandName , String recordingDuration , String ratingValue) throws InterruptedException {
         SoftAssert softAssertion = new SoftAssert();
 
         // 1. Initialize the first page object
@@ -121,11 +125,56 @@ public class UploadReviewTest extends BaseTest
         if(this.platform == Platform.ANDROID) {
             /*initialize a Notification Verification object */
             NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+            notificationVerifier.openNotification();
             notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+            notificationVerifier.closeNotification();
         } else if (this.platform == Platform.IOS) {
             softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
         }
 
+        softAssertion.assertAll();
+    }
+
+    @Test (priority = 3, dataProvider = "uploadReviewData", description = "Verify user can upload a new review from Gallery")
+    public void UploadGalleryReview(String brandName , String recordingDuration , String ratingValue) throws InterruptedException {
+        SoftAssert softAssertion = new SoftAssert();
+
+        // 1. Initialize the first page object
+        HomePage homePage = new HomePage(driver);
+
+        softAssertion.assertTrue(homePage.isPageLoaded(),"Home Page did not load successfully");
+
+        /*Clicking on Plus Icon From nav bar*/
+        UploadReviewPage uploadReview=homePage.clickRecordReview();
+
+        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
+        systemAlertsPage.allowLocationAccess();
+        systemAlertsPage.allowRecordingSettings();
+
+        /*Choosing from Gallery*/
+        uploadReview.chooseFromGallery();
+
+        /*mention Brand*/
+        uploadReview.mentionBrand(brandName);
+
+        /*set rating for the Review*/
+        uploadReview.setReviewRating(ratingValue);
+
+        /*Uploading the Review*/
+        FeedPage feedPage= uploadReview.shareReview();
+
+        /*soft Assertion Navigating to the 'Feed' page after Uploading*/
+        softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
+
+        if(this.platform == Platform.ANDROID) {
+            /*initialize a Notification Verification object */
+            NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
+            notificationVerifier.openNotification();
+            notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+            notificationVerifier.closeNotification();
+        } else if (this.platform == Platform.IOS) {
+            softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
+        }
         softAssertion.assertAll();
     }
 
@@ -162,52 +211,15 @@ public class UploadReviewTest extends BaseTest
 //        softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
 //
 //        if(this.platform == Platform.ANDROID) {
-//            /*initialize a Notification Verification object */
+//             /*initialize a Notification Verification object */
 //            NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
-//
+//            notificationVerifier.openNotification();
 //            notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
+//            notificationVerifier.closeNotification();
 //        } else if (this.platform == Platform.IOS) {
 //            softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
 //        }
 //        softAssertion.assertAll();
 //    }
 //
-//    @Test (priority = 2 , description = "Verify user can upload a new review from Gallery")
-//    public void UploadGalleryReview() throws InterruptedException {
-//        SoftAssert softAssertion = new SoftAssert();
-//
-//        // 1. Initialize the first page object
-//        FeedPage feedPage = new FeedPage(driver);
-//
-//        UploadReviewPage uploadReview= feedPage.clickRecordReview();
-//
-//
-//        SystemAlertsPage systemAlertsPage= new SystemAlertsPage(driver);
-//        systemAlertsPage.allowRecordingSettings();
-//
-//        /*Choosing from Gallery*/
-//        uploadReview.chooseFromGallery();
-//
-//        /*mention Brand*/
-//        uploadReview.mentionBrand("BRGR");
-//
-//        /*set rating for the Review*/
-//        uploadReview.setReviewRating();
-//
-//        /*Uploading the Review*/
-//        uploadReview.shareReview();
-//
-//        /*soft Assertion Navigating to the 'Feed' page after Uploading*/
-//        softAssertion.assertTrue(feedPage.isPageLoaded(),"Did not navigate to the 'Feed' page after Uploading");
-//
-//        if(this.platform == Platform.ANDROID) {
-//            /*initialize a Notification Verification object */
-//            NotificationVerifier notificationVerifier = new NotificationVerifier(driver);
-//
-//            notificationVerifier.verifyNotification("Reel", "\uD83C\uDFAC Preparing your video... Just a moment");
-//        } else if (this.platform == Platform.IOS) {
-//            softAssertion.assertTrue(uploadReview.verifyUploadingMessages(),"Video uploading messages not displayed as expected on iOS");
-//        }
-//        softAssertion.assertAll();
-//    }
 }

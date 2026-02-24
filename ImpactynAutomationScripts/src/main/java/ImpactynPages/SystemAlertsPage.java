@@ -39,7 +39,7 @@ public class SystemAlertsPage extends BasePage {
         handlePermissionPopup(allowWhileUsingAppLocator); // Handles Media/Location
         handlePermissionPopup(allowButtonLocator);        // Handles Notifications
         handlePermissionPopup(allowButtonLocator);
-        System.out.println("Onboarding screen found and done.");
+        logger.info("Onboarding screen found and done.");
 
     }
 
@@ -47,18 +47,18 @@ public class SystemAlertsPage extends BasePage {
         try {
             // This wait is specific to this action.
             WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            System.out.println("Checking for permission pop-up with locator: " + locator);
+            logger.info("Checking for permission pop-up with locator: " + locator);
             shortWait.until(ExpectedConditions.elementToBeClickable(locator)).click();
-            System.out.println("Permission pop-up handled successfully.");
+            logger.info("Permission pop-up handled successfully.");
         } catch (TimeoutException e) {
             // This is now EXPECTED and SAFE. It just means the pop-up wasn't there.
-            System.out.println("Permission pop-up not found. Continuing...");
+            logger.warning("Permission pop-up not found. Continuing...");
         }
     }
 
     /*this method is used only for iOS system alert handling */
     private void handle_initialSystemAlert_iOS() {
-        System.out.println("Handling iOS system alert to handle Notification ...");
+        logger.info("Handling iOS system alert to handle Notification ...");
 
         try {
             // Step 1: Wait for the alert to be present on the screen.
@@ -70,29 +70,29 @@ public class SystemAlertsPage extends BasePage {
 
             // Step 3: You can get the text for verification (optional but good for debugging)
             String alertText = systemAlert.getText();
-            System.out.println("Found system alert with text: " + alertText);
+            logger.info("Found system alert with text: " + alertText);
 
             // Step 4: Accept the alert. This will click the default "Continue" button.
             systemAlert.accept();
 
-            System.out.println("System alert accepted.");
+            logger.info("System alert accepted.");
 
         } catch (Exception e) {
-            System.err.println("Failed to handle the system alert.");
+            logger.warning("Failed to handle the system alert.");
             // Optionally take a screenshot here for debugging
             throw e;
         }
-        System.out.println("System alert confirmed.");
+        logger.info("System alert confirmed.");
     }
 
     public void handleInitialPopups() {
         if (this.platform.is(Platform.IOS))
         {
-            System.out.println("--- PRE-TEST ACTION: Handling initial pop-ups ---");
+            logger.info("--- PRE-TEST ACTION: Handling initial pop-ups ---");
             handle_initialSystemAlert_iOS();
         }
         else if (this.platform.is(Platform.ANDROID)) {
-            System.out.println("--- PRE-TEST ACTION: Handling initial pop-ups ---");
+            logger.info("--- PRE-TEST ACTION: Handling initial pop-ups ---");
             handle_initialSystemAlert_Android();
         }
 
@@ -100,7 +100,7 @@ public class SystemAlertsPage extends BasePage {
 
     /*this method is used only for iOS system alert handling */
     public void confirmSignIn() {
-        System.out.println("Handling iOS system alert to confirm sign-in...");
+        logger.info("Handling iOS system alert to confirm sign-in...");
 
         try {
             // Step 1: Wait for the alert to be present on the screen.
@@ -112,23 +112,23 @@ public class SystemAlertsPage extends BasePage {
 
             // Step 3: You can get the text for verification (optional but good for debugging)
             String alertText = systemAlert.getText();
-            System.out.println("Found system alert with text: " + alertText);
+            logger.info("Found system alert with text: " + alertText);
 
             // Step 4: Accept the alert. This will click the default "Continue" button.
             systemAlert.accept();
 
-            System.out.println("System alert accepted.");
+            logger.info("System alert accepted.");
 
         } catch (Exception e) {
-            System.err.println("Failed to handle the system alert.");
+            logger.warning("Failed to handle the system alert.");
             throw e;
         }
-        System.out.println("System alert confirmed.");
+        logger.info("System alert confirmed.");
     }
 
     public void allowLocationAccess() {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for location access...");
+            logger.info("Attempting to handle iOS system alert for location access...");
             boolean alertHandled = false;
             for (int i = 0; i < 5; i++) {
                 try {
@@ -145,7 +145,7 @@ public class SystemAlertsPage extends BasePage {
                         params.put("buttonLabel", "Allow While Using App");
                         driver.executeScript("mobile:alert", params);
 
-                        System.out.println("Successfully clicked Allow While Using App button");
+                        logger.info("Successfully clicked Allow While Using App button");
                         alertHandled = true;
                         break;
                     } catch (Exception alertEx) {
@@ -154,7 +154,7 @@ public class SystemAlertsPage extends BasePage {
                         params.put("action", "accept");
                         driver.executeScript("mobile: acceptAlert", params);
 
-                        System.out.println("Successfully handled alert using alternative method");
+                        logger.info("Successfully handled alert using alternative method");
                         alertHandled = true;
                     }
                 } catch (InterruptedException e) {
@@ -166,7 +166,7 @@ public class SystemAlertsPage extends BasePage {
 
     public void allowGalleryAccess() {
         if (this.platform.is(Platform.IOS)) {
-            System.out.println("Attempting to handle iOS system alert for gallery access...");
+            logger.info("Attempting to handle iOS system alert for gallery access...");
             boolean alertHandled = false;
             for (int i = 0; i < 5; i++) {
                 try {
@@ -183,7 +183,7 @@ public class SystemAlertsPage extends BasePage {
                         params.put("buttonLabel", "Allow Full Access");
                         driver.executeScript("mobile:alert", params);
 
-                        System.out.println("Successfully clicked Allow Full Access button");
+                        logger.info("Successfully clicked Allow Full Access button");
                         alertHandled = true;
                         break;
                     } catch (Exception alertEx) {
@@ -192,7 +192,7 @@ public class SystemAlertsPage extends BasePage {
                         params.put("action", "accept");
                         driver.executeScript("mobile: acceptAlert", params);
 
-                        System.out.println("Successfully handled alert using alternative method");
+                        logger.info("Successfully handled alert using alternative method");
                         alertHandled = true;
                     }
                 } catch (InterruptedException e) {
@@ -206,7 +206,7 @@ public class SystemAlertsPage extends BasePage {
 
     public void allowCameraAccess()
     {
-        System.out.println("Handling iOS system alert to Allow Camera...");
+        logger.info("Handling iOS system alert to Allow Camera...");
 
         try {
             // Step 1: Wait for the alert to be present on the screen.
@@ -218,18 +218,18 @@ public class SystemAlertsPage extends BasePage {
 
             // Step 3: You can get the text for verification (optional but good for debugging)
             String alertText = systemAlert.getText();
-            System.out.println("Found system alert with text: " + alertText);
+            logger.info("Found system alert with text: " + alertText);
 
             // Step 4: Accept the alert. This will click the default "Continue" button.
             systemAlert.accept();
 
-            System.out.println("System alert accepted.");
+            logger.info("System alert accepted.");
 
         } catch (Exception e) {
-            System.err.println("Failed to handle the system alert.");
+            logger.warning("Failed to handle the system alert.");
             throw e;
         }
-        System.out.println("System alert confirmed.");
+        logger.info("System alert confirmed.");
     }
 
     /* upload review Page related system alerts handling */
@@ -250,7 +250,7 @@ public class SystemAlertsPage extends BasePage {
                 }
             } catch (Exception e) {
                 // If the Next button is not found, we assume there are no coach marks to handle
-                System.out.println("No more coach marks to handle.");
+                logger.warning("No more coach marks to handle.");
             }
         }
     }

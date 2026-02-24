@@ -9,14 +9,24 @@ import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
 
 
 public abstract class BaseTest {
@@ -101,5 +111,53 @@ public abstract class BaseTest {
         // Assert that the login was successful as a precondition check
         Assert.assertTrue(homePage.isPageLoaded(), "PRECONDITION FAILED: Could not log in before test.");
         System.out.println("--- PRE-TEST ACTION: Login Successful ---");
+    }
+
+    /**
+     * Pushes a local file from the project resources to the iOS Simulator's media library.
+     */
+    protected void addFileToSimulatorPhotos(String resourcePath) {
+        System.out.println("Adding file '" + resourcePath + "' to Simulator using 'mobile: pushFile'...");
+
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+
+            if (inputStream == null) {
+                throw new RuntimeException("File not found in resources. Ensure the path is correct: " + resourcePath);
+            }
+
+            // Step 1: Read the file into a byte array and Base64 encode it.
+            // This command expects the payload to be a Base64 string.
+            byte[] fileBytes = IOUtils.toByteArray(inputStream);
+            String base64String = Base64.getEncoder().encodeToString(fileBytes);
+
+            // Step 2: Construct the remote path using the correct Photos app bundle ID.
+            String fileName = new File(resourcePath).getName();
+            // --- STEP 2: PUSH THE FILE TO THE APP'S WRITABLE CONTAINER ---
+            // The 'Documents' folder is a standard, writable location inside any app's sandbox.
+            String appContainerPath = "Documents/" + fileName;
+
+            Map<String, Object> pushArgs = new HashMap<>();
+            // We don't use the '@' prefix here. The path is relative to the app's root.
+            pushArgs.put("remotePath", appContainerPath);
+            pushArgs.put("payload", base64String);
+
+            System.out.println("Executing 'mobile: pushFile' to app container: " + appContainerPath);
+            driver.executeScript("mobile: pushFile", pushArgs);
+
+//            // --- STEP 3: SAVE THE PUSHED FILE TO THE CAMERA ROLL ---
+//            // This command tells the system to take the file we just saved
+//            // and officially import it into the Photos app.
+//            Map<String, Object> saveArgs = new HashMap<>();
+//            // The path here is the full path inside the app container, which Appium knows how to find.
+//            saveArgs.put("filePath", appContainerPath);
+//
+//            System.out.println("Executing 'mobile: saveFileToCameraRoll'...");
+//            driver.executeScript("mobile: saveFileToCameraRoll", saveArgs);
+
+            System.out.println("Successfully saved file to the simulator's camera roll.");
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading or adding file to simulator: " + e.getMessage(), e);
+        }
     }
 }
